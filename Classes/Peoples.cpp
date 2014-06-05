@@ -85,6 +85,7 @@ void Peoples::onTouchMoved(Touch* touch, Event*  event)
 	if (rect.containsPoint(locationInNode))//判断触摸点是否在精灵的矩形框上
 	{
 		log("Peoples::onTouchMoved,%d", target->getTag());
+		target->setPosition(target->getPosition() + touch->getDelta());		
 	}
 
 	//return true;
