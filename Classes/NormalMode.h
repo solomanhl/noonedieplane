@@ -15,8 +15,9 @@ private:
 	Node *gameLayer;
 	Node *peopleLayer;
 	Label *timerLabel;
-	bool timerRunning, timerRunning5s;
+	bool timerRunning, timerRunning2s;
 	long startTime;
+	long startY;
 
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -38,8 +39,8 @@ public:
 	virtual void step(float dt);
 	void startTimer();
 	void stopTimer();
-	void startTimer5s();
-	void stopTimer5s();
+	void startTimer2s();
+	void stopTimer2s();
 
 	void addArea(Color3B color, int tag);
 	void addPeople(int tag);//ÃÌº””¢–€

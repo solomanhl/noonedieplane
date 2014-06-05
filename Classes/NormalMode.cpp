@@ -124,9 +124,9 @@ void NormalMode::menuCloseCallback(Ref* pSender)
 void NormalMode::startGame()
 {
 	timerRunning = false;
-	timerRunning5s = false;
+	timerRunning2s = false;
 	this->startTimer();
-	this->startTimer5s();
+	this->startTimer2s();
 }
 
 void NormalMode::update(float dt)
@@ -160,17 +160,17 @@ void NormalMode::step(float dt)
 	addEnemy();
 }
 
-void NormalMode::startTimer5s(){
-	if (!timerRunning5s){
-		timerRunning5s = true;
+void NormalMode::startTimer2s(){
+	if (!timerRunning2s){
+		timerRunning2s = true;
 
-		schedule(schedule_selector(NormalMode::step), 5.0f);
+		schedule(schedule_selector(NormalMode::step), 2.0f);
 	}
 }
 
-void NormalMode::stopTimer5s(){
-	if (timerRunning5s){
-		timerRunning5s = false;
+void NormalMode::stopTimer2s(){
+	if (timerRunning2s){
+		timerRunning2s = false;
 		unschedule(schedule_selector(NormalMode::step));
 	}
 }
@@ -206,11 +206,13 @@ void NormalMode::addEnemy()
 {
 	auto b0 = Enemys::createWithArgs(Color3B::BLACK, Size(100, 10), "", 20, Color4B::BLACK);
 	peopleLayer->addChild(b0);
-	b0->setPosition(500, 200);
-	b0->moveEnemy(6, Point(0 - b0->getContentSize().width, b0->getPosition().y) );
+	startY = rand() % (int)(visibleSize.height / 2 );
+	b0->setPosition(visibleSize.width + b0->getContentSize().width / 2, startY);
+	b0->moveEnemy(7, Point(0 - b0->getContentSize().width / 2, b0->getPosition().y) );
 
 	auto b1 = Enemys::createWithArgs(Color3B::BLACK, Size(100, 10), "", 20, Color4B::BLACK);
 	peopleLayer->addChild(b1);
-	b1->setPosition(500, 400);
-	b1->moveEnemy(6, Point(0 - b1->getContentSize().width, b1->getPosition().y));
+	startY = rand() % (int)(visibleSize.height / 2 - b1->getContentSize().height / 2);
+	b1->setPosition(visibleSize.width + b1->getContentSize().width / 2, startY + visibleSize.height / 2 + b1->getContentSize().height / 2);
+	b1->moveEnemy(7, Point(0 - b1->getContentSize().width / 2, b1->getPosition().y));
 }

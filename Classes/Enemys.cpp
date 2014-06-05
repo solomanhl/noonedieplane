@@ -28,7 +28,7 @@ bool Enemys::initWithArgs(Color3B color, Size size, std::string lable, float fon
 	Sprite::init();
 
 	setContentSize(size);
-	setAnchorPoint(Point::ZERO);
+	//setAnchorPoint(Point::ZERO);
 	setTextureRect(Rect(0, 0, size.width, size.height));
 	setColor(color);
 
