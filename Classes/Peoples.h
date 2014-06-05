@@ -6,6 +6,7 @@ USING_NS_CC;
 class Peoples :public Sprite
 {
 private:
+	Size visibleSize;
 	static Vector<Peoples*> *peoples;
 
 public:

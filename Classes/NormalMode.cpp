@@ -26,7 +26,8 @@ bool NormalMode::init()
     {
         return false;
     }
-    
+
+	srand(time(NULL));
     visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
 
@@ -60,14 +61,14 @@ bool NormalMode::init()
     // add a label shows time
     // create and initialize a label
     
-    auto label = LabelTTF::create("0.000000", "Arial", 24);
+	timerLabel = Label::create("0.000000", "Arial", 24);
     
     // position the label on the center of the screen
-    label->setPosition(Point(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
+	timerLabel->setPosition(Point(origin.x + visibleSize.width - timerLabel->getContentSize().width,
+		origin.y + visibleSize.height - timerLabel->getContentSize().height));
 
     // add the time label as a child to this layer
-    this->addChild(label, 1);
+	this->addChild(timerLabel, 1);
 
 	/*
     // add "NormalMode" splash screen"
@@ -99,6 +100,9 @@ bool NormalMode::init()
 	addPeople(0);
 	addPeople(1);
 
+	startGame();
+
+
     return true;
 }
 
@@ -117,6 +121,59 @@ void NormalMode::menuCloseCallback(Ref* pSender)
 #endif
 }
 
+void NormalMode::startGame()
+{
+	timerRunning = false;
+	timerRunning5s = false;
+	this->startTimer();
+	this->startTimer5s();
+}
+
+void NormalMode::update(float dt)
+{
+	long offset = clock() - startTime;
+	timerLabel->setString(StringUtils::format("%g", ((double)offset) / 1000000));
+
+}
+
+void NormalMode::startTimer()
+{
+	if (!timerRunning){
+		timerRunning = true;
+		startTime = clock();
+
+		scheduleUpdate();
+	}
+}
+
+void NormalMode::stopTimer()
+{
+	if (timerRunning){
+		timerRunning = false;
+		unscheduleUpdate();
+	}
+}
+
+void NormalMode::step(float dt)
+{
+	log("5s");
+	addEnemy();
+}
+
+void NormalMode::startTimer5s(){
+	if (!timerRunning5s){
+		timerRunning5s = true;
+
+		schedule(schedule_selector(NormalMode::step), 5.0f);
+	}
+}
+
+void NormalMode::stopTimer5s(){
+	if (timerRunning5s){
+		timerRunning5s = false;
+		unschedule(schedule_selector(NormalMode::step));
+	}
+}
 
 void NormalMode::addArea(Color3B color, int tag){
 	auto b = Areas::createWithArgs(color, Size(visibleSize.width, visibleSize.height / 2), "", 20, Color4B::BLACK, tag);
@@ -144,3 +201,16 @@ bool  NormalMode::onTouchesBegan(const Vector<Touch*>& touches, Event*  event)
 	log("NormalMode::onTouchesBegan");
 }
 */
+
+void NormalMode::addEnemy()
+{
+	auto b0 = Enemys::createWithArgs(Color3B::BLACK, Size(100, 10), "", 20, Color4B::BLACK);
+	peopleLayer->addChild(b0);
+	b0->setPosition(500, 200);
+	b0->moveEnemy(6, Point(0 - b0->getContentSize().width, b0->getPosition().y) );
+
+	auto b1 = Enemys::createWithArgs(Color3B::BLACK, Size(100, 10), "", 20, Color4B::BLACK);
+	peopleLayer->addChild(b1);
+	b1->setPosition(500, 400);
+	b1->moveEnemy(6, Point(0 - b1->getContentSize().width, b1->getPosition().y));
+}

@@ -3,6 +3,7 @@
 
 Peoples::Peoples()
 {
+	visibleSize = Director::getInstance()->getVisibleSize();
 }
 
 
@@ -85,8 +86,25 @@ void Peoples::onTouchMoved(Touch* touch, Event*  event)
 	if (rect.containsPoint(locationInNode))//判断触摸点是否在精灵的矩形框上
 	{
 		log("Peoples::onTouchMoved,%d", target->getTag());
-		target->setPosition(target->getPosition() + touch->getDelta());		
-	}
+		target->setPosition(target->getPosition() + touch->getDelta());		//移动到拖动点
 
-	//return true;
+		//x越界
+		if (target->getPosition().x < target->getContentSize().width / 2)
+		{
+			target->setPosition(target->getContentSize().width / 2, target->getPosition().y);
+		}
+		else if (target->getPosition().x > visibleSize.width  -  target->getContentSize().width / 2)
+		{
+			target->setPosition(visibleSize.width - target->getContentSize().width / 2, target->getPosition().y);
+		}
+		//y越界
+		if (target->getPosition().y < (target->getTag() * visibleSize.height / 2) + target->getContentSize().width / 2)
+		{
+			target->setPosition(target->getPosition().x, (target->getTag() * visibleSize.height / 2) + target->getContentSize().width / 2);
+		}
+		else if (target->getPosition().y > ((target->getTag() + 1) * visibleSize.height / 2) - target->getContentSize().width / 2)
+		{
+			target->setPosition(target->getPosition().x, ((target->getTag() + 1) * visibleSize.height / 2) - target->getContentSize().width / 2);
+		}
+	}
 }

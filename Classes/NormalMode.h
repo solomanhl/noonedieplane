@@ -5,6 +5,7 @@
 
 #include "Areas.h"
 #include "Peoples.h"
+#include "Enemys.h"
 USING_NS_CC;
 
 class NormalMode : public cocos2d::Layer
@@ -13,6 +14,9 @@ private:
 	Size visibleSize;
 	Node *gameLayer;
 	Node *peopleLayer;
+	Label *timerLabel;
+	bool timerRunning, timerRunning5s;
+	long startTime;
 
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -29,8 +33,17 @@ public:
 
 	//bool onTouchesBegan(const Vector<Touch*>& touches, Event* event);
 
+	void startGame();
+	virtual void update(float dt);
+	virtual void step(float dt);
+	void startTimer();
+	void stopTimer();
+	void startTimer5s();
+	void stopTimer5s();
+
 	void addArea(Color3B color, int tag);
 	void addPeople(int tag);//ÃÌº””¢–€
+	void addEnemy();//ÃÌº”µ–»À
 };
 
 #endif // __NormalMode_SCENE_H__
