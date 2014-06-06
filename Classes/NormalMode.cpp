@@ -204,6 +204,8 @@ void NormalMode::step(float dt)
 		const char *cstr = s.c_str();
 
 		MessageBox(("%d", cstr), "Game Over");
+
+		changeToGameOver();
 	}
 
 	addEnemy();
@@ -264,4 +266,25 @@ void NormalMode::addEnemy()
 	startY = rand() % (int)(visibleSize.height / 2 - b1->getContentSize().height / 2);
 	b1->setPosition(visibleSize.width + b1->getContentSize().width / 2, startY + visibleSize.height / 2 + b1->getContentSize().height / 2);
 	b1->moveEnemy(7, Point(0 - b1->getContentSize().width / 2, b1->getPosition().y));
+}
+
+void NormalMode::changeToGameOver()
+{
+	TransitionScene * reScene = NULL;
+	Scene * s = GameOver::createScene();
+	float t = 1.2f;
+
+	//  CCTransitionJumpZoom
+	//    作用： 创建一个跳动的过渡动画
+	//    参数1：过渡动作的时间
+	//    参数2：切换到目标场景的对象
+	//Scene = CCTransitionJumpZoom ::create(t , s);
+	//CCDirector::sharedDirector()->replaceScene(reScene);
+
+	//    CCTransitionProgressInOut
+	//    作用： 创建一个由里向外扩展的过渡动画，
+	//    参数1：过渡动作的时间
+	//    参数2：切换到目标场景的对象
+	reScene = CCTransitionProgressInOut::create(t, s);
+	CCDirector::sharedDirector()->replaceScene(reScene);
 }

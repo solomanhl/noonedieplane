@@ -6,6 +6,7 @@
 #include "Areas.h"
 #include "Peoples.h"
 #include "Enemys.h"
+#include "GameOver.h"
 USING_NS_CC;
 
 class NormalMode : public cocos2d::Layer
@@ -48,6 +49,8 @@ public:
 	void addArea(Color3B color, int tag);
 	void addPeople(int tag);//添加英雄
 	void addEnemy();//添加敌人
+
+	void changeToGameOver();//转换场景
 };
 
 #endif // __NormalMode_SCENE_H__
