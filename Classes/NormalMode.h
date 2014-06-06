@@ -17,7 +17,9 @@ private:
 	Label *timerLabel;
 	bool timerRunning, timerRunning2s;
 	long startTime;
+	long runTime;
 	long startY;
+	bool gameRunning;
 
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -35,6 +37,7 @@ public:
 	//bool onTouchesBegan(const Vector<Touch*>& touches, Event* event);
 
 	void startGame();
+	void gameOver();
 	virtual void update(float dt);
 	virtual void step(float dt);
 	void startTimer();

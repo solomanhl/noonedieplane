@@ -22,6 +22,7 @@ public:
 	void movePeople(int time, Point target);//ÒÆ¶¯Ó¢ÐÛ	
 	void spriteMoveFinished(cocos2d::CCNode *sender);//ÒÆ³ýÓ¢ÐÛ»Øµ÷º¯Êý
 	void removePeople();//ÒÆ³ýÓ¢ÐÛ
+	void pengPeople();//Ó¢ÐÛÅö×²¶¯»­
 
 	bool onTouchBegan(Touch* touch, Event*  event);
 	void onTouchMoved(Touch* touch, Event*  event);

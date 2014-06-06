@@ -125,16 +125,53 @@ void NormalMode::startGame()
 {
 	timerRunning = false;
 	timerRunning2s = false;
+	gameRunning = true;
 	this->startTimer();
 	this->startTimer2s();
 }
 
+void NormalMode::gameOver()
+{
+	stopTimer2s();
+	startTimer2s();
+	stopTimer();
+	//MessageBox("Game Over!", "Failed!");
+}
+
 void NormalMode::update(float dt)
 {
-	long offset = clock() - startTime;
-	timerLabel->setString(StringUtils::format("%g", ((double)offset) / 1000000));
+	runTime = clock() - startTime;
+	timerLabel->setString(StringUtils::format("%g", ((double)runTime) / 1000000));
+
+	//Åö×²¼ì²â
+	auto ps = Peoples::getPeoples();
+	auto es = Enemys::getEnemys();
+
+	for (auto itp = ps->begin(); itp != ps->end(); itp++){
+		//(*it)->moveDown();
+		for (auto ite = es->begin(); ite != es->end(); ite++){
+			if ((*itp)->getBoundingBox().intersectsRect((*ite)->getBoundingBox()))//Åö×²
+			{
+				log("peng! d% d%", (*itp)->getTag(), (*ite)->getTag());
+				(*itp)->pengPeople();
+				//(*itp)->removePeople();
+				(*ite)->removeEnemy();
+				gameRunning = false;
+				gameOver();
+				break;
+			}
+		}
+
+		/*if (!gameRunning)
+		{
+			break;
+		}*/
+
+	}
 
 }
+
+
 
 void NormalMode::startTimer()
 {
@@ -156,7 +193,19 @@ void NormalMode::stopTimer()
 
 void NormalMode::step(float dt)
 {
-	log("5s");
+	log("2s");
+
+	if (!gameRunning)
+	{
+		stopTimer2s();
+		std::string s = "You alived ";
+		s.append(StringUtils::format("%d", ((int)runTime) / 1000000));
+		s.append(" S!");
+		const char *cstr = s.c_str();
+
+		MessageBox(("%d", cstr), "Game Over");
+	}
+
 	addEnemy();
 }
 

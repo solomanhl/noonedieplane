@@ -49,6 +49,13 @@ void Peoples::removePeople(){
 
 }
 
+void Peoples::pengPeople()
+{
+	CCFiniteTimeAction *peopleAnim1 = ScaleTo::create(0.25f, 2.0f);
+	CCFiniteTimeAction *peopleAnim2 = ScaleTo::create(0.25f, 1.0f);
+	runAction(CCSequence::create(peopleAnim1, peopleAnim2, NULL));
+}
+
 void Peoples::movePeople(int time, Point target){
 	CCFiniteTimeAction *bulletMoveToRight = CCMoveTo::create(time, target);
 	//增加一个回调函数，回收移动到屏幕外的精灵  
@@ -65,6 +72,7 @@ void Peoples::spriteMoveFinished(cocos2d::CCNode *sender){
 
 bool  Peoples::onTouchBegan(Touch* touch, Event*  event)
 {
+	/*
 	auto target = static_cast<Sprite*>(event->getCurrentTarget());//获取当前的触摸目标
 	Point locationInNode = target->convertToNodeSpace(touch->getLocation());//将本地坐标系转化为精灵坐标系(以精灵的左下角作为坐标原点)
 	Size s = target->getContentSize();//获取精灵的文本尺寸大小
@@ -73,6 +81,7 @@ bool  Peoples::onTouchBegan(Touch* touch, Event*  event)
 	{
 		log("Peoples::onTouchBegan,%d", target->getTag());
 	}
+	*/
 
 	return true;
 }
@@ -81,30 +90,37 @@ void Peoples::onTouchMoved(Touch* touch, Event*  event)
 {
 	auto target = static_cast<Sprite*>(event->getCurrentTarget());//获取当前的触摸目标
 	Point locationInNode = target->convertToNodeSpace(touch->getLocation());//将本地坐标系转化为精灵坐标系(以精灵的左下角作为坐标原点)
+	Point oldTouchLocation = target->convertToNodeSpace(touch->getPreviousLocation());//上次touch的点
+	Point targetPosition = target->getPosition();
 	Size s = target->getContentSize();//获取精灵的文本尺寸大小
 	Rect rect = Rect(0, 0, s.width, s.height);//获取精灵的矩形框（起始点为精灵的左下角）
-	if (rect.containsPoint(locationInNode))//判断触摸点是否在精灵的矩形框上
+	//if (rect.containsPoint(locationInNode))//判断触摸点是否在精灵的矩形框上，如果移动快了  指头超出精灵 精灵就会停止响应事件
+	if (rect.containsPoint(oldTouchLocation))//判断上次触摸点是否在精灵的矩形框上
 	{
 		log("Peoples::onTouchMoved,%d", target->getTag());
-		target->setPosition(target->getPosition() + touch->getDelta());		//移动到拖动点
+		target->setPosition(targetPosition + touch->getDelta());		//移动到拖动点
 
 		//x越界
-		if (target->getPosition().x < target->getContentSize().width / 2)
+		if (targetPosition.x < s.width / 2)
 		{
-			target->setPosition(target->getContentSize().width / 2, target->getPosition().y);
+			target->setPosition(s.width / 2, targetPosition.y);
 		}
-		else if (target->getPosition().x > visibleSize.width  -  target->getContentSize().width / 2)
+		else if (targetPosition.x > visibleSize.width - s.width / 2)
 		{
-			target->setPosition(visibleSize.width - target->getContentSize().width / 2, target->getPosition().y);
+			target->setPosition(visibleSize.width - s.width / 2, targetPosition.y);
 		}
 		//y越界
-		if (target->getPosition().y < (target->getTag() * visibleSize.height / 2) + target->getContentSize().width / 2)
+		if (targetPosition.y < (target->getTag() * visibleSize.height / 2) + s.width / 2)
 		{
-			target->setPosition(target->getPosition().x, (target->getTag() * visibleSize.height / 2) + target->getContentSize().width / 2);
+			target->setPosition(targetPosition.x, (target->getTag() * visibleSize.height / 2) + s.width / 2);
 		}
-		else if (target->getPosition().y > ((target->getTag() + 1) * visibleSize.height / 2) - target->getContentSize().width / 2)
+		else if (targetPosition.y >((target->getTag() + 1) * visibleSize.height / 2) - s.width / 2)
 		{
-			target->setPosition(target->getPosition().x, ((target->getTag() + 1) * visibleSize.height / 2) - target->getContentSize().width / 2);
+			target->setPosition(targetPosition.x, ((target->getTag() + 1) * visibleSize.height / 2) - s.width / 2);
 		}
+	}
+	else
+	{
+		log("outside");
 	}
 }
