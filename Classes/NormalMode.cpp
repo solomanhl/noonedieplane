@@ -61,7 +61,7 @@ bool NormalMode::init()
     // add a label shows time
     // create and initialize a label
     
-	timerLabel = Label::create("0.000000", "Arial", 24);
+	timerLabel = Label::create("0.000000", "Arial", 48);
     
     // position the label on the center of the screen
 	timerLabel->setPosition(Point(origin.x + visibleSize.width - timerLabel->getContentSize().width,
@@ -201,11 +201,11 @@ void NormalMode::step(float dt)
 		std::string s = "You alived ";
 		s.append(StringUtils::format("%d", ((int)runTime) / 1000000));
 		s.append(" S!");
-		const char *cstr = s.c_str();
 
-		MessageBox(("%d", cstr), "Game Over");
+		//const char *cstr = s.c_str();
+		//MessageBox(("%d", cstr), "Game Over");
 
-		changeToGameOver();
+		changeToGameOver(s);
 	}
 
 	addEnemy();
@@ -259,19 +259,22 @@ void NormalMode::addEnemy()
 	peopleLayer->addChild(b0);
 	startY = rand() % (int)(visibleSize.height / 2 );
 	b0->setPosition(visibleSize.width + b0->getContentSize().width / 2, startY);
-	b0->moveEnemy(7, Point(0 - b0->getContentSize().width / 2, b0->getPosition().y) );
+	b0->moveEnemy(5, Point(0 - b0->getContentSize().width / 2, b0->getPosition().y) );
 
 	auto b1 = Enemys::createWithArgs(Color3B::BLACK, Size(100, 10), "", 20, Color4B::BLACK);
 	peopleLayer->addChild(b1);
 	startY = rand() % (int)(visibleSize.height / 2 - b1->getContentSize().height / 2);
 	b1->setPosition(visibleSize.width + b1->getContentSize().width / 2, startY + visibleSize.height / 2 + b1->getContentSize().height / 2);
-	b1->moveEnemy(7, Point(0 - b1->getContentSize().width / 2, b1->getPosition().y));
+	b1->moveEnemy(5, Point(0 - b1->getContentSize().width / 2, b1->getPosition().y));
 }
 
-void NormalMode::changeToGameOver()
+void NormalMode::changeToGameOver(String s)
 {
 	TransitionScene * reScene = NULL;
-	Scene * s = GameOver::createScene();
+	Scene * scene = Scene::create();
+	GameOver *layer = GameOver::create();
+	layer->aliveTime = s;
+	scene->addChild(layer);
 	float t = 1.2f;
 
 	//  CCTransitionJumpZoom
@@ -285,6 +288,6 @@ void NormalMode::changeToGameOver()
 	//    作用： 创建一个由里向外扩展的过渡动画，
 	//    参数1：过渡动作的时间
 	//    参数2：切换到目标场景的对象
-	reScene = CCTransitionProgressInOut::create(t, s);
+	reScene = CCTransitionProgressInOut::create(t, scene);
 	CCDirector::sharedDirector()->replaceScene(reScene);
 }

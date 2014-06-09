@@ -50,7 +50,7 @@ public:
 	void addPeople(int tag);//添加英雄
 	void addEnemy();//添加敌人
 
-	void changeToGameOver();//转换场景
+	void changeToGameOver(String s);//转换场景
 };
 
 #endif // __NormalMode_SCENE_H__
