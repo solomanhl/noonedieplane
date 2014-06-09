@@ -5,6 +5,7 @@ USING_NS_CC;
 
 Scene* GameOver::createScene()
 {
+
 	// 'scene' is an autorelease object
 	auto scene = Scene::create();
 
@@ -32,9 +33,10 @@ bool GameOver::init()
 	visibleSize = Director::getInstance()->getVisibleSize();
 	Point origin = Director::getInstance()->getVisibleOrigin();
 
-	gameLayer = Node::create();
+	gameLayer = LayerColor::create(Color4B::RED);
 	addChild(gameLayer);
 
+	
 
 	/////////////////////////////
 	// 2. add a menu item with "X" image, which is clicked to quit the program
@@ -52,20 +54,26 @@ bool GameOver::init()
 	// create menu, it's an autorelease object
 	auto menu = Menu::create(closeItem, NULL);
 	menu->setPosition(Point::ZERO);
-	this->addChild(menu, 1);
+	gameLayer->addChild(menu, 1);
 
 	/////////////////////////////
 	// 3. add your codes below...
 	// add "GameOver" splash screen"
-	auto sprite = Sprite::create("HelloWorld.png");
+	timerLabel = Label::create("", "Arial", 60);
+	//timerLabel->setString(aliveTime.getCString());
 
-	// position the sprite on the center of the screen
-	sprite->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	// position the label on the center of the screen
+	timerLabel->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2));
 
-	// add the sprite as a child to this layer
-	this->addChild(sprite, 0);
+	// add the time label as a child to this layer
+	gameLayer->addChild(timerLabel, 1);
 
 	return true;
+}
+
+void GameOver::onEnter()
+{
+	timerLabel->setString(aliveTime.getCString());
 }
 
 void GameOver::menuCloseCallback(Ref* pSender)
