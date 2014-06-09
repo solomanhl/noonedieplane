@@ -198,10 +198,9 @@ void NormalMode::step(float dt)
 	if (!gameRunning)
 	{
 		stopTimer2s();
-		std::string s = "You alived ";
+		std::string s = "";
 		s.append(StringUtils::format("%d", ((int)runTime) / 1000000));
-		s.append(" S!");
-
+		
 		//const char *cstr = s.c_str();
 		//MessageBox(("%d", cstr), "Game Over");
 

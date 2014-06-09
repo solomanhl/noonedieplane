@@ -28,6 +28,8 @@ public:
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(GameOver);
+
+	bool onTouchBegan(Touch* touch, Event*  event);
 };
 
 #endif // __GameOver_SCENE_H__

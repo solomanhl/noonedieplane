@@ -67,13 +67,54 @@ bool GameOver::init()
 
 	// add the time label as a child to this layer
 	gameLayer->addChild(timerLabel, 1);
+		
 
 	return true;
 }
 
 void GameOver::onEnter()
 {
-	timerLabel->setString(aliveTime.getCString());
+	Dictionary* dic = Dictionary::createWithContentsOfFile("chineseString.xml");
+
+	//显示时间
+	String* strchinese = (String*)dic->objectForKey("jianchi");
+	strchinese->append(aliveTime.getCString());
+	strchinese->append(    ((String*)dic->objectForKey("miao"))->getCString()    );
+	timerLabel->setString(strchinese->getCString());
+	timerLabel->setColor(Color3B::BLACK);
+
+	//显示模式
+	auto labelMode = Label::create();
+	strchinese = (String*)dic->objectForKey("putong");
+	labelMode->setString(strchinese->getCString());
+	labelMode->setPosition(Point(visibleSize.width / 2, visibleSize.height * 3 /4));
+	labelMode->setSystemFontSize(48);
+	gameLayer->addChild(labelMode);
+
+	//返回
+	auto labelReturn = Label::create();
+	strchinese = (String*)dic->objectForKey("fanhui");
+	labelReturn->setString(strchinese->getCString());
+	labelReturn->setPosition(Point(visibleSize.width / 4, visibleSize.height / 4));
+	labelReturn->setSystemFontSize(48);
+	gameLayer->addChild(labelReturn);
+
+	//再来一次
+	auto labelAgain = Label::create();
+	strchinese = (String*)dic->objectForKey("zailai");
+	labelAgain->setString(strchinese->getCString());
+	labelAgain->setPosition(Point(visibleSize.width * 3 / 4, visibleSize.height / 4));
+	labelAgain->setSystemFontSize(48);
+	gameLayer->addChild(labelAgain);
+
+	//添加触摸监听——单点触摸
+	auto dispatcher = Director::getInstance()->getEventDispatcher();
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = CC_CALLBACK_2(GameOver::onTouchBegan, gameLayer);
+	//listener->onTouchMoved = CC_CALLBACK_2(GameOver::onTouchMoved, b);
+	//listener->onTouchEnded = CC_CALLBACK_2(Peoples::onTouchEnded, b);
+	listener->setSwallowTouches(false);//向下传递触摸
+	dispatcher->addEventListenerWithSceneGraphPriority(listener, gameLayer);
 }
 
 void GameOver::menuCloseCallback(Ref* pSender)
@@ -88,4 +129,20 @@ void GameOver::menuCloseCallback(Ref* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	exit(0);
 #endif
+}
+
+bool  GameOver::onTouchBegan(Touch* touch, Event*  event)
+{
+	
+	auto target = static_cast<Sprite*>(event->getCurrentTarget());//获取当前的触摸目标
+	Point locationInNode = target->convertToNodeSpace(touch->getLocation());//将本地坐标系转化为精灵坐标系(以精灵的左下角作为坐标原点)
+	Size s = target->getContentSize();//获取精灵的文本尺寸大小
+	Rect rect = Rect(0, 0, s.width, s.height);//获取精灵的矩形框（起始点为精灵的左下角）
+	if (rect.containsPoint(locationInNode))//判断触摸点是否在精灵的矩形框上
+	{
+	log("GameOver::onTouchBegan,%d", target->getTag());
+	}
+	
+
+	return true;
 }
