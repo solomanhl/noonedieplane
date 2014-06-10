@@ -23,6 +23,8 @@ public:
 
 	bool onTouchBegan(Touch* touch, Event*  event);
 
+	virtual void onExit();
+
 protected:
 	Areas *area;	
 };
