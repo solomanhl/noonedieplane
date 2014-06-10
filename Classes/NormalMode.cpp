@@ -106,6 +106,10 @@ bool NormalMode::init()
     return true;
 }
 
+void NormalMode::onExit()
+{
+
+}
 
 void NormalMode::menuCloseCallback(Ref* pSender)
 {
@@ -271,9 +275,14 @@ void NormalMode::changeToGameOver(String s)
 {
 	TransitionScene * reScene = NULL;
 	Scene * scene = Scene::create();
+	//auto scene = GameOver::createScene();
 	GameOver *layer = GameOver::create();
 	layer->aliveTime = s;
 	scene->addChild(layer);
+
+	
+	
+
 	float t = 1.2f;
 
 	//  CCTransitionJumpZoom

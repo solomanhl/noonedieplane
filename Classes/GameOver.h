@@ -2,6 +2,7 @@
 #define __GameOver_SCENE_H__
 
 #include "cocos2d.h"
+#include "Areas.h"
 
 USING_NS_CC;
 class GameOver : public cocos2d::Layer
@@ -11,6 +12,8 @@ private:
 	Node *gameLayer;
 	
 	Label *timerLabel;
+	String* strchinese;
+	Dictionary* dic;
 
 
 public:
