@@ -73,6 +73,8 @@ bool GameOver::init()
 
 void GameOver::onEnter()
 {
+	Node::onEnter();//这句一定要加，否则后面的listener不起作用
+
 	Dictionary* dic = Dictionary::createWithContentsOfFile("chineseString.xml");
 
 	//显示时间
@@ -91,7 +93,7 @@ void GameOver::onEnter()
 	gameLayer->addChild(labelMode);
 
 	//返回
-	auto labelReturn = Label::create();
+	labelReturn = Label::create();
 	strchinese = (String*)dic->objectForKey("fanhui");
 	labelReturn->setString(strchinese->getCString());
 	labelReturn->setPosition(Point(visibleSize.width / 4, visibleSize.height / 4));
@@ -99,7 +101,7 @@ void GameOver::onEnter()
 	gameLayer->addChild(labelReturn);
 
 	//再来一次
-	auto labelAgain = Label::create();
+	labelAgain = Label::create();
 	strchinese = (String*)dic->objectForKey("zailai");
 	labelAgain->setString(strchinese->getCString());
 	labelAgain->setPosition(Point(visibleSize.width * 3 / 4, visibleSize.height / 4));
@@ -140,13 +142,39 @@ bool  GameOver::onTouchBegan(Touch* touch, Event*  event)
 	
 	auto target = static_cast<Sprite*>(event->getCurrentTarget());//获取当前的触摸目标
 	Point locationInNode = target->convertToNodeSpace(touch->getLocation());//将本地坐标系转化为精灵坐标系(以精灵的左下角作为坐标原点)
-	Size s = target->getContentSize();//获取精灵的文本尺寸大小
-	Rect rect = Rect(0, 0, s.width, s.height);//获取精灵的矩形框（起始点为精灵的左下角）
-	if (rect.containsPoint(locationInNode))//判断触摸点是否在精灵的矩形框上
+	//Size s = target->getContentSize();//获取精灵的文本尺寸大小  这里的精灵是gameover自己
+	//Rect rect = Rect(0, 0, s.width, s.height);//获取精灵的矩形框（起始点为精灵的左下角）在这里是gameover整个矩形框也就是全屏幕
+	Size s = labelAgain->getContentSize();//获取这个label的大小
+	Rect rect = Rect(labelAgain->getPositionX() - s.width /2, labelAgain->getPositionY() - s.height / 2, s.width, s.height);
+	if (rect.containsPoint(locationInNode))//判断触摸点是否在labelAgain的矩形框上
 	{
-	log("GameOver::onTouchBegan,%d", target->getTag());
+		log("GameOver::onTouchBegan,labelAgain");
+		changToLastScene();
 	}
 	
 
 	return true;
+}
+
+void GameOver::changToLastScene()
+{
+	TransitionScene * reScene = NULL;
+	Scene * scene = Scene::create();
+	NormalMode *layer = NormalMode::create();
+	scene->addChild(layer);
+	float t = 1.2f;
+
+	//  CCTransitionJumpZoom
+	//    作用： 创建一个跳动的过渡动画
+	//    参数1：过渡动作的时间
+	//    参数2：切换到目标场景的对象
+	//Scene = CCTransitionJumpZoom ::create(t , s);
+	//CCDirector::sharedDirector()->replaceScene(reScene);
+
+	//    CCTransitionProgressInOut
+	//    作用： 创建一个由里向外扩展的过渡动画，
+	//    参数1：过渡动作的时间
+	//    参数2：切换到目标场景的对象
+	reScene = CCTransitionProgressInOut::create(t, scene);
+	CCDirector::sharedDirector()->replaceScene(reScene);
 }

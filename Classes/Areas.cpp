@@ -65,3 +65,10 @@ bool  Areas::onTouchBegan(Touch* touch, Event*  event)
 
 	return true;
 }
+
+void Areas::onExit()
+{
+	//ÒÆ³ý¼àÌý
+	//TouchDispatcher::sharedDispatcher()->removeDelegate(this);
+	Sprite::onExit();
+}

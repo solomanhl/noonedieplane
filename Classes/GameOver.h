@@ -2,7 +2,7 @@
 #define __GameOver_SCENE_H__
 
 #include "cocos2d.h"
-#include "Areas.h"
+#include "NormalMode.h"
 
 USING_NS_CC;
 class GameOver : public cocos2d::Layer
@@ -11,7 +11,7 @@ private:
 	Size visibleSize;
 	Node *gameLayer;
 	
-	Label *timerLabel;
+	Label *timerLabel, *labelReturn, *labelAgain;
 
 
 public:
@@ -31,6 +31,8 @@ public:
 	CREATE_FUNC(GameOver);
 
 	bool onTouchBegan(Touch* touch, Event*  event);
+
+	void changToLastScene();
 };
 
 #endif // __GameOver_SCENE_H__
