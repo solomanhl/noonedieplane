@@ -62,6 +62,7 @@ bool NormalMode::init()
     // create and initialize a label
     
 	timerLabel = Label::create("0.000000", "Arial", 48);
+	timerLabel->setColor(Color3B::BLACK);
     
     // position the label on the center of the screen
 	timerLabel->setPosition(Point(origin.x + visibleSize.width - timerLabel->getContentSize().width,
@@ -92,6 +93,15 @@ bool NormalMode::init()
 	dispatcher->addEventListenerWithSceneGraphPriority(listener1, this);
     */
 
+	//添加触摸监听——单点触摸
+	auto dispatcher = Director::getInstance()->getEventDispatcher();
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = CC_CALLBACK_2(NormalMode::onTouchBegan, this);
+	//listener->onTouchMoved = CC_CALLBACK_2(NormalMode::onTouchMoved, b);
+	//listener->onTouchEnded = CC_CALLBACK_2(Peoples::onTouchEnded, b);
+	listener->setSwallowTouches(false);//向下传递触摸
+	dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
 	//添加2个区域，下面是0，上面是1
 	addArea(Color3B::YELLOW, 0);
 	addArea(Color3B::GREEN , 1);
@@ -100,12 +110,41 @@ bool NormalMode::init()
 	addPeople(0);
 	addPeople(1);
 
-	startGame();
+	//玩法介绍
+
+	Dictionary*	dic = Dictionary::createWithContentsOfFile("chineseString.xml");
+	String* strchinese = (String*)dic->objectForKey("wanfa");
+	wanfaLabel = Label::create(strchinese->getCString(), "Arial", 32);
+	wanfaLabel->setTextColor(Color4B::BLACK);
+	wanfaLabel->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2 + 50));
+	gameLayer->addChild(wanfaLabel);
+
+	gameRunning = false;
+	//startGame();
 
 
     return true;
 }
 
+
+bool  NormalMode::onTouchBegan(Touch* touch, Event*  event)
+{
+	
+	//auto target = static_cast<Sprite*>(event->getCurrentTarget());//获取当前的触摸目标
+	//Point locationInNode = target->convertToNodeSpace(touch->getLocation());//将本地坐标系转化为精灵坐标系(以精灵的左下角作为坐标原点)
+	//Size s = target->getContentSize();//获取精灵的文本尺寸大小
+	//Rect rect = Rect(0, 0, s.width, s.height);//获取精灵的矩形框（起始点为精灵的左下角）
+	//if (rect.containsPoint(locationInNode))//判断触摸点是否在精灵的矩形框上
+	//{
+	//log("NormalMode::onTouchBegan");
+	//}
+	if (!gameRunning)
+	{
+		startGame();
+	}
+
+	return true;
+}
 
 void NormalMode::menuCloseCallback(Ref* pSender)
 {
@@ -128,6 +167,16 @@ void NormalMode::startGame()
 	gameRunning = true;
 	this->startTimer();
 	this->startTimer1s();
+
+	auto areas = Areas::getAreas();
+	for (auto it = areas->begin(); it != areas->end(); it++){
+		(*it)->setColor(Color3B::WHITE);
+	}
+
+	wanfaLabel->setString("");
+
+	
+
 }
 
 void NormalMode::gameOver()
@@ -226,9 +275,13 @@ void NormalMode::stopTimer1s(){
 }
 
 void NormalMode::addArea(Color3B color, int tag){
-	auto b = Areas::createWithArgs(color, Size(visibleSize.width - 5, (visibleSize.height / 2) - 5), "", 20, Color4B::BLACK, tag);
+	
+
+	auto b = Areas::createWithArgs(color, Size(visibleSize.width - 10, (visibleSize.height / 2) - 10), "", 32, Color4B::BLACK, tag);
 	gameLayer->addChild(b);
 	b->setPosition(5, (tag*visibleSize.height / 2) + 5);
+
+	
 }
 
 void NormalMode::addPeople(int tag){
@@ -269,6 +322,22 @@ void NormalMode::addEnemy()
 
 void NormalMode::changeToGameOver(String s)
 {
+	//清楚所有敌人
+	auto enemys = Enemys::getEnemys();
+	for (auto it = enemys->begin(); it != enemys->end(); ){
+		(*it)->removeEnemy();
+		it = enemys->begin();
+	}
+
+
+	//清除所有英雄
+	auto peoples = Peoples::getPeoples();
+	for (auto it = peoples->begin(); it != peoples->end(); ){
+		(*it)->removePeople();
+		it = peoples->begin();
+	}
+
+	
 	TransitionScene * reScene = NULL;
 	Scene * scene = Scene::create();
 	GameOver *layer = GameOver::create();
@@ -289,4 +358,5 @@ void NormalMode::changeToGameOver(String s)
 	//    参数2：切换到目标场景的对象
 	reScene = CCTransitionProgressInOut::create(t, scene);
 	CCDirector::sharedDirector()->replaceScene(reScene);
+	
 }

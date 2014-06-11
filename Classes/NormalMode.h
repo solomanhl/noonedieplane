@@ -15,7 +15,7 @@ private:
 	Size visibleSize;
 	Node *gameLayer;
 	Node *peopleLayer;
-	Label *timerLabel;
+	Label *timerLabel, *wanfaLabel;
 	bool timerRunning, timerRunning2s;
 	long startTime;
 	long runTime;
@@ -35,7 +35,7 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(NormalMode);
 
-	//bool onTouchesBegan(const Vector<Touch*>& touches, Event* event);
+	bool onTouchBegan(Touch* touch, Event*  event);
 
 	void startGame();
 	void gameOver();

@@ -42,6 +42,13 @@ bool Areas::initWithArgs(Color3B color, Size size, std::string lable, float font
 	setColor(color);
 	setTag(tag);
 
+	auto l = Label::create();
+	l->setString(lable);
+	l->setSystemFontSize(fontSize);
+	l->setTextColor(textColor);
+	addChild(l);
+	l->setPosition(size.width / 2, size.height / 2);
+
 	return true;
 }
 

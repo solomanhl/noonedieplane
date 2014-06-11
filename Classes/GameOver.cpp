@@ -161,18 +161,18 @@ bool  GameOver::onTouchBegan(Touch* touch, Event*  event)
 	//Rect rect = Rect(0, 0, s.width, s.height);//获取精灵的矩形框（起始点为精灵的左下角）在这里是gameover整个矩形框也就是全屏幕
 	Size s = labelAgain->getContentSize();//获取这个label的大小
 	Rect rect = Rect(labelAgain->getPositionX() - s.width /2, labelAgain->getPositionY() - s.height / 2, s.width, s.height);
-	Size sShare = labelSharemsg->getContentSize();//获取这个label的大小
-	Rect rectShare = Rect(labelSharemsg->getPositionX() - sShare.width / 2, labelSharemsg->getPositionY() - sShare.height / 2, sShare.width, sShare.height);
+	//Size sShare = labelSharemsg->getContentSize();//获取这个label的大小
+	//Rect rectShare = Rect(labelSharemsg->getPositionX() - sShare.width / 2, labelSharemsg->getPositionY() - sShare.height / 2, sShare.width, sShare.height);
 	if (rect.containsPoint(locationInNode))//判断触摸点是否在labelAgain的矩形框上
 	{
 		log("GameOver::onTouchBegan,labelAgain");
 		changToLastScene();
 	}
-	else if (rectShare.containsPoint(locationInNode))//分享微信
-	{
-		log("GameOver::onTouchBegan,labelSharemsg");
-		
-	}
+	//else if (rectShare.containsPoint(locationInNode))//分享微信
+	//{
+	//	log("GameOver::onTouchBegan,labelSharemsg");
+	//	
+	//}
 	
 
 	return true;

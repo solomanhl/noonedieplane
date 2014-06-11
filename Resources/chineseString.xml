@@ -15,5 +15,7 @@
 		<string>秒！</string>  
 		<key>fenxiangmsg</key>
 		<string>分享</string>  
+                <key>wanfa</key>
+		<string>拖动不同的飞机移动，确保飞机不会撞到飞行小块。</string>  
 	</dict>  
 </plist>  

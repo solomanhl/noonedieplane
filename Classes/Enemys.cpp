@@ -16,6 +16,7 @@ Vector<Enemys*> *Enemys::getEnemys(){
 	return Enemys::enemys;
 }
 
+
 Enemys* Enemys::createWithArgs(Color3B color, Size size, std::string lable, float fontSize, Color4B textColor){
 	auto b = new Enemys();
 	b->initWithArgs(color, size, lable, fontSize, textColor);
