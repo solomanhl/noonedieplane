@@ -127,13 +127,13 @@ void NormalMode::startGame()
 	timerRunning2s = false;
 	gameRunning = true;
 	this->startTimer();
-	this->startTimer2s();
+	this->startTimer1s();
 }
 
 void NormalMode::gameOver()
 {
-	stopTimer2s();
-	startTimer2s();
+	stopTimer1s();
+	startTimer1s();
 	stopTimer();
 	//MessageBox("Game Over!", "Failed!");
 }
@@ -197,7 +197,7 @@ void NormalMode::step(float dt)
 
 	if (!gameRunning)
 	{
-		stopTimer2s();
+		stopTimer1s();
 		std::string s = "";
 		s.append(StringUtils::format("%d", ((int)runTime) / 1000000));
 		
@@ -210,15 +210,15 @@ void NormalMode::step(float dt)
 	addEnemy();
 }
 
-void NormalMode::startTimer2s(){
+void NormalMode::startTimer1s(){
 	if (!timerRunning2s){
 		timerRunning2s = true;
 
-		schedule(schedule_selector(NormalMode::step), 2.0f);
+		schedule(schedule_selector(NormalMode::step), 1.0f);
 	}
 }
 
-void NormalMode::stopTimer2s(){
+void NormalMode::stopTimer1s(){
 	if (timerRunning2s){
 		timerRunning2s = false;
 		unschedule(schedule_selector(NormalMode::step));
@@ -226,9 +226,9 @@ void NormalMode::stopTimer2s(){
 }
 
 void NormalMode::addArea(Color3B color, int tag){
-	auto b = Areas::createWithArgs(color, Size(visibleSize.width, visibleSize.height / 2), "", 20, Color4B::BLACK, tag);
+	auto b = Areas::createWithArgs(color, Size(visibleSize.width - 5, (visibleSize.height / 2) - 5), "", 20, Color4B::BLACK, tag);
 	gameLayer->addChild(b);
-	b->setPosition(0, tag*visibleSize.height / 2);
+	b->setPosition(5, (tag*visibleSize.height / 2) + 5);
 }
 
 void NormalMode::addPeople(int tag){
@@ -258,13 +258,13 @@ void NormalMode::addEnemy()
 	peopleLayer->addChild(b0);
 	startY = rand() % (int)(visibleSize.height / 2 );
 	b0->setPosition(visibleSize.width + b0->getContentSize().width / 2, startY);
-	b0->moveEnemy(5, Point(0 - b0->getContentSize().width / 2, b0->getPosition().y) );
+	b0->moveEnemy(3, Point(0 - b0->getContentSize().width / 2, b0->getPosition().y) );
 
 	auto b1 = Enemys::createWithArgs(Color3B::BLACK, Size(100, 10), "", 20, Color4B::BLACK);
 	peopleLayer->addChild(b1);
 	startY = rand() % (int)(visibleSize.height / 2 - b1->getContentSize().height / 2);
 	b1->setPosition(visibleSize.width + b1->getContentSize().width / 2, startY + visibleSize.height / 2 + b1->getContentSize().height / 2);
-	b1->moveEnemy(5, Point(0 - b1->getContentSize().width / 2, b1->getPosition().y));
+	b1->moveEnemy(3, Point(0 - b1->getContentSize().width / 2, b1->getPosition().y));
 }
 
 void NormalMode::changeToGameOver(String s)

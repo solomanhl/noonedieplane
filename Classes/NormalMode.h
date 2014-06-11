@@ -43,8 +43,8 @@ public:
 	virtual void step(float dt);
 	void startTimer();
 	void stopTimer();
-	void startTimer2s();
-	void stopTimer2s();
+	void startTimer1s();
+	void stopTimer1s();
 
 	void addArea(Color3B color, int tag);
 	void addPeople(int tag);//ÃÌº””¢–€
