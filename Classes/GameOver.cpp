@@ -1,7 +1,8 @@
 #include "GameOver.h"
-
+#include "C2DXShareSDK.h"
 
 USING_NS_CC;
+using namespace cn::sharesdk;
 
 Scene* GameOver::createScene()
 {
@@ -29,6 +30,7 @@ bool GameOver::init()
 		return false;
 	}
 
+	srand(time(NULL));
 	visibleSize = Director::getInstance()->getVisibleSize();
 	Point origin = Director::getInstance()->getVisibleOrigin();
 
@@ -92,11 +94,29 @@ void GameOver::onEnter()
 	labelMode->setSystemFontSize(48);
 	gameLayer->addChild(labelMode);
 
+	//分享
+	strchinese = (String*)dic->objectForKey("fenxiangmsg");
+	MenuItemLabel *shareMenuItem = MenuItemLabel::create(LabelTTF::create(strchinese->getCString(), "Arial", 48),
+		this,
+		menu_selector(GameOver::shareMenuItemClick));
+	Menu *itemsMenu = Menu::create(shareMenuItem, NULL);
+	itemsMenu->alignItemsHorizontallyWithPadding(20);
+	itemsMenu->setPosition(Point(visibleSize.width / 4, visibleSize.height / 4));
+	gameLayer->addChild(itemsMenu);
+
+
+	/*labelSharemsg = Label::create();
+	strchinese = (String*)dic->objectForKey("fenxiangmsg");
+	labelSharemsg->setString(strchinese->getCString());
+	labelSharemsg->setPosition(Point(visibleSize.width / 4, visibleSize.height / 4));
+	labelSharemsg->setSystemFontSize(48);
+	gameLayer->addChild(labelSharemsg);*/
+
 	//返回
 	labelReturn = Label::create();
 	strchinese = (String*)dic->objectForKey("fanhui");
 	labelReturn->setString(strchinese->getCString());
-	labelReturn->setPosition(Point(visibleSize.width / 4, visibleSize.height / 4));
+	labelReturn->setPosition(Point(visibleSize.width / 2, visibleSize.height / 4));
 	labelReturn->setSystemFontSize(48);
 	gameLayer->addChild(labelReturn);
 
@@ -108,17 +128,12 @@ void GameOver::onEnter()
 	labelAgain->setSystemFontSize(48);
 	gameLayer->addChild(labelAgain);
 
-	//
-	auto a = Areas::createWithArgs(Color3B::GRAY, Size(100, 100), "adf", 48, Color4B::GREEN, 4);
-	a->setPosition(100, 100);
-	gameLayer->addChild(a);
-
 	//添加触摸监听——单点触摸
 	auto dispatcher = Director::getInstance()->getEventDispatcher();
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(GameOver::onTouchBegan, this);
 	//listener->onTouchMoved = CC_CALLBACK_2(GameOver::onTouchMoved, b);
-	//listener->onTouchEnded = CC_CALLBACK_2(GameOver::onTouchEnded, b);
+	//listener->onTouchEnded = CC_CALLBACK_2(Peoples::onTouchEnded, b);
 	listener->setSwallowTouches(false);//向下传递触摸
 	dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
@@ -146,10 +161,17 @@ bool  GameOver::onTouchBegan(Touch* touch, Event*  event)
 	//Rect rect = Rect(0, 0, s.width, s.height);//获取精灵的矩形框（起始点为精灵的左下角）在这里是gameover整个矩形框也就是全屏幕
 	Size s = labelAgain->getContentSize();//获取这个label的大小
 	Rect rect = Rect(labelAgain->getPositionX() - s.width /2, labelAgain->getPositionY() - s.height / 2, s.width, s.height);
+	Size sShare = labelSharemsg->getContentSize();//获取这个label的大小
+	Rect rectShare = Rect(labelSharemsg->getPositionX() - sShare.width / 2, labelSharemsg->getPositionY() - sShare.height / 2, sShare.width, sShare.height);
 	if (rect.containsPoint(locationInNode))//判断触摸点是否在labelAgain的矩形框上
 	{
 		log("GameOver::onTouchBegan,labelAgain");
 		changToLastScene();
+	}
+	else if (rectShare.containsPoint(locationInNode))//分享微信
+	{
+		log("GameOver::onTouchBegan,labelSharemsg");
+		
 	}
 	
 
@@ -177,4 +199,93 @@ void GameOver::changToLastScene()
 	//    参数2：切换到目标场景的对象
 	reScene = CCTransitionProgressInOut::create(t, scene);
 	CCDirector::sharedDirector()->replaceScene(reScene);
+}
+
+void authResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *error)
+{
+	switch (state) {
+	case C2DXResponseStateSuccess:
+		CCLog("授权成功");
+		break;
+	case C2DXResponseStateFail:
+		CCLog("授权失败");
+		break;
+	default:
+		break;
+	}
+}
+
+void getUserResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *userInfo, CCDictionary *error)
+{
+	if (state == C2DXResponseStateSuccess)
+	{
+		//输出用户信息
+		try
+		{
+			CCArray *allKeys = userInfo->allKeys();
+			allKeys->retain();
+			for (int i = 0; i < allKeys->count(); i++)
+			{
+				CCString *key = (CCString *)allKeys->objectAtIndex(i);
+				CCObject *obj = userInfo->objectForKey(key->getCString());
+
+				CCLog("key = %s", key->getCString());
+				if (dynamic_cast<CCString *>(obj))
+				{
+					CCLog("value = %s", dynamic_cast<CCString *>(obj)->getCString());
+				}
+				else if (dynamic_cast<CCInteger *>(obj))
+				{
+					CCLog("value = %d", dynamic_cast<CCInteger *>(obj)->getValue());
+				}
+				else if (dynamic_cast<CCDouble *>(obj))
+				{
+					CCLog("value = %f", dynamic_cast<CCDouble *>(obj)->getValue());
+				}
+			}
+			allKeys->release();
+		}
+		catch (...)
+		{
+			CCLog("==============error");
+		}
+
+	}
+}
+
+void shareResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *shareInfo, CCDictionary *error)
+{
+	switch (state) {
+	case C2DXResponseStateSuccess:
+		CCLog("分享成功");
+		break;
+	case C2DXResponseStateFail:
+		CCLog("分享失败");
+		break;
+	default:
+		break;
+	}
+}
+
+void GameOver::getUserInfoMenuItemClick(CCObject* pSender)
+{
+	C2DXShareSDK::getUserInfo(C2DXPlatTypeSinaWeibo, getUserResultHandler);
+}
+
+void GameOver::shareMenuItemClick(CCObject* pSender)
+{
+	CCDictionary *content = CCDictionary::create();
+	content->setObject(CCString::create("这是一条测试内容"), "content");
+	content->setObject(CCString::create("http://img0.bdstatic.com/img/image/shouye/systsy-11927417755.jpg"), "image");
+	content->setObject(CCString::create("测试标题"), "title");
+	content->setObject(CCString::create("测试描述"), "description");
+	content->setObject(CCString::create("http://sharesdk.cn"), "url");
+	//content->setObject(CCString::createWithFormat("%d", C2DXContentTypeNews), "type");
+	//content->setObject(CCString::create("http://sharesdk.cn"), "siteUrl");
+	//content->setObject(CCString::create("ShareSDK"), "site");
+	//content->setObject(CCString::create("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3"), "musicUrl");
+	//content->setObject(CCString::create("extInfo"), "extInfo");
+
+	C2DXShareSDK::showShareMenu(NULL, content, CCPointMake(100, 100), C2DXMenuArrowDirectionLeft, shareResultHandler);
+	//    C2DXShareSDK::showShareView(C2DXPlatTypeSinaWeibo, content, shareResultHandler);
 }

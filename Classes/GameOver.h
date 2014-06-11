@@ -11,7 +11,7 @@ private:
 	Size visibleSize;
 	Node *gameLayer;
 	
-	Label *timerLabel, *labelReturn, *labelAgain;
+	Label *timerLabel, *labelSharemsg,*labelReturn, *labelAgain;
 
 
 public:
@@ -27,12 +27,24 @@ public:
 	// a selector callback
 	void menuCloseCallback(cocos2d::Ref* pSender);
 
+
+
 	// implement the "static create()" method manually
 	CREATE_FUNC(GameOver);
 
 	bool onTouchBegan(Touch* touch, Event*  event);
 
 	void changToLastScene();
+
+
+	//sharesdk
+	void cancelAuthMenuItemClick(CCObject* pSender);
+
+	void hasAuthMenuItemClick(CCObject* pSender);
+
+	void getUserInfoMenuItemClick(CCObject* pSender);
+
+	void shareMenuItemClick(CCObject* pSender);
 };
 
 #endif // __GameOver_SCENE_H__

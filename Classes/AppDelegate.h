@@ -2,6 +2,7 @@
 #define  _APP_DELEGATE_H_
 
 #include "cocos2d.h"
+#include "C2DXShareSDK.h"
 
 /**
 @brief    The cocos2d Application.
@@ -13,6 +14,9 @@ class  AppDelegate : private cocos2d::Application
 public:
     AppDelegate();
     virtual ~AppDelegate();
+
+	//初始化平台配置
+	void initPlatformConfig();
 
     /**
     @brief    Implement Director and Scene init code here.
