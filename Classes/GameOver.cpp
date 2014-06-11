@@ -13,7 +13,7 @@ Scene* GameOver::createScene()
 	auto layer = GameOver::create();
 
 	// add layer as a child to scene
-	scene->addChild(layer,100);
+	scene->addChild(layer);
 
 	// return the scene
 	return scene;
@@ -29,12 +29,11 @@ bool GameOver::init()
 		return false;
 	}
 
-	srand(time(NULL));
 	visibleSize = Director::getInstance()->getVisibleSize();
 	Point origin = Director::getInstance()->getVisibleOrigin();
 
 	gameLayer = LayerColor::create(Color4B::RED);
-	addChild(gameLayer,101);
+	addChild(gameLayer);
 
 	
 
@@ -54,7 +53,7 @@ bool GameOver::init()
 	// create menu, it's an autorelease object
 	auto menu = Menu::create(closeItem, NULL);
 	menu->setPosition(Point::ZERO);
-	gameLayer->addChild(menu, 110);
+	gameLayer->addChild(menu, 1);
 
 	/////////////////////////////
 	// 3. add your codes below...
@@ -66,33 +65,38 @@ bool GameOver::init()
 	timerLabel->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2));
 
 	// add the time label as a child to this layer
-	gameLayer->addChild(timerLabel, 110);
+	gameLayer->addChild(timerLabel, 1);
+		
 
-	//添加触摸监听——单点触摸
-	auto dispatcher = Director::getInstance()->getEventDispatcher();
-	auto listener = EventListenerTouchOneByOne::create();
-	listener->onTouchBegan = CC_CALLBACK_2(GameOver::onTouchBegan, this);
-	//listener->onTouchMoved = CC_CALLBACK_2(GameOver::onTouchMoved, this);
-	//listener->onTouchEnded = CC_CALLBACK_2(GameOver::onTouchEnded, this);
-	listener->setSwallowTouches(false);//向下传递触摸
-	dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	return true;
+}
 
-	dic = Dictionary::createWithContentsOfFile("chineseString.xml");
+void GameOver::onEnter()
+{
+	Dictionary* dic = Dictionary::createWithContentsOfFile("chineseString.xml");
+
+	//显示时间
+	String* strchinese = (String*)dic->objectForKey("jianchi");
+	strchinese->append(aliveTime.getCString());
+	strchinese->append(    ((String*)dic->objectForKey("miao"))->getCString()    );
+	timerLabel->setString(strchinese->getCString());
+	timerLabel->setColor(Color3B::BLACK);
+
 	//显示模式
 	auto labelMode = Label::create();
 	strchinese = (String*)dic->objectForKey("putong");
 	labelMode->setString(strchinese->getCString());
-	labelMode->setPosition(Point(visibleSize.width / 2, visibleSize.height * 3 / 4));
+	labelMode->setPosition(Point(visibleSize.width / 2, visibleSize.height * 3 /4));
 	labelMode->setSystemFontSize(48);
-	gameLayer->addChild(labelMode, 110);
+	gameLayer->addChild(labelMode);
 
-	//返回  这次改成用areas做
+	//返回
 	auto labelReturn = Label::create();
 	strchinese = (String*)dic->objectForKey("fanhui");
 	labelReturn->setString(strchinese->getCString());
 	labelReturn->setPosition(Point(visibleSize.width / 4, visibleSize.height / 4));
 	labelReturn->setSystemFontSize(48);
-	gameLayer->addChild(labelReturn, 110);
+	gameLayer->addChild(labelReturn);
 
 	//再来一次
 	auto labelAgain = Label::create();
@@ -100,25 +104,21 @@ bool GameOver::init()
 	labelAgain->setString(strchinese->getCString());
 	labelAgain->setPosition(Point(visibleSize.width * 3 / 4, visibleSize.height / 4));
 	labelAgain->setSystemFontSize(48);
-	gameLayer->addChild(labelAgain, 110);
-		
-	return true;
-}
+	gameLayer->addChild(labelAgain);
 
-void GameOver::onEnter()
-{
-	//dic = Dictionary::createWithContentsOfFile("chineseString.xml");//放到init（）里面做
+	//
+	auto a = Areas::createWithArgs(Color3B::GRAY, Size(100, 100), "adf", 48, Color4B::GREEN, 4);
+	a->setPosition(100, 100);
+	gameLayer->addChild(a);
 
-	//显示时间
-	strchinese = (String*)dic->objectForKey("jianchi");
-	strchinese->append(aliveTime.getCString());
-	strchinese->append(    ((String*)dic->objectForKey("miao"))->getCString()    );
-	timerLabel->setString(strchinese->getCString());
-	timerLabel->setColor(Color3B::BLACK);
-
-	
-
-	
+	//添加触摸监听——单点触摸
+	auto dispatcher = Director::getInstance()->getEventDispatcher();
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = CC_CALLBACK_2(GameOver::onTouchBegan, this);
+	//listener->onTouchMoved = CC_CALLBACK_2(GameOver::onTouchMoved, b);
+	//listener->onTouchEnded = CC_CALLBACK_2(GameOver::onTouchEnded, b);
+	listener->setSwallowTouches(false);//向下传递触摸
+	dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
 void GameOver::menuCloseCallback(Ref* pSender)

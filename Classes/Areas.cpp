@@ -29,7 +29,6 @@ Areas* Areas::createWithArgs(Color3B color, Size size, std::string lable, float 
 	//listener->onTouchEnded = CC_CALLBACK_2(NormalMode::onTouchEnded, this);
 	listener->setSwallowTouches(false);//ÏòÏÂ´«µİ´¥Ãş
 	dispatcher->addEventListenerWithSceneGraphPriority(listener, b);
-	
 
 	areas->pushBack(b);
 	return b;

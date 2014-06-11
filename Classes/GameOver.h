@@ -12,8 +12,6 @@ private:
 	Node *gameLayer;
 	
 	Label *timerLabel;
-	String* strchinese;
-	Dictionary* dic;
 
 
 public:
