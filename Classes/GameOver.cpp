@@ -1,5 +1,8 @@
 #include "GameOver.h"
-#include "C2DXShareSDK.h"
+//// 引入相关的头文件
+//#include "Cocos2dx/Common/CCUMSocialSDK.h"
+//// 使用友盟命令空间
+//USING_NS_UM_SOCIAL;
 
 USING_NS_CC;
 //using namespace cn::sharesdk;
@@ -29,7 +32,7 @@ bool GameOver::init()
 	{
 		return false;
 	}
-
+	this->setKeypadEnabled(true);
 	srand(time(NULL));
 	visibleSize = Director::getInstance()->getVisibleSize();
 	Point origin = Director::getInstance()->getVisibleOrigin();
@@ -105,12 +108,12 @@ void GameOver::onEnter()
 	//gameLayer->addChild(itemsMenu);
 
 
-	/*labelSharemsg = Label::create();
-	strchinese = (String*)dic->objectForKey("fenxiangmsg");
-	labelSharemsg->setString(strchinese->getCString());
-	labelSharemsg->setPosition(Point(visibleSize.width / 4, visibleSize.height / 4));
-	labelSharemsg->setSystemFontSize(48);
-	gameLayer->addChild(labelSharemsg);*/
+	//labelSharemsg = Label::create();
+	//strchinese = (String*)dic->objectForKey("fenxiangmsg");
+	//labelSharemsg->setString(strchinese->getCString());
+	//labelSharemsg->setPosition(Point(visibleSize.width / 4, visibleSize.height / 4));
+	//labelSharemsg->setSystemFontSize(48);
+	//gameLayer->addChild(labelSharemsg);
 
 	//返回
 	labelReturn = Label::create();
@@ -136,6 +139,35 @@ void GameOver::onEnter()
 	//listener->onTouchEnded = CC_CALLBACK_2(Peoples::onTouchEnded, b);
 	listener->setSwallowTouches(false);//向下传递触摸
 	dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+	//注册捕捉监听
+	auto listenerkeyPad = EventListenerKeyboard::create();
+	listenerkeyPad->onKeyReleased = CC_CALLBACK_2(GameOver::onKeyReleased, this);
+	dispatcher->addEventListenerWithSceneGraphPriority(listenerkeyPad, this);
+}
+
+void  GameOver::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event)
+{
+	if (keycode == EventKeyboard::KeyCode::KEY_BACKSPACE)  //返回
+	{
+		//Director::getInstance()->popScene();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+		MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.", "Alert");
+		return;
+#endif
+
+		Director::getInstance()->end();
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		exit(0);
+#endif
+
+
+	}
+	else if (keycode == EventKeyboard::KeyCode::KEY_MENU)
+	{
+
+	}
 }
 
 void GameOver::menuCloseCallback(Ref* pSender)
@@ -163,6 +195,9 @@ bool  GameOver::onTouchBegan(Touch* touch, Event*  event)
 	Rect rect = Rect(labelAgain->getPositionX() - s.width /2, labelAgain->getPositionY() - s.height / 2, s.width, s.height);
 	Size sRtn = labelReturn->getContentSize();//获取这个label的大小
 	Rect rectRtn = Rect(labelReturn->getPositionX() - sRtn.width / 2, labelReturn->getPositionY() - sRtn.height / 2, sRtn.width, sRtn.height);
+	//Size share = labelSharemsg->getContentSize();//获取这个label的大小
+	//Rect rectShare = Rect(labelSharemsg->getPositionX() - share.width / 2, labelSharemsg->getPositionY() - share.height / 2, share.width, share.height);
+	
 	if (rect.containsPoint(locationInNode))//判断触摸点是否在labelAgain的矩形框上
 	{
 		log("GameOver::onTouchBegan,labelAgain");
@@ -173,6 +208,11 @@ bool  GameOver::onTouchBegan(Touch* touch, Event*  event)
 		log("GameOver::onTouchBegan,labelReturn");
 		returnToSelectMode();
 	}
+	//else if (rectShare.containsPoint(locationInNode))//分享
+	//{
+	//	log("GameOver::onTouchBegan,labelSharemsg");
+	//	shareButtonClick();
+	//}
 	
 
 	return true;
@@ -223,6 +263,61 @@ void GameOver::returnToSelectMode()
 	reScene = CCTransitionProgressInOut::create(t, scene);
 	CCDirector::sharedDirector()->replaceScene(reScene);
 }
+
+// GameOver为cocos2d::CCLayer的子类, shareButtonClick为某个按钮点击事件的处理函数
+//void GameOver::shareButtonClick()
+//{
+//	// 获取一个CCUMSocialSDK实例
+//	CCUMSocialSDK *sdk = CCUMSocialSDK::create("你的友盟appkey");
+//	// 设置用户点击一条图文分享时用户跳转到的目标页面, 一般为app主页或者下载页面
+//	sdk->setTargetUrl("http://app.iuoooo.com/AppAssembly/GetAppDetail?appId=8ce13755-eb4c-444e-9f46-6422b3e91231");
+//	// **********************   设置平台信息  ***************************
+//	// sdk->setQQAppIdAndAppKey("设置QQ的app id", "appkey");
+//	sdk->setWeiXinAppId("设置微信和朋友圈的app id");
+//	// sdk->setYiXinAppKey("设置易信和易信朋友圈的app id");
+//	// sdk->setLaiwangAppInfo("设置来往和来往动态的app id", 
+//	//              "设置来往和来往动态的app key", "我的应用名");
+//	// sdk->setFacebookAppId("你的facebook appid");
+//	//     // 打开或者关闭log
+//	// sdk->setLogEnable(true) ;
+//	// **********************   END ***************************
+//
+//	// 直接分享，参数1为要分享到的目标平台, 参数2为要分享的文字内容, 
+//	// 参数3为要分享的图片路径(android和IOS的图片地址格式不一致，因此分平台设置), 参数4为分享回调.
+//#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+//	sdk->directShare(WEIXIN_CIRCLE, "要分享的文字内容", "/sdcard/image.png", share_selector(shareCallback));
+//#elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+//	sdk->directShare(WEIXIN_CIRCLE, "要分享的文字内容", "image.png", share_selector(shareCallback));
+//#endif
+//}
+//
+///*
+//* 分享回调, 该回调不是某个类的成员函数， 而是一个普通的函数, 具体使用参考HelloWorldScene的例子
+//* @param platform 要分享到的目标平台
+//* @param stCode 返回码, 200代表分享成功, 100代表开始分享
+//* @param errorMsg 分享失败时的错误信息,android平台没有错误信息
+//*/
+//void shareCallback(int platform, int stCode, string& errorMsg)
+//{
+//	if (stCode == 100)
+//	{
+//		CCLog("#### 开始分享");
+//	}
+//	else if (stCode == 200)
+//	{
+//		CCLog("####  分享成功");
+//	}
+//	else
+//	{
+//		CCLog("####  分享出错");
+//	}
+//
+//	CCLog("platform num is : %d.", platform);
+//}
+
+
+
+
 //
 //void authResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *error)
 //{

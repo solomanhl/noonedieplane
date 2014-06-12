@@ -33,10 +33,13 @@ public:
 	// implement the "static create()" method manually
 	CREATE_FUNC(GameOver);
 
+	void onKeyReleased(EventKeyboard::KeyCode keycode, Event* event);
 	bool onTouchBegan(Touch* touch, Event*  event);
 
 	void changToLastScene();
 	void returnToSelectMode();
+
+	void shareButtonClick();
 
 
 	//sharesdk

@@ -26,7 +26,7 @@ bool NormalMode::init()
     {
         return false;
     }
-
+	this->setKeypadEnabled(true);
 	srand(time(NULL));
     visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
@@ -61,7 +61,7 @@ bool NormalMode::init()
     // add a label shows time
     // create and initialize a label
     
-	timerLabel = Label::create("0.000000", "Arial", 48);
+	timerLabel = Label::create("0.000000", "Arial", 64);
 	timerLabel->setColor(Color3B::BLACK);
     
     // position the label on the center of the screen
@@ -102,6 +102,11 @@ bool NormalMode::init()
 	listener->setSwallowTouches(false);//向下传递触摸
 	dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	//注册捕捉监听
+	auto listenerkeyPad = EventListenerKeyboard::create();
+	listenerkeyPad->onKeyReleased = CC_CALLBACK_2(NormalMode::onKeyReleased, this);
+	dispatcher->addEventListenerWithSceneGraphPriority(listenerkeyPad, this);
+
 	//添加2个区域，下面是0，上面是1
 	addArea(Color3B::YELLOW, 0);
 	addArea(Color3B::GREEN , 1);
@@ -114,10 +119,17 @@ bool NormalMode::init()
 
 	Dictionary*	dic = Dictionary::createWithContentsOfFile("chineseString.xml");
 	String* strchinese = (String*)dic->objectForKey("wanfa");
-	wanfaLabel = Label::create(strchinese->getCString(), "Arial", 32);
+	wanfaLabel = Label::create(strchinese->getCString(), "Arial", 64);
 	wanfaLabel->setTextColor(Color4B::BLACK);
 	wanfaLabel->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2 + 50));
 	gameLayer->addChild(wanfaLabel);
+
+	strchinese = (String*)dic->objectForKey("wanfa2");
+	wanfaLabel2 = Label::create(strchinese->getCString(), "Arial", 64);
+	wanfaLabel2->setTextColor(Color4B::BLACK);
+	wanfaLabel2->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2 - 50));
+	gameLayer->addChild(wanfaLabel2);
+
 
 	gameRunning = false;
 	//startGame();
@@ -126,6 +138,29 @@ bool NormalMode::init()
     return true;
 }
 
+void  NormalMode::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event)
+{
+	if (keycode == EventKeyboard::KeyCode::KEY_BACKSPACE)  //返回
+	{
+		//Director::getInstance()->popScene();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+		MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.", "Alert");
+		return;
+#endif
+
+		Director::getInstance()->end();
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		exit(0);
+#endif
+
+
+	}
+	else if (keycode == EventKeyboard::KeyCode::KEY_MENU)
+	{
+
+	}
+}
 
 bool  NormalMode::onTouchBegan(Touch* touch, Event*  event)
 {
@@ -174,6 +209,7 @@ void NormalMode::startGame()
 	}
 
 	wanfaLabel->setString("");
+	wanfaLabel2->setString("");
 
 	
 

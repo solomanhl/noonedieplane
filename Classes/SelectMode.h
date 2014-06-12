@@ -29,6 +29,7 @@ public:
 	// implement the "static create()" method manually
 	CREATE_FUNC(SelectMode);
 
+	void onKeyReleased(EventKeyboard::KeyCode keycode, Event* event);
 	bool onTouchBegan(Touch* touch, Event*  event);
 
 	void addArea(Color3B color);

@@ -28,6 +28,8 @@ bool SelectMode::init()
 		return false;
 	}
 
+	this->setKeypadEnabled(true);
+
 	visibleSize = Director::getInstance()->getVisibleSize();
 	Point origin = Director::getInstance()->getVisibleOrigin();
 
@@ -61,7 +63,7 @@ bool SelectMode::init()
 	Dictionary*	dic = Dictionary::createWithContentsOfFile("chineseString.xml");
 	String* strchinese = (String*)dic->objectForKey("gamename");
 
-	nameLabel = Label::create(strchinese->getCString(), "Arial", 32);
+	nameLabel = Label::create(strchinese->getCString(), "Arial", 64);
 	nameLabel->setColor(Color3B::BLACK);
 
 	// position the label on the center of the screen
@@ -73,7 +75,7 @@ bool SelectMode::init()
 
 
 	strchinese = (String*)dic->objectForKey("subname");
-	subnameLabel = Label::create(strchinese->getCString(), "Arial", 32);
+	subnameLabel = Label::create(strchinese->getCString(), "Arial", 64);
 	subnameLabel->setColor(Color3B::BLACK);
 	// position the label on the center of the screen
 	subnameLabel->setPosition(Point(origin.x + visibleSize.width / 2,
@@ -84,7 +86,7 @@ bool SelectMode::init()
 
 
 	strchinese = (String*)dic->objectForKey("startGame");
-	startLabel = Label::create(strchinese->getCString(), "Arial", 48);
+	startLabel = Label::create(strchinese->getCString(), "Arial", 64);
 	startLabel->setColor(Color3B::BLACK);
 	// position the label on the center of the screen
 	startLabel->setPosition(Point(visibleSize.width / 2,visibleSize.height / 2));
@@ -123,6 +125,12 @@ bool SelectMode::init()
 	listener->setSwallowTouches(false);//ÏòÏÂ´«µÝ´¥Ãþ
 	dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	//×¢²á²¶×½¼àÌý
+	auto listenerkeyPad = EventListenerKeyboard::create();
+	listenerkeyPad->onKeyReleased = CC_CALLBACK_2(SelectMode::onKeyReleased, this);
+	dispatcher->addEventListenerWithSceneGraphPriority(listenerkeyPad, this);
+
+
 
 	//Ìí¼ÓÓ¢ÐÛ
 	//addPeople();
@@ -130,6 +138,29 @@ bool SelectMode::init()
 	return true;
 }
 
+void  SelectMode::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event)
+{
+	if (keycode == EventKeyboard::KeyCode::KEY_BACKSPACE)  //·µ»Ø
+	{
+		//Director::getInstance()->popScene();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+		MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.", "Alert");
+		return;
+#endif
+
+		Director::getInstance()->end();
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		exit(0);
+#endif
+
+
+	}
+	else if (keycode == EventKeyboard::KeyCode::KEY_MENU)
+	{
+
+	}
+}
 
 bool  SelectMode::onTouchBegan(Touch* touch, Event*  event)
 {
@@ -149,6 +180,8 @@ bool  SelectMode::onTouchBegan(Touch* touch, Event*  event)
 
 	return true;
 }
+
+
 
 void SelectMode::menuCloseCallback(Ref* pSender)
 {

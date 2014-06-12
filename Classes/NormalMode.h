@@ -15,7 +15,7 @@ private:
 	Size visibleSize;
 	Node *gameLayer;
 	Node *peopleLayer;
-	Label *timerLabel, *wanfaLabel;
+	Label *timerLabel, *wanfaLabel, *wanfaLabel2;
 	bool timerRunning, timerRunning2s;
 	long startTime;
 	long runTime;
@@ -35,6 +35,7 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(NormalMode);
 
+	void onKeyReleased(EventKeyboard::KeyCode keycode, Event* event);
 	bool onTouchBegan(Touch* touch, Event*  event);
 
 	void startGame();
