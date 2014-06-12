@@ -3,7 +3,7 @@
 #include "SelectMode.h"
 
 USING_NS_CC;
-using namespace cn::sharesdk;
+//using namespace cn::sharesdk;
 
 AppDelegate::AppDelegate() {
 
@@ -38,10 +38,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 
 	//初始化ShareSDK
-	C2DXShareSDK::open(CCString::create("1ff4a599a237"), false);
+	//C2DXShareSDK::open(CCString::create("1ff4a599a237"), false);
 
 	//初始化社交平台信息
-	this->initPlatformConfig();
+	//this->initPlatformConfig();
 
     return true;
 }
@@ -61,10 +61,10 @@ void AppDelegate::applicationWillEnterForeground() {
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }
-
+/*
 void AppDelegate::initPlatformConfig()
 {
-	/*
+	
 	//新浪微博
 	CCDictionary *sinaConfigDict = CCDictionary::create();
 	sinaConfigDict->setObject(CCString::create("568898243"), "app_key");
@@ -241,7 +241,7 @@ void AppDelegate::initPlatformConfig()
 	vkConfigDict->setObject(CCString::create("3921561"), "application_id");
 	vkConfigDict->setObject(CCString::create("6Qf883ukLDyz4OBepYF1"), "secret_key");
 	C2DXShareSDK::setPlatformConfig(C2DXPlatTypeVKontakte, vkConfigDict);
-	*/
+	
 
 	//微信
 	CCDictionary *wcConfigDict = CCDictionary::create();
@@ -249,4 +249,4 @@ void AppDelegate::initPlatformConfig()
 	C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiSession, wcConfigDict);//好友
 	C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiTimeline, wcConfigDict);//朋友圈
 	C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiFav, wcConfigDict);//收藏
-}
+}*/

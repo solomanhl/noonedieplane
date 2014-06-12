@@ -40,13 +40,13 @@ public:
 
 
 	//sharesdk
-	void cancelAuthMenuItemClick(CCObject* pSender);
+	//void cancelAuthMenuItemClick(CCObject* pSender);
 
-	void hasAuthMenuItemClick(CCObject* pSender);
+	//void hasAuthMenuItemClick(CCObject* pSender);
 
-	void getUserInfoMenuItemClick(CCObject* pSender);
+	//void getUserInfoMenuItemClick(CCObject* pSender);
 
-	void shareMenuItemClick(CCObject* pSender);
+	//void shareMenuItemClick(CCObject* pSender);
 };
 
 #endif // __GameOver_SCENE_H__
