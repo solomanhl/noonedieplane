@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
-#include "NormalMode.h"
+//#include "NormalMode.h"
+#include "SelectMode.h"
 
 USING_NS_CC;
 using namespace cn::sharesdk;
@@ -29,7 +30,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-	auto scene = NormalMode::createScene();
+	//auto scene = NormalMode::createScene();
+	auto scene = SelectMode::createScene();
 
     // run
     director->runWithScene(scene);

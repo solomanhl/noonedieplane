@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "NormalMode.h"
+#include "SelectMode.h"
 
 USING_NS_CC;
 class GameOver : public cocos2d::Layer
@@ -35,6 +36,7 @@ public:
 	bool onTouchBegan(Touch* touch, Event*  event);
 
 	void changToLastScene();
+	void returnToSelectMode();
 
 
 	//sharesdk

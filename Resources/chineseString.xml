@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <plist version="1.0"> 
-	<dict>       
+	<dict>  
+		<key>gamename</key> 
+		<string>一个都不能死</string>       
+		<key>subname</key> 
+		<string>飞机版</string>       
 		<key>startGame</key> 
 		<string>开始游戏</string>  
 		<key>putong</key> 
@@ -15,7 +19,7 @@
 		<string>秒！</string>  
 		<key>fenxiangmsg</key>
 		<string>分享</string>  
-                <key>wanfa</key>
+    <key>wanfa</key>
 		<string>拖动不同的飞机移动，确保飞机不会撞到飞行小块。</string>  
 	</dict>  
 </plist>  
