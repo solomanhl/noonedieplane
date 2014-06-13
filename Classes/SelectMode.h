@@ -14,6 +14,8 @@ class SelectMode : public cocos2d::Layer
 private:
 	Size visibleSize;
 	Label *nameLabel, *subnameLabel, *startLabel;
+	Peoples *people;
+
 
 
 public:
@@ -37,6 +39,8 @@ public:
 
 
 	void addPeople();//ÃÌº””¢–€
+
+
 
 };
 

@@ -94,6 +94,18 @@ bool SelectMode::init()
 	// add the time label as a child to this layer
 	this->addChild(startLabel, 1);
 
+
+	people = Peoples::createWithImg("plane100.png", 0, 90);
+	this->addChild(people);
+	people->setPosition(200,200);
+
+	MoveBy *move = MoveBy::create(1.2f, Point(0, visibleSize.height - 200 - 200));
+	people->runAction(RepeatForever::create(static_cast<Sequence *>(Sequence::create(move, move->reverse(), NULL))));
+
+
+
+
+
 	/*
 	// add "NormalMode" splash screen"
 	auto sprite = Sprite::create("NormalMode.png");
@@ -206,6 +218,7 @@ void SelectMode::addArea(Color3B color)
 
 void SelectMode::changeToGame()
 {
+
 	TransitionScene * reScene = NULL;
 	/*Scene * scene = Scene::create();
 	GameOver *layer = GameOver::create();

@@ -63,6 +63,24 @@ void Peoples::movePeople(int time, Point target){
 	//runAction(CCSequence::create(bulletMoveToRight, actionMoveDone, NULL));
 }
 
+void Peoples::moveBesel(int time, Point tar){
+	//±´Èû¶ûÇúÏßÒÆ¶¯  
+	ccBezierConfig bezier;
+	int temp1, temp2;
+	temp1 = (this->getPosition().x) + abs(tar.x - (this->getPosition().x)) / 4;
+	temp2 = (this->getPosition().y) + (tar.y - (this->getPosition().y)) / 4;
+	bezier.controlPoint_1 = CCPointMake(MAX(temp1, visibleSize.width), MAX(temp2, visibleSize.height));
+	temp1 = (this->getPosition().x) + (tar.x - (this->getPosition().x)) * 3 / 4;
+	temp2 = (this->getPosition().y) - (tar.y - (this->getPosition().y)) / 4;
+	bezier.controlPoint_2 = CCPointMake(MAX(temp1, visibleSize.width), MIN(temp2, 0));
+	bezier.endPosition = CCPointMake(tar.x, tar.y);
+
+
+	BezierTo * bezierBy = CCBezierTo::create(time, bezier);
+
+	runAction(CCSequence::create(bezierBy, NULL));
+}
+
 void Peoples::spriteMoveFinished(cocos2d::CCNode *sender){
 	//CCSprite *sprite = (CCSprite *)sender;
 	//this->removeChild(sprite, true);
