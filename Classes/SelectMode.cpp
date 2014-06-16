@@ -218,6 +218,8 @@ void SelectMode::addArea(Color3B color)
 
 void SelectMode::changeToGame()
 {
+	ps = Peoples::removeAll();
+	removeAllChildrenWithCleanup(true);
 
 	TransitionScene * reScene = NULL;
 	/*Scene * scene = Scene::create();

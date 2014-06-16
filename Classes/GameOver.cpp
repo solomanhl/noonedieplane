@@ -220,6 +220,8 @@ bool  GameOver::onTouchBegan(Touch* touch, Event*  event)
 
 void GameOver::changToLastScene()
 {
+	removeAllChildrenWithCleanup(true);
+
 	TransitionScene * reScene = NULL;
 	Scene * scene = Scene::create();
 	NormalMode *layer = NormalMode::create();
@@ -243,6 +245,8 @@ void GameOver::changToLastScene()
 
 void GameOver::returnToSelectMode()
 {
+	removeAllChildrenWithCleanup(true);
+
 	TransitionScene * reScene = NULL;
 	auto * scene = SelectMode::createScene();
 	//NormalMode *layer = NormalMode::create();

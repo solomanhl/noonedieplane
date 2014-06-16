@@ -15,6 +15,15 @@ Vector<Peoples*> *Peoples::peoples = new Vector<Peoples*>();
 Vector<Peoples*> *Peoples::getPeoples(){
 	return Peoples::peoples;
 }
+Vector<Peoples*> *Peoples::removeAll(){
+	auto iter = peoples->end();
+	while (iter != peoples->begin())
+	{
+		iter--;
+		iter = peoples->erase(iter);
+	}
+	return Peoples::peoples;
+}
 
 Peoples* Peoples::createWithImg(std::string img, int tag, float rotation){
 auto b = new Peoples();

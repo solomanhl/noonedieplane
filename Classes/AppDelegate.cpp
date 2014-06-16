@@ -17,10 +17,17 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
+
+	
+
     if(!glview) {
         glview = GLView::create("No One Die - Plane");
         director->setOpenGLView(glview);
+
+		glview->setFrameSize(director->getVisibleSize().width, director->getVisibleSize().height);//ÆÁÄ»ÊÊÅä
     }
+
+	glview->setDesignResolutionSize(720, 1280, ResolutionPolicy::EXACT_FIT);//ÆÁÄ»ÊÊÅä,»ù×¼ÊÇ»ªÎªp6
 
     // turn on display FPS
     //director->setDisplayStats(true);

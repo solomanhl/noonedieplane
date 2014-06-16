@@ -15,6 +15,15 @@ Vector<Enemys*> *Enemys::enemys = new Vector<Enemys*>();
 Vector<Enemys*> *Enemys::getEnemys(){
 	return Enemys::enemys;
 }
+Vector<Enemys*> *Enemys::removeAll(){
+	auto iter = enemys->end();
+	while (iter != enemys->begin())
+	{
+		iter--;
+		iter = enemys->erase(iter);
+	}
+	return Enemys::enemys;
+}
 
 
 Enemys* Enemys::createWithArgs(Color3B color, Size size, std::string lable, float fontSize, Color4B textColor){

@@ -14,6 +14,7 @@ public:
 	~Enemys();
 
 	static Vector<Enemys *> *getEnemys();
+	static Vector<Enemys *> *removeAll();
 
 	static Enemys* createWithArgs(Color3B color, Size size, std::string lable, float fontSize, Color4B textColor);
 

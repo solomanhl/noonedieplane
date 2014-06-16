@@ -23,6 +23,9 @@ private:
 	long startY;
 	bool gameRunning;
 
+	Vector<Peoples *> *ps;
+	Vector<Enemys *> *es;
+
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* createScene();

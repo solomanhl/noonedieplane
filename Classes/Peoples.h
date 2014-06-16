@@ -14,6 +14,7 @@ public:
 	~Peoples();
 
 	static Vector<Peoples *> *getPeoples();
+	static Vector<Peoples *> *removeAll();
 
 	static Peoples* createWithImg(std::string img, int tag, float rotation);
 

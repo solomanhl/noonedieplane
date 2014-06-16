@@ -233,8 +233,8 @@ void NormalMode::update(float dt)
 	timerLabel->setString(StringUtils::format("%g", ((double)runTime) / 1000000));
 
 	//碰撞检测
-	auto ps = Peoples::getPeoples();
-	auto es = Enemys::getEnemys();
+	ps = Peoples::getPeoples();
+	es = Enemys::getEnemys();
 
 	for (auto itp = ps->begin(); itp != ps->end(); itp++){
 		//(*it)->moveDown();
@@ -380,21 +380,25 @@ void NormalMode::changeToGameOver(String s)
 
 	stopTimer1s();
 
-	//清楚所有敌人
-	auto enemys = Enemys::getEnemys();
-	for (auto it = enemys->begin(); it != enemys->end(); ){
-		(*it)->removeEnemy();
-		it = enemys->begin();
-	}
+	////清楚所有敌人
+	//auto enemys = Enemys::getEnemys();
+	//for (auto it = enemys->begin(); it != enemys->end(); ){
+	//	(*it)->removeEnemy();
+	//	it = enemys->begin();
+	//}
 
 
-	//清除所有英雄
-	auto peoples = Peoples::getPeoples();
-	for (auto it = peoples->begin(); it != peoples->end(); ){
-		(*it)->removePeople();
-		it = peoples->begin();
-	}
+	////清除所有英雄
+	//auto peoples = Peoples::getPeoples();
+	//for (auto it = peoples->begin(); it != peoples->end(); ){
+	//	(*it)->removePeople();
+	//	it = peoples->begin();
+	//}
 
+	ps = Peoples::removeAll();
+	es = Enemys::removeAll();
+
+	removeAllChildrenWithCleanup(true);
 	
 	TransitionScene * reScene = NULL;
 	Scene * scene = Scene::create();

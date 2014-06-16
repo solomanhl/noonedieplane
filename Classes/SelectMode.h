@@ -15,6 +15,7 @@ private:
 	Size visibleSize;
 	Label *nameLabel, *subnameLabel, *startLabel;
 	Peoples *people;
+	Vector<Peoples *> *ps;
 
 
 
