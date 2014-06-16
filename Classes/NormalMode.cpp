@@ -221,8 +221,8 @@ void NormalMode::startGame()
 
 void NormalMode::gameOver()
 {
-	stopTimer1s();
-	startTimer1s();
+	//stopTimer1s();
+	//startTimer1s();
 	stopTimer();
 	//MessageBox("Game Over!", "Failed!");
 }
@@ -241,7 +241,7 @@ void NormalMode::update(float dt)
 		for (auto ite = es->begin(); ite != es->end(); ite++){
 			if ((*itp)->getBoundingBox().intersectsRect((*ite)->getBoundingBox()))//碰撞
 			{
-				log("peng! %d %d", (*itp)->getTag(), (*ite)->getTag());
+				log("peng! %d (%f, %f)", (*itp)->getTag(), (*ite)->getPosition().x, (*ite)->getPosition().y);
 
 				if (gameRunning)
 				{
@@ -378,6 +378,7 @@ void NormalMode::changeToGameOver(String s)
 	CocosDenshion::SimpleAudioEngine::getInstance()->unloadEffect("sound/biu01.wav");
 	CocosDenshion::SimpleAudioEngine::getInstance()->unloadEffect("sound/peng01.wav");
 
+	stopTimer1s();
 
 	//清楚所有敌人
 	auto enemys = Enemys::getEnemys();

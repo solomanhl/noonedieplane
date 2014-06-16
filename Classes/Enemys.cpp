@@ -57,7 +57,7 @@ void Enemys::moveEnemy(int time, Point target){
 	runAction(CCSequence::create(enemyMoveToLeft, actionMoveDone, NULL));
 }
 
-void Enemys::spriteMoveFinished(cocos2d::CCNode *sender){
+void Enemys::spriteMoveFinished(cocos2d::Node *sender){
 	enemy = (Enemys *)sender;
 	enemy->removeEnemy();
 }
