@@ -28,6 +28,10 @@ bool NormalMode::init()
     }
 	this->setKeypadEnabled(true);
 	srand(time(NULL));
+
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("sound/biu01.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("sound/peng01.wav");
+
     visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
 
@@ -237,12 +241,12 @@ void NormalMode::update(float dt)
 		for (auto ite = es->begin(); ite != es->end(); ite++){
 			if ((*itp)->getBoundingBox().intersectsRect((*ite)->getBoundingBox()))//碰撞
 			{
-				log("peng! d% d%", (*itp)->getTag(), (*ite)->getTag());
+				log("peng! %d %d", (*itp)->getTag(), (*ite)->getTag());
 
 				if (gameRunning)
 				{
 					//发出声音
-					CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("/sound/peng01.wav");
+					CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sound/peng01.wav");
 				}
 
 				(*itp)->pengPeople();
@@ -366,11 +370,15 @@ void NormalMode::addEnemy()
 	b1->moveEnemy(3, Point(0 - b1->getContentSize().width / 2, b1->getPosition().y));
 
 	//发出声音
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("/sound/biu01.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sound/biu01.wav");
 }
 
 void NormalMode::changeToGameOver(String s)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->unloadEffect("sound/biu01.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->unloadEffect("sound/peng01.wav");
+
+
 	//清楚所有敌人
 	auto enemys = Enemys::getEnemys();
 	for (auto it = enemys->begin(); it != enemys->end(); ){
