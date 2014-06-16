@@ -5,7 +5,7 @@
 //USING_NS_UM_SOCIAL;
 
 USING_NS_CC;
-//using namespace cn::sharesdk;
+using namespace cn::sharesdk;
 
 Scene* GameOver::createScene()
 {
@@ -97,15 +97,15 @@ void GameOver::onEnter()
 	labelMode->setSystemFontSize(48);
 	gameLayer->addChild(labelMode);
 
-	////分享
-	//strchinese = (String*)dic->objectForKey("fenxiangmsg");
-	//MenuItemLabel *shareMenuItem = MenuItemLabel::create(LabelTTF::create(strchinese->getCString(), "Arial", 48),
-	//	this,
-	//	menu_selector(GameOver::shareMenuItemClick));
-	//Menu *itemsMenu = Menu::create(shareMenuItem, NULL);
-	//itemsMenu->alignItemsHorizontallyWithPadding(20);
-	//itemsMenu->setPosition(Point(visibleSize.width / 2, visibleSize.height / 4));
-	//gameLayer->addChild(itemsMenu);
+	//分享
+	strchinese = (String*)dic->objectForKey("fenxiangmsg");
+	MenuItemLabel *shareMenuItem = MenuItemLabel::create(LabelTTF::create(strchinese->getCString(), "Arial", 48),
+		this,
+		menu_selector(GameOver::shareMenuItemClick));
+	Menu *itemsMenu = Menu::create(shareMenuItem, NULL);
+	itemsMenu->alignItemsHorizontallyWithPadding(20);
+	itemsMenu->setPosition(Point(visibleSize.width / 2, visibleSize.height / 4));
+	gameLayer->addChild(itemsMenu);
 
 
 	//labelSharemsg = Label::create();
@@ -197,7 +197,7 @@ bool  GameOver::onTouchBegan(Touch* touch, Event*  event)
 	Rect rectRtn = Rect(labelReturn->getPositionX() - sRtn.width / 2, labelReturn->getPositionY() - sRtn.height / 2, sRtn.width, sRtn.height);
 	//Size share = labelSharemsg->getContentSize();//获取这个label的大小
 	//Rect rectShare = Rect(labelSharemsg->getPositionX() - share.width / 2, labelSharemsg->getPositionY() - share.height / 2, share.width, share.height);
-	
+	//
 	if (rect.containsPoint(locationInNode))//判断触摸点是否在labelAgain的矩形框上
 	{
 		log("GameOver::onTouchBegan,labelAgain");
@@ -322,93 +322,105 @@ void GameOver::returnToSelectMode()
 
 
 
-//
-//void authResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *error)
-//{
-//	switch (state) {
-//	case C2DXResponseStateSuccess:
-//		CCLog("授权成功");
-//		break;
-//	case C2DXResponseStateFail:
-//		CCLog("授权失败");
-//		break;
-//	default:
-//		break;
-//	}
-//}
-//
-//void getUserResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *userInfo, CCDictionary *error)
-//{
-//	if (state == C2DXResponseStateSuccess)
-//	{
-//		//输出用户信息
-//		try
-//		{
-//			CCArray *allKeys = userInfo->allKeys();
-//			allKeys->retain();
-//			for (int i = 0; i < allKeys->count(); i++)
-//			{
-//				CCString *key = (CCString *)allKeys->objectAtIndex(i);
-//				CCObject *obj = userInfo->objectForKey(key->getCString());
-//
-//				CCLog("key = %s", key->getCString());
-//				if (dynamic_cast<CCString *>(obj))
-//				{
-//					CCLog("value = %s", dynamic_cast<CCString *>(obj)->getCString());
-//				}
-//				else if (dynamic_cast<CCInteger *>(obj))
-//				{
-//					CCLog("value = %d", dynamic_cast<CCInteger *>(obj)->getValue());
-//				}
-//				else if (dynamic_cast<CCDouble *>(obj))
-//				{
-//					CCLog("value = %f", dynamic_cast<CCDouble *>(obj)->getValue());
-//				}
-//			}
-//			allKeys->release();
-//		}
-//		catch (...)
-//		{
-//			CCLog("==============error");
-//		}
-//
-//	}
-//}
-//
-//void shareResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *shareInfo, CCDictionary *error)
-//{
-//	switch (state) {
-//	case C2DXResponseStateSuccess:
-//		CCLog("分享成功");
-//		break;
-//	case C2DXResponseStateFail:
-//		CCLog("分享失败");
-//		break;
-//	default:
-//		break;
-//	}
-//}
-//
-//void GameOver::getUserInfoMenuItemClick(CCObject* pSender)
-//{
-//	C2DXShareSDK::getUserInfo(C2DXPlatTypeSinaWeibo, getUserResultHandler);
-//}
-//
-//void GameOver::shareMenuItemClick(CCObject* pSender)
-//{
-//	CCDictionary *content = CCDictionary::create();
-//
-//	content->setObject(CCString::create("这是一条测试内容"), "content");
-//	content->setObject(CCString::create("http://img0.bdstatic.com/img/image/shouye/systsy-11927417755.jpg"), "image");
-//	content->setObject(CCString::create("测试标题"), "title");
-//	content->setObject(CCString::create("测试描述"), "description");
-//	content->setObject(CCString::create("http://sharesdk.cn"), "url");
-//	//content->setObject(CCString::createWithFormat("%d", C2DXContentTypeNews), "type");
-//	//content->setObject(CCString::create("http://sharesdk.cn"), "siteUrl");
-//	//content->setObject(CCString::create("ShareSDK"), "site");
-//	//content->setObject(CCString::create("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3"), "musicUrl");
-//	//content->setObject(CCString::create("extInfo"), "extInfo");
-//
-//	C2DXShareSDK::showShareMenu(NULL, content, CCPointMake(100, 100), C2DXMenuArrowDirectionLeft, shareResultHandler);
-//	//    C2DXShareSDK::showShareView(C2DXPlatTypeSinaWeibo, content, shareResultHandler);
-//}
+
+void authResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *error)
+{
+	switch (state) {
+	case C2DXResponseStateSuccess:
+		CCLog("授权成功");
+		break;
+	case C2DXResponseStateFail:
+		CCLog("授权失败");
+		break;
+	default:
+		break;
+	}
+}
+
+void getUserResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *userInfo, CCDictionary *error)
+{
+	if (state == C2DXResponseStateSuccess)
+	{
+		//输出用户信息
+		try
+		{
+			CCArray *allKeys = userInfo->allKeys();
+			allKeys->retain();
+			for (int i = 0; i < allKeys->count(); i++)
+			{
+				CCString *key = (CCString *)allKeys->objectAtIndex(i);
+				CCObject *obj = userInfo->objectForKey(key->getCString());
+
+				CCLog("key = %s", key->getCString());
+				if (dynamic_cast<CCString *>(obj))
+				{
+					CCLog("value = %s", dynamic_cast<CCString *>(obj)->getCString());
+				}
+				else if (dynamic_cast<CCInteger *>(obj))
+				{
+					CCLog("value = %d", dynamic_cast<CCInteger *>(obj)->getValue());
+				}
+				else if (dynamic_cast<CCDouble *>(obj))
+				{
+					CCLog("value = %f", dynamic_cast<CCDouble *>(obj)->getValue());
+				}
+			}
+			allKeys->release();
+		}
+		catch (...)
+		{
+			CCLog("==============error");
+		}
+
+	}
+}
+
+void shareResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *shareInfo, CCDictionary *error)
+{
+	switch (state) {
+	case C2DXResponseStateSuccess:
+		CCLog("分享成功");
+		break;
+	case C2DXResponseStateFail:
+		CCLog("分享失败");
+		break;
+	default:
+		break;
+	}
+}
+
+void GameOver::hasAuthMenuItemClick(CCObject* pSender)
+{
+	if (C2DXShareSDK::hasAutorized(C2DXPlatTypeSinaWeibo))
+	{
+		CCLog("用户已授权");
+	}
+	else
+	{
+		CCLog("用户尚未授权");
+	}
+}
+
+void GameOver::getUserInfoMenuItemClick(CCObject* pSender)
+{
+	C2DXShareSDK::getUserInfo(C2DXPlatTypeSinaWeibo, getUserResultHandler);
+}
+
+void GameOver::shareMenuItemClick(CCObject* pSender)
+{
+	Dictionary *content = CCDictionary::create();
+
+	content->setObject(String::create("这是一条测试内容"), "content");
+	content->setObject(String::create("http://img0.bdstatic.com/img/image/shouye/systsy-11927417755.jpg"), "image");
+	content->setObject(String::create("测试标题"), "title");
+	content->setObject(String::create("测试描述"), "description");
+	content->setObject(String::create("http://sharesdk.cn"), "url");
+	//content->setObject(CCString::createWithFormat("%d", C2DXContentTypeNews), "type");
+	//content->setObject(CCString::create("http://sharesdk.cn"), "siteUrl");
+	//content->setObject(CCString::create("ShareSDK"), "site");
+	//content->setObject(CCString::create("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3"), "musicUrl");
+	//content->setObject(CCString::create("extInfo"), "extInfo");
+
+	C2DXShareSDK::showShareMenu(NULL, content, CCPointMake(100, 100), C2DXMenuArrowDirectionLeft, shareResultHandler);
+	//    C2DXShareSDK::showShareView(C2DXPlatTypeSinaWeibo, content, shareResultHandler);
+}

@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "NormalMode.h"
 #include "SelectMode.h"
+#include "../Classes/C2DXShareSDK/C2DXShareSDK.h"
 
 USING_NS_CC;
 class GameOver : public cocos2d::Layer
@@ -43,13 +44,15 @@ public:
 
 
 	//sharesdk
-	//void cancelAuthMenuItemClick(CCObject* pSender);
+	void authMenuItemClick(CCObject* pSender);
 
-	//void hasAuthMenuItemClick(CCObject* pSender);
+	void cancelAuthMenuItemClick(CCObject* pSender);
 
-	//void getUserInfoMenuItemClick(CCObject* pSender);
+	void hasAuthMenuItemClick(CCObject* pSender);
 
-	//void shareMenuItemClick(CCObject* pSender);
+	void getUserInfoMenuItemClick(CCObject* pSender);
+
+	void shareMenuItemClick(CCObject* pSender);
 };
 
 #endif // __GameOver_SCENE_H__
