@@ -238,6 +238,13 @@ void NormalMode::update(float dt)
 			if ((*itp)->getBoundingBox().intersectsRect((*ite)->getBoundingBox()))//碰撞
 			{
 				log("peng! d% d%", (*itp)->getTag(), (*ite)->getTag());
+
+				if (gameRunning)
+				{
+					//发出声音
+					CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("/sound/peng01.wav");
+				}
+
 				(*itp)->pengPeople();
 				//(*itp)->removePeople();
 				(*ite)->removeEnemy();
@@ -278,7 +285,7 @@ void NormalMode::stopTimer()
 
 void NormalMode::step(float dt)
 {
-	log("2s");
+	log("1s");
 
 	if (!gameRunning)
 	{
@@ -291,8 +298,11 @@ void NormalMode::step(float dt)
 
 		changeToGameOver(s);
 	}
-
-	addEnemy();
+	else
+	{
+		addEnemy();
+	}
+	
 }
 
 void NormalMode::startTimer1s(){
@@ -354,6 +364,9 @@ void NormalMode::addEnemy()
 	startY = rand() % (int)(visibleSize.height / 2 - b1->getContentSize().height / 2);
 	b1->setPosition(visibleSize.width + b1->getContentSize().width / 2, startY + visibleSize.height / 2 + b1->getContentSize().height / 2);
 	b1->moveEnemy(3, Point(0 - b1->getContentSize().width / 2, b1->getPosition().y));
+
+	//发出声音
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("/sound/biu01.wav");
 }
 
 void NormalMode::changeToGameOver(String s)

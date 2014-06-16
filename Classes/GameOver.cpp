@@ -104,7 +104,7 @@ void GameOver::onEnter()
 	//	menu_selector(GameOver::shareMenuItemClick));
 	//Menu *itemsMenu = Menu::create(shareMenuItem, NULL);
 	//itemsMenu->alignItemsHorizontallyWithPadding(20);
-	//itemsMenu->setPosition(Point(visibleSize.width / 4, visibleSize.height / 4));
+	//itemsMenu->setPosition(Point(visibleSize.width / 2, visibleSize.height / 4));
 	//gameLayer->addChild(itemsMenu);
 
 
@@ -119,7 +119,7 @@ void GameOver::onEnter()
 	labelReturn = Label::create();
 	strchinese = (String*)dic->objectForKey("fanhui");
 	labelReturn->setString(strchinese->getCString());
-	labelReturn->setPosition(Point(visibleSize.width / 2, visibleSize.height / 4));
+	labelReturn->setPosition(Point(visibleSize.width / 4, visibleSize.height / 4));
 	labelReturn->setSystemFontSize(48);
 	gameLayer->addChild(labelReturn);
 

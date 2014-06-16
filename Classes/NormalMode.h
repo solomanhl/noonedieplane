@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 
+#include "SimpleAudioEngine.h" 
 #include "Areas.h"
 #include "Peoples.h"
 #include "Enemys.h"
