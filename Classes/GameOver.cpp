@@ -115,11 +115,11 @@ void GameOver::onEnter()
 	MenuItemLabel *shareMenuItem = MenuItemLabel::create(LabelTTF::create(strchinese->getCString(), "Arial", 48),
 		this,
 		menu_selector(GameOver::shareMenuItemClick));
+	//Menu *itemsMenu = Menu::create(authMenuItem, cancelAuthMenuItem, hasAuthMenuItem, getUserMenuItem, shareMenuItem, NULL);
 	Menu *itemsMenu = Menu::create(shareMenuItem, NULL);
 	itemsMenu->alignItemsHorizontallyWithPadding(20);
 	itemsMenu->setPosition(Point(visibleSize.width / 2, visibleSize.height / 4));
 	gameLayer->addChild(itemsMenu);
-
 
 	//labelSharemsg = Label::create();
 	//strchinese = (String*)dic->objectForKey("fenxiangmsg");
@@ -256,6 +256,42 @@ void GameOver::changToLastScene()
 	CCDirector::sharedDirector()->replaceScene(reScene);
 }
 
+void GameOver::snapShot()
+{
+	//定义一个屏幕大小的渲染纹理
+	//RenderTexture* renderTexture = RenderTexture::create(visibleSize.width * .5, visibleSize.height * .5, Texture2D::PixelFormat::RGBA8888);
+	RenderTexture* renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height, Texture2D::PixelFormat::RGBA8888);
+	
+	Scene* curScene = Director::getInstance()->getRunningScene();
+	Point ancPos = curScene->getAnchorPoint();
+
+	//渲染纹理开始捕捉
+	renderTexture->begin();
+
+	// 缩小屏幕截屏区域
+	//curScene->setScale(.5);
+	//curScene->setAnchorPoint(cocos2d::Point(0, 0));
+
+	//绘制当前场景
+	curScene->visit();
+
+	//结束
+	renderTexture->end();
+
+	//保存png
+	//imgFile = FileUtils::sharedFileUtils()->getWritablePath() + "screenshoot.png";
+	renderTexture->saveToFile("screenshoot.png", Image::Format::PNG);
+
+	// 恢复屏幕尺寸
+	//curScene->setScale(1);
+	//curScene->setAnchorPoint(ancPos);
+
+
+	//CC_SAFE_DELETE(curScene);
+	
+
+}
+
 void GameOver::returnToSelectMode()
 {
 	removeAllChildrenWithCleanup(true);
@@ -351,7 +387,7 @@ void shareResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictio
 
 void GameOver::authMenuItemClick(Object* pSender)
 {
-	//    C2DXShareSDK::authorize(C2DXPlatTypeFacebook, authResultHandler);
+	C2DXShareSDK::authorize(C2DXPlatTypeWeixiTimeline, authResultHandler);
 }
 
 void GameOver::cancelAuthMenuItemClick(Object* pSender)
@@ -361,7 +397,8 @@ void GameOver::cancelAuthMenuItemClick(Object* pSender)
 
 void GameOver::hasAuthMenuItemClick(Object* pSender)
 {
-	if (C2DXShareSDK::hasAutorized(C2DXPlatTypeSinaWeibo))
+	//if (C2DXShareSDK::hasAutorized(C2DXPlatTypeSinaWeibo))
+	if (C2DXShareSDK::hasAutorized(C2DXPlatTypeWeixiSession) || C2DXShareSDK::hasAutorized(C2DXPlatTypeWeixiTimeline) || C2DXShareSDK::hasAutorized(C2DXPlatTypeWeixiFav))
 	{
 		CCLog("用户已授权");
 	}
@@ -373,18 +410,30 @@ void GameOver::hasAuthMenuItemClick(Object* pSender)
 
 void GameOver::getUserInfoMenuItemClick(Object* pSender)
 {
-	C2DXShareSDK::getUserInfo(C2DXPlatTypeSinaWeibo, getUserResultHandler);
+	C2DXShareSDK::getUserInfo(C2DXPlatTypeWeixiSession, getUserResultHandler);
 }
 
 void GameOver::shareMenuItemClick(Object* pSender)
 {
+	snapShot();//截屏
+
+	authMenuItemClick(pSender);
+	hasAuthMenuItemClick(pSender);
+	getUserInfoMenuItemClick(pSender);
+
+
 	Dictionary *content = CCDictionary::create();
 
-	content->setObject(String::create("这是一条测试内容"), "content");
-	content->setObject(String::create("http://img0.bdstatic.com/img/image/shouye/systsy-11927417755.jpg"), "image");
-	content->setObject(String::create("测试标题"), "title");
-	content->setObject(String::create("测试描述"), "description");
-	content->setObject(String::create("http://sharesdk.cn"), "url");
+	//content->setObject(String::create("一个都不能死 飞机版，你能比我强吗？"), "content");
+
+	imgFile = FileUtils::sharedFileUtils()->getWritablePath() + "screenshoot.png";		
+	fCopy(imgFile, "/mnt/sdcard/screenshoot.png");
+	imgFile = "/mnt/sdcard/screenshoot.png";
+
+	content->setObject(String::create(imgFile), "image");
+	content->setObject(String::create("一个都不能死 飞机版"), "title");
+	//content->setObject(String::create("一个都不能死 飞机版，你能比我强吗？"), "description");
+	//content->setObject(String::create("http://sharesdk.cn"), "url");
 	//content->setObject(CCString::createWithFormat("%d", C2DXContentTypeNews), "type");
 	//content->setObject(CCString::create("http://sharesdk.cn"), "siteUrl");
 	//content->setObject(CCString::create("ShareSDK"), "site");
@@ -392,5 +441,29 @@ void GameOver::shareMenuItemClick(Object* pSender)
 	//content->setObject(CCString::create("extInfo"), "extInfo");
 
 	C2DXShareSDK::showShareMenu(NULL, content, CCPointMake(100, 100), C2DXMenuArrowDirectionLeft, shareResultHandler);
-	//    C2DXShareSDK::showShareView(C2DXPlatTypeSinaWeibo, content, shareResultHandler);
+	//C2DXShareSDK::showShareView(C2DXPlatTypeWeixiTimeline, content, shareResultHandler);
+}
+
+void GameOver::fCopy(std::string src, std::string  tar)
+{
+	FILE* inFile = fopen(src.c_str(), "rb");
+	FILE* outFile = fopen(tar.c_str(), "wb+");
+	int buffsize;
+	char* buffer;
+	if (inFile != NULL)
+	{
+		buffsize = fseek(inFile, 0, SEEK_END) - fseek(inFile, 0, SEEK_SET);
+		fseek(inFile, 0, SEEK_SET);
+		buffer = (char*)malloc(buffsize*sizeof(char));
+		fread(buffer, buffsize, 1, inFile);
+		fwrite(buffer, buffsize, 1, outFile);
+	}
+	else
+	{
+		fprintf(stderr, "error");
+	}
+
+	fclose(inFile);
+	fclose(outFile);
+
 }

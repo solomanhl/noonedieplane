@@ -97,9 +97,9 @@ bool SelectMode::init()
 
 	people = Peoples::createWithImg("plane100.png", 0, 90);
 	this->addChild(people);
-	people->setPosition(200,200);
+	people->setPosition(startLabel->getPositionX() - 200, startLabel->getPositionY() - 150);
 
-	MoveBy *move = MoveBy::create(1.2f, Point(0, visibleSize.height - 200 - 200));
+	MoveBy *move = MoveBy::create(1.2f, Point(0, 300));
 	people->runAction(RepeatForever::create(static_cast<Sequence *>(Sequence::create(move, move->reverse(), NULL))));
 
 

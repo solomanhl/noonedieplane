@@ -39,6 +39,9 @@ public:
 
 	void changToLastScene();
 	void returnToSelectMode();
+	void snapShot();
+	std::string imgFile;
+	void fCopy(std::string src, std::string  tar);
 
 
 

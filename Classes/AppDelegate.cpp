@@ -46,7 +46,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 
 	//初始化ShareSDK
-	C2DXShareSDK::open(String::create("1ff4a599a237"), false);
+	C2DXShareSDK::open(String::create("1ff4a599a237"), false);//sharesdk的id
 	//初始化社交平台信息
 	this->initPlatformConfig();
 	////以下都是微信
@@ -103,7 +103,7 @@ void AppDelegate::initPlatformConfig()
 
 	//微信
 	CCDictionary *wcConfigDict = CCDictionary::create();
-	wcConfigDict->setObject(CCString::create("wxa8fbe006c93bc7ac"), "app_id");
+	wcConfigDict->setObject(CCString::create("wx4c8cdf1d0d514686"), "app_id");
 	C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiSession, wcConfigDict);
 	C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiTimeline, wcConfigDict);
 	C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiFav, wcConfigDict);
