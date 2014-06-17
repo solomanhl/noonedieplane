@@ -99,6 +99,19 @@ void GameOver::onEnter()
 
 	//分享
 	strchinese = (String*)dic->objectForKey("fenxiangmsg");
+
+	MenuItemLabel *authMenuItem = MenuItemLabel::create(CCLabelTTF::create("授权", "Arial", 40),
+		this,
+		menu_selector(GameOver::authMenuItemClick));
+	MenuItemLabel *cancelAuthMenuItem = MenuItemLabel::create(CCLabelTTF::create("取消授权", "Arial", 40),
+		this,
+		menu_selector(GameOver::cancelAuthMenuItemClick));
+	MenuItemLabel *hasAuthMenuItem = MenuItemLabel::create(CCLabelTTF::create("是否授权", "Arial", 40),
+		this,
+		menu_selector(GameOver::hasAuthMenuItemClick));
+	MenuItemLabel *getUserMenuItem = MenuItemLabel::create(CCLabelTTF::create("用户信息", "Arial", 40),
+		this,
+		menu_selector(GameOver::getUserInfoMenuItemClick));
 	MenuItemLabel *shareMenuItem = MenuItemLabel::create(LabelTTF::create(strchinese->getCString(), "Arial", 48),
 		this,
 		menu_selector(GameOver::shareMenuItemClick));
@@ -268,59 +281,6 @@ void GameOver::returnToSelectMode()
 	CCDirector::sharedDirector()->replaceScene(reScene);
 }
 
-// GameOver为cocos2d::CCLayer的子类, shareButtonClick为某个按钮点击事件的处理函数
-//void GameOver::shareButtonClick()
-//{
-//	// 获取一个CCUMSocialSDK实例
-//	CCUMSocialSDK *sdk = CCUMSocialSDK::create("你的友盟appkey");
-//	// 设置用户点击一条图文分享时用户跳转到的目标页面, 一般为app主页或者下载页面
-//	sdk->setTargetUrl("http://app.iuoooo.com/AppAssembly/GetAppDetail?appId=8ce13755-eb4c-444e-9f46-6422b3e91231");
-//	// **********************   设置平台信息  ***************************
-//	// sdk->setQQAppIdAndAppKey("设置QQ的app id", "appkey");
-//	sdk->setWeiXinAppId("设置微信和朋友圈的app id");
-//	// sdk->setYiXinAppKey("设置易信和易信朋友圈的app id");
-//	// sdk->setLaiwangAppInfo("设置来往和来往动态的app id", 
-//	//              "设置来往和来往动态的app key", "我的应用名");
-//	// sdk->setFacebookAppId("你的facebook appid");
-//	//     // 打开或者关闭log
-//	// sdk->setLogEnable(true) ;
-//	// **********************   END ***************************
-//
-//	// 直接分享，参数1为要分享到的目标平台, 参数2为要分享的文字内容, 
-//	// 参数3为要分享的图片路径(android和IOS的图片地址格式不一致，因此分平台设置), 参数4为分享回调.
-//#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-//	sdk->directShare(WEIXIN_CIRCLE, "要分享的文字内容", "/sdcard/image.png", share_selector(shareCallback));
-//#elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-//	sdk->directShare(WEIXIN_CIRCLE, "要分享的文字内容", "image.png", share_selector(shareCallback));
-//#endif
-//}
-//
-///*
-//* 分享回调, 该回调不是某个类的成员函数， 而是一个普通的函数, 具体使用参考HelloWorldScene的例子
-//* @param platform 要分享到的目标平台
-//* @param stCode 返回码, 200代表分享成功, 100代表开始分享
-//* @param errorMsg 分享失败时的错误信息,android平台没有错误信息
-//*/
-//void shareCallback(int platform, int stCode, string& errorMsg)
-//{
-//	if (stCode == 100)
-//	{
-//		CCLog("#### 开始分享");
-//	}
-//	else if (stCode == 200)
-//	{
-//		CCLog("####  分享成功");
-//	}
-//	else
-//	{
-//		CCLog("####  分享出错");
-//	}
-//
-//	CCLog("platform num is : %d.", platform);
-//}
-
-
-
 
 
 void authResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *error)
@@ -389,7 +349,17 @@ void shareResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictio
 	}
 }
 
-void GameOver::hasAuthMenuItemClick(CCObject* pSender)
+void GameOver::authMenuItemClick(Object* pSender)
+{
+	//    C2DXShareSDK::authorize(C2DXPlatTypeFacebook, authResultHandler);
+}
+
+void GameOver::cancelAuthMenuItemClick(Object* pSender)
+{
+	//    C2DXShareSDK::cancelAuthorize(C2DXPlatTypeSinaWeibo);
+}
+
+void GameOver::hasAuthMenuItemClick(Object* pSender)
 {
 	if (C2DXShareSDK::hasAutorized(C2DXPlatTypeSinaWeibo))
 	{
@@ -401,12 +371,12 @@ void GameOver::hasAuthMenuItemClick(CCObject* pSender)
 	}
 }
 
-void GameOver::getUserInfoMenuItemClick(CCObject* pSender)
+void GameOver::getUserInfoMenuItemClick(Object* pSender)
 {
 	C2DXShareSDK::getUserInfo(C2DXPlatTypeSinaWeibo, getUserResultHandler);
 }
 
-void GameOver::shareMenuItemClick(CCObject* pSender)
+void GameOver::shareMenuItemClick(Object* pSender)
 {
 	Dictionary *content = CCDictionary::create();
 

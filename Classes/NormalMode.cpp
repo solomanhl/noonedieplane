@@ -378,7 +378,12 @@ void NormalMode::changeToGameOver(String s)
 	CocosDenshion::SimpleAudioEngine::getInstance()->unloadEffect("sound/biu01.wav");
 	CocosDenshion::SimpleAudioEngine::getInstance()->unloadEffect("sound/peng01.wav");
 
+	stopTimer();
 	stopTimer1s();
+	timerRunning = false;
+	timerRunning2s = false;
+	runTime = 0;
+	gameRunning = false;
 
 	////清楚所有敌人
 	//auto enemys = Enemys::getEnemys();

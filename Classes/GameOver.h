@@ -40,19 +40,18 @@ public:
 	void changToLastScene();
 	void returnToSelectMode();
 
-	void shareButtonClick();
 
 
 	//sharesdk
-	void authMenuItemClick(CCObject* pSender);
+	void authMenuItemClick(Object* pSender);
 
-	void cancelAuthMenuItemClick(CCObject* pSender);
+	void cancelAuthMenuItemClick(Object* pSender);
 
-	void hasAuthMenuItemClick(CCObject* pSender);
+	void hasAuthMenuItemClick(Object* pSender);
 
-	void getUserInfoMenuItemClick(CCObject* pSender);
+	void getUserInfoMenuItemClick(Object* pSender);
 
-	void shareMenuItemClick(CCObject* pSender);
+	void shareMenuItemClick(Object* pSender);
 };
 
 #endif // __GameOver_SCENE_H__
