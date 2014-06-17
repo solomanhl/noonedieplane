@@ -20,8 +20,10 @@
 		<key>fenxiangmsg</key>
 		<string>分享</string>  
     <key>wanfa</key>
-		<string>拖动不同的飞机移动</string>  
+		<string>拖动不同的飞机移动</string>   
 		<key>wanfa2</key>
 		<string>确保飞机不会撞到飞行块</string>  
+		<key>share</key>
+		<string>一个都不能死 飞机版，你能比我强吗？</string>  
 	</dict>  
 </plist>  

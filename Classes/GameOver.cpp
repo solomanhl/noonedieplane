@@ -1,4 +1,9 @@
 #include "GameOver.h"
+#include<iostream>
+#include<fstream>
+
+using namespace std;
+
 //// 引入相关的头文件
 //#include "Cocos2dx/Common/CCUMSocialSDK.h"
 //// 使用友盟命令空间
@@ -88,6 +93,7 @@ void GameOver::onEnter()
 	strchinese->append(    ((String*)dic->objectForKey("miao"))->getCString()    );
 	timerLabel->setString(strchinese->getCString());
 	timerLabel->setColor(Color3B::BLACK);
+	timerLabel->setSystemFontSize(84);
 
 	//显示模式
 	auto labelMode = Label::create();
@@ -100,16 +106,16 @@ void GameOver::onEnter()
 	//分享
 	strchinese = (String*)dic->objectForKey("fenxiangmsg");
 
-	MenuItemLabel *authMenuItem = MenuItemLabel::create(CCLabelTTF::create("授权", "Arial", 40),
+	MenuItemLabel *authMenuItem = MenuItemLabel::create(CCLabelTTF::create("sq", "Arial", 40),
 		this,
 		menu_selector(GameOver::authMenuItemClick));
-	MenuItemLabel *cancelAuthMenuItem = MenuItemLabel::create(CCLabelTTF::create("取消授权", "Arial", 40),
+	MenuItemLabel *cancelAuthMenuItem = MenuItemLabel::create(CCLabelTTF::create("qxsq", "Arial", 40),
 		this,
 		menu_selector(GameOver::cancelAuthMenuItemClick));
-	MenuItemLabel *hasAuthMenuItem = MenuItemLabel::create(CCLabelTTF::create("是否授权", "Arial", 40),
+	MenuItemLabel *hasAuthMenuItem = MenuItemLabel::create(CCLabelTTF::create("sfsq", "Arial", 40),
 		this,
 		menu_selector(GameOver::hasAuthMenuItemClick));
-	MenuItemLabel *getUserMenuItem = MenuItemLabel::create(CCLabelTTF::create("用户信息", "Arial", 40),
+	MenuItemLabel *getUserMenuItem = MenuItemLabel::create(CCLabelTTF::create("yhxx", "Arial", 40),
 		this,
 		menu_selector(GameOver::getUserInfoMenuItemClick));
 	MenuItemLabel *shareMenuItem = MenuItemLabel::create(LabelTTF::create(strchinese->getCString(), "Arial", 48),
@@ -119,6 +125,7 @@ void GameOver::onEnter()
 	Menu *itemsMenu = Menu::create(shareMenuItem, NULL);
 	itemsMenu->alignItemsHorizontallyWithPadding(20);
 	itemsMenu->setPosition(Point(visibleSize.width / 2, visibleSize.height / 4));
+	//itemsMenu->setPosition(Point(visibleSize.width / 2, visibleSize.height / 6));
 	gameLayer->addChild(itemsMenu);
 
 	//labelSharemsg = Label::create();
@@ -387,18 +394,18 @@ void shareResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictio
 
 void GameOver::authMenuItemClick(Object* pSender)
 {
-	C2DXShareSDK::authorize(C2DXPlatTypeWeixiTimeline, authResultHandler);
+	//C2DXShareSDK::authorize(C2DXPlatTypeWeixiTimeline, authResultHandler);
 }
 
 void GameOver::cancelAuthMenuItemClick(Object* pSender)
 {
-	//    C2DXShareSDK::cancelAuthorize(C2DXPlatTypeSinaWeibo);
+	//C2DXShareSDK::cancelAuthorize(C2DXPlatTypeWeixiTimeline);
 }
 
 void GameOver::hasAuthMenuItemClick(Object* pSender)
 {
 	//if (C2DXShareSDK::hasAutorized(C2DXPlatTypeSinaWeibo))
-	if (C2DXShareSDK::hasAutorized(C2DXPlatTypeWeixiSession) || C2DXShareSDK::hasAutorized(C2DXPlatTypeWeixiTimeline) || C2DXShareSDK::hasAutorized(C2DXPlatTypeWeixiFav))
+	if (C2DXShareSDK::hasAutorized(C2DXPlatTypeWeixiTimeline) )
 	{
 		CCLog("用户已授权");
 	}
@@ -417,23 +424,29 @@ void GameOver::shareMenuItemClick(Object* pSender)
 {
 	snapShot();//截屏
 
-	authMenuItemClick(pSender);
-	hasAuthMenuItemClick(pSender);
-	getUserInfoMenuItemClick(pSender);
+	//authMenuItemClick(pSender);
+	//hasAuthMenuItemClick(pSender);
+	//getUserInfoMenuItemClick(pSender);
 
 
 	Dictionary *content = CCDictionary::create();
 
-	//content->setObject(String::create("一个都不能死 飞机版，你能比我强吗？"), "content");
+	
 
-	imgFile = FileUtils::sharedFileUtils()->getWritablePath() + "screenshoot.png";		
-	fCopy(imgFile, "/mnt/sdcard/screenshoot.png");
-	imgFile = "/mnt/sdcard/screenshoot.png";
+	imgFileSrc = FileUtils::sharedFileUtils()->getWritablePath() + "screenshoot.png";	
+	/*imgFileTar = "/mnt/sdcard/screenshoot.png";
+	fCopy(imgFileSrc, imgFileTar);*/
+	
 
-	content->setObject(String::create(imgFile), "image");
-	content->setObject(String::create("一个都不能死 飞机版"), "title");
-	//content->setObject(String::create("一个都不能死 飞机版，你能比我强吗？"), "description");
-	//content->setObject(String::create("http://sharesdk.cn"), "url");
+	Dictionary* dic = Dictionary::createWithContentsOfFile("chineseString.xml");
+	String* strchinese = (String*)dic->objectForKey("share");
+
+	//content->setObject(String::create(""), "content");
+	//content->setObject(String::create("http://img0.bdstatic.com/img/image/shouye/systsy-11927417755.jpg"), "image");
+	content->setObject(String::create(imgFileSrc), "image");
+	content->setObject(String::create(strchinese->getCString()), "title");
+	//content->setObject(String::create(strchinese->getCString()), "description");//没用
+	content->setObject(String::create("http://sharesdk.cn"), "url");//这个正常，点击就跳转
 	//content->setObject(CCString::createWithFormat("%d", C2DXContentTypeNews), "type");
 	//content->setObject(CCString::create("http://sharesdk.cn"), "siteUrl");
 	//content->setObject(CCString::create("ShareSDK"), "site");
@@ -446,7 +459,7 @@ void GameOver::shareMenuItemClick(Object* pSender)
 
 void GameOver::fCopy(std::string src, std::string  tar)
 {
-	FILE* inFile = fopen(src.c_str(), "rb");
+	/*FILE* inFile = fopen(src.c_str(), "rb");
 	FILE* outFile = fopen(tar.c_str(), "wb+");
 	int buffsize;
 	char* buffer;
@@ -461,9 +474,35 @@ void GameOver::fCopy(std::string src, std::string  tar)
 	else
 	{
 		fprintf(stderr, "error");
+	}*/
+
+	ifstream in;
+	ofstream out;
+	in.open(src, ios::binary);//打开源文件
+	if (in.fail())//打开源文件失败
+	{
+		cout << "Error 1: Fail to open the source file." << endl;
+		in.close();
+		out.close();
 	}
 
-	fclose(inFile);
-	fclose(outFile);
+	remove(tar.c_str());
+
+
+
+
+	out.open(tar, ios::binary);//创建目标文件 
+	if (out.fail())//创建文件失败
+	{
+		cout << "Error 2: Fail to create the new file." << endl;
+		out.close();
+		in.close();
+	}
+	else//复制文件
+	{
+		out << in.rdbuf();
+		out.close();
+		in.close();
+	}
 
 }

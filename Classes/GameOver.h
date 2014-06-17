@@ -40,7 +40,7 @@ public:
 	void changToLastScene();
 	void returnToSelectMode();
 	void snapShot();
-	std::string imgFile;
+	std::string imgFileSrc,imgFileTar;
 	void fCopy(std::string src, std::string  tar);
 
 
