@@ -441,13 +441,14 @@ void GameOver::shareMenuItemClick(Object* pSender)
 	Dictionary* dic = Dictionary::createWithContentsOfFile("chineseString.xml");
 	String* strchinese = (String*)dic->objectForKey("share");
 
-	//content->setObject(String::create(""), "content");
+	content->setObject(String::create(strchinese->getCString()), "content");
 	//content->setObject(String::create("http://img0.bdstatic.com/img/image/shouye/systsy-11927417755.jpg"), "image");
 	content->setObject(String::create(imgFileSrc), "image");
 	content->setObject(String::create(strchinese->getCString()), "title");
 	//content->setObject(String::create(strchinese->getCString()), "description");//没用
-	content->setObject(String::create("http://sharesdk.cn"), "url");//这个正常，点击就跳转
-	//content->setObject(CCString::createWithFormat("%d", C2DXContentTypeNews), "type");
+	content->setObject(String::create("http://www.mumayi.com/android-639597.html?1403163917"), "url");//这个正常，点击就跳转,不设置有个默认的链接,官网应用后台->社会化组件设置中->对应的微博分享中->关闭转短链
+	//content->setObject(CCString::createWithFormat("%d", C2DXContentTypeNews), "type");//新闻形式有链接
+	content->setObject(CCString::createWithFormat("%d", C2DXContentTypeImage), "type");//图片形式，sharesdk.xml里面要绕开审核，但读不到私有路径图片，发纯图这个屏蔽，xml绕过审核设false
 	//content->setObject(CCString::create("http://sharesdk.cn"), "siteUrl");
 	//content->setObject(CCString::create("ShareSDK"), "site");
 	//content->setObject(CCString::create("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3"), "musicUrl");

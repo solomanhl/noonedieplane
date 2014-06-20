@@ -103,7 +103,7 @@ void AppDelegate::initPlatformConfig()
 
 	//н╒пе
 	Dictionary *wcConfigDict = Dictionary::create();
-	wcConfigDict->setObject(CCString::create("wx4c8cdf1d0d514686"), "app_id");
+	wcConfigDict->setObject(String::create("wx4c8cdf1d0d514686"), "app_id");
 	C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiSession, wcConfigDict);
 	C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiTimeline, wcConfigDict);
 	C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiFav, wcConfigDict);
