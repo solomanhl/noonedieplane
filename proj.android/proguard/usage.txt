@@ -1,0 +1,1039 @@
+cn.sharesdk.ShareSDKUtils:
+    24:26:private ShareSDKUtils()
+    107:117:public static void initSDK(java.lang.String,boolean)
+    120:124:public static void stopSDK()
+    127:133:public static void setPlatformConfig(int,java.lang.String)
+    136:143:public static void authorize(int)
+    146:152:public static void removeAccount(int)
+    155:160:public static boolean isValid(int)
+    164:171:public static void showUser(int)
+    174:188:public static void share(int,java.lang.String)
+    192:211:private static java.util.HashMap nativeMapToJavaMap(java.util.HashMap)
+    215:225:private static int iosTypeToAndroidType(int)
+    229:230:public static void onekeyShare(java.lang.String)
+    233:272:public static void onekeyShare(int,java.lang.String)
+    20:20:static synthetic android.content.Context access$4()
+cn.sharesdk.ShareSDKUtils$3
+cn.sharesdk.douban.Douban
+cn.sharesdk.douban.Douban$ShareParams
+cn.sharesdk.douban.a
+cn.sharesdk.douban.b
+cn.sharesdk.douban.c
+cn.sharesdk.douban.d
+cn.sharesdk.dropbox.Dropbox
+cn.sharesdk.dropbox.Dropbox$ShareParams
+cn.sharesdk.dropbox.DropboxClientNotExistsException
+cn.sharesdk.dropbox.a
+cn.sharesdk.dropbox.b
+cn.sharesdk.dropbox.c
+cn.sharesdk.dropbox.d
+cn.sharesdk.dropbox.e
+cn.sharesdk.evernote.Evernote
+cn.sharesdk.evernote.Evernote$ShareParams
+cn.sharesdk.evernote.a
+cn.sharesdk.evernote.b
+cn.sharesdk.evernote.c
+cn.sharesdk.evernote.d
+cn.sharesdk.evernote.e
+cn.sharesdk.evernote.f
+cn.sharesdk.evernote.g
+cn.sharesdk.evernote.h
+cn.sharesdk.evernote.i
+cn.sharesdk.evernote.j
+cn.sharesdk.evernote.k
+cn.sharesdk.evernote.l
+cn.sharesdk.evernote.m
+cn.sharesdk.evernote.n
+cn.sharesdk.evernote.o
+cn.sharesdk.facebook.Facebook
+cn.sharesdk.facebook.Facebook$ShareParams
+cn.sharesdk.facebook.a
+cn.sharesdk.facebook.b
+cn.sharesdk.facebook.c
+cn.sharesdk.facebook.d
+cn.sharesdk.facebook.e
+cn.sharesdk.flickr.Flickr
+cn.sharesdk.flickr.Flickr$ShareParams
+cn.sharesdk.flickr.a
+cn.sharesdk.flickr.b
+cn.sharesdk.flickr.c
+cn.sharesdk.flickr.d
+cn.sharesdk.foursquare.FourSquare
+cn.sharesdk.foursquare.FourSquare$ShareParams
+cn.sharesdk.foursquare.a
+cn.sharesdk.foursquare.b
+cn.sharesdk.foursquare.c
+cn.sharesdk.framework.CustomPlatform:
+    public CustomPlatform(android.content.Context)
+    protected final void initDevInfo(java.lang.String)
+    public abstract java.lang.String getName()
+    public int getVersion()
+    protected final int getPlatformId()
+    protected int getCustomPlatformId()
+    protected final void setNetworkDevinfo()
+    protected void doAuthorize(java.lang.String[])
+    protected abstract boolean checkAuthorize(int,java.lang.Object)
+    protected void doShare(cn.sharesdk.framework.Platform$ShareParams)
+    protected void follow(java.lang.String)
+    protected void timeline(int,int,java.lang.String)
+    protected void userInfor(java.lang.String)
+    protected void getFriendList(int,int,java.lang.String)
+    protected void doCustomerProtocol(java.lang.String,java.lang.String,int,java.util.HashMap,java.util.HashMap)
+    protected final cn.sharesdk.framework.b.b.f$a filterShareContent(cn.sharesdk.framework.Platform$ShareParams,java.util.HashMap)
+cn.sharesdk.framework.FakeActivity:
+    public android.view.View getContentView()
+    public void finish()
+    public void startActivity(android.content.Intent)
+    public void startActivityForResult(android.content.Intent,int)
+    public android.content.Context getContext()
+    public void show(android.content.Context,android.content.Intent)
+    public void showForResult(android.content.Context,android.content.Intent,cn.sharesdk.framework.FakeActivity)
+    public cn.sharesdk.framework.FakeActivity getParent()
+    public final void setResult(java.util.HashMap)
+cn.sharesdk.framework.Platform:
+    public static final int ACTION_AUTHORIZING
+    public static final int ACTION_GETTING_FRIEND_LIST
+    public static final int ACTION_SENDING_DIRECT_MESSAGE
+    public static final int ACTION_FOLLOWING_USER
+    public static final int ACTION_TIMELINE
+    public static final int ACTION_USER_INFOR
+    public static final int ACTION_SHARE
+    protected static final int ACTION_CUSTOMER
+    public static final int CUSTOMER_ACTION_MASK
+    public static final int SHARE_TEXT
+    public static final int SHARE_IMAGE
+    public static final int SHARE_WEBPAGE
+    public static final int SHARE_MUSIC
+    public static final int SHARE_VIDEO
+    public static final int SHARE_APPS
+    public static final int SHARE_FILE
+    public static final int SHARE_EMOJI
+    protected final android.content.Context context
+    protected final cn.sharesdk.framework.PlatformDb db
+    protected cn.sharesdk.framework.PlatformActionListener listener
+    public Platform(android.content.Context)
+    public java.lang.String getDevinfo(java.lang.String)
+    public java.lang.String getDevinfo(java.lang.String,java.lang.String)
+    protected java.lang.String getNetworkDevinfo(java.lang.String,java.lang.String)
+    protected java.lang.String getNetworkDevinfo(int,java.lang.String,java.lang.String)
+    public android.content.Context getContext()
+    public abstract int getVersion()
+    public int getId()
+    public void setPlatformActionListener(cn.sharesdk.framework.PlatformActionListener)
+    public cn.sharesdk.framework.PlatformActionListener getPlatformActionListener()
+    public boolean isValid()
+    public void SSOSetting(boolean)
+    public boolean isSSODisable()
+    public void authorize()
+    public void authorize(java.lang.String[])
+    protected abstract void setNetworkDevinfo()
+    protected abstract void doAuthorize(java.lang.String[])
+    protected abstract boolean checkAuthorize(int,java.lang.Object)
+    protected void innerAuthorize(int,java.lang.Object)
+    public void share(cn.sharesdk.framework.Platform$ShareParams)
+    protected abstract void doShare(cn.sharesdk.framework.Platform$ShareParams)
+    public void followFriend(java.lang.String)
+    protected abstract void follow(java.lang.String)
+    public void getTimeLine(java.lang.String,int,int)
+    protected abstract void timeline(int,int,java.lang.String)
+    public void showUser(java.lang.String)
+    protected abstract void userInfor(java.lang.String)
+    public void listFriend(int,int,java.lang.String)
+    protected abstract void getFriendList(int,int,java.lang.String)
+    public void customerProtocol(java.lang.String,java.lang.String,short,java.util.HashMap,java.util.HashMap)
+    protected abstract void doCustomerProtocol(java.lang.String,java.lang.String,int,java.util.HashMap,java.util.HashMap)
+    protected void afterRegister(int,java.lang.Object)
+    public cn.sharesdk.framework.PlatformDb getDb()
+    public void removeAccount()
+    public java.lang.String getShortLintk(java.lang.String,boolean)
+    protected abstract cn.sharesdk.framework.b.b.f$a filterShareContent(cn.sharesdk.framework.Platform$ShareParams,java.util.HashMap)
+    protected java.lang.String uploadImageToFileServer(java.lang.String)
+    protected java.lang.String uploadImageToFileServer(android.graphics.Bitmap)
+cn.sharesdk.framework.Platform$ShareParams:
+    public java.lang.String text
+    public java.lang.String imagePath
+    public Platform$ShareParams()
+    public Platform$ShareParams(java.util.HashMap)
+    public Platform$ShareParams(java.lang.String)
+cn.sharesdk.framework.PlatformDb
+cn.sharesdk.framework.Service
+cn.sharesdk.framework.Service$ServiceEvent
+cn.sharesdk.framework.ShareSDK:
+    public ShareSDK()
+    public static void initSDK(android.content.Context)
+    public static void initSDK(android.content.Context,boolean)
+    public static void initSDK(android.content.Context,java.lang.String)
+    public static void initSDK(android.content.Context,java.lang.String,boolean)
+    public static void stopSDK(android.content.Context)
+    public static void registerService(java.lang.Class)
+    public static void unregisterService(java.lang.Class)
+    public static cn.sharesdk.framework.Service getService(java.lang.Class)
+    public static void registerPlatform(java.lang.Class)
+    public static void unregisterPlatform(java.lang.Class)
+    public static void setConnTimeout(int)
+    public static void setReadTimeout(int)
+    public static void removeCookieOnAuthorize(boolean)
+    public static synchronized cn.sharesdk.framework.Platform[] getPlatformList(android.content.Context)
+    public static synchronized cn.sharesdk.framework.Platform[] getPlatformList()
+    public static cn.sharesdk.framework.Platform getPlatform(android.content.Context,java.lang.String)
+    public static cn.sharesdk.framework.Platform getPlatform(java.lang.String)
+    public static void logDemoEvent(int,cn.sharesdk.framework.Platform)
+    public static void logApiEvent(java.lang.String,int)
+    public static void setPlatformDevInfo(java.lang.String,java.util.HashMap)
+    public static java.lang.String platformIdToName(int)
+    public static boolean isRemoveCookieOnAuthorize()
+    public static void closeDebug()
+    static java.lang.String a(int,java.lang.String)
+    static boolean a()
+    static boolean b()
+    static boolean a(java.util.HashMap)
+    static boolean b(java.util.HashMap)
+    static java.lang.String a(java.lang.String,boolean,int,java.lang.String)
+    static java.lang.String a(java.lang.String)
+    static java.lang.String a(android.graphics.Bitmap)
+cn.sharesdk.framework.ShareSDKUIShell:
+    public static java.lang.String a(cn.sharesdk.framework.FakeActivity)
+    public static java.lang.String a(java.lang.String,cn.sharesdk.framework.FakeActivity)
+cn.sharesdk.framework.TitleLayout
+cn.sharesdk.framework.a
+cn.sharesdk.framework.a.a
+cn.sharesdk.framework.a.b:
+    public void a(java.io.File)
+cn.sharesdk.framework.a.g:
+    public java.lang.String a(android.content.Context,java.lang.String,java.lang.String,boolean)
+    public java.io.InputStream a(java.lang.String,java.util.ArrayList,cn.sharesdk.framework.a.c)
+    public java.lang.String b(java.lang.String,java.util.ArrayList,cn.sharesdk.framework.a.d,java.util.ArrayList,java.util.ArrayList)
+cn.sharesdk.framework.a.h
+cn.sharesdk.framework.authorize.AuthorizeAdapter
+cn.sharesdk.framework.authorize.AuthorizeHelper
+cn.sharesdk.framework.authorize.RegisterView
+cn.sharesdk.framework.authorize.ResizeLayout
+cn.sharesdk.framework.authorize.ResizeLayout$OnResizeListener
+cn.sharesdk.framework.authorize.SSOListener
+cn.sharesdk.framework.authorize.a
+cn.sharesdk.framework.authorize.b
+cn.sharesdk.framework.authorize.c
+cn.sharesdk.framework.authorize.d
+cn.sharesdk.framework.authorize.e
+cn.sharesdk.framework.authorize.f
+cn.sharesdk.framework.authorize.g
+cn.sharesdk.framework.authorize.g$a
+cn.sharesdk.framework.authorize.h
+cn.sharesdk.framework.authorize.i
+cn.sharesdk.framework.authorize.j
+cn.sharesdk.framework.b
+cn.sharesdk.framework.b.a:
+    private java.lang.String f()
+    public java.lang.String a(java.lang.String,byte[])
+    public java.lang.String a(java.lang.String,java.lang.String,int,boolean,java.lang.String)
+    private java.lang.String a(java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
+    private java.lang.String c(java.lang.String,java.lang.String)
+    public java.lang.String d(java.lang.String)
+    public java.lang.String a(java.lang.String,java.lang.String)
+cn.sharesdk.framework.b.b:
+    public synchronized void a()
+cn.sharesdk.framework.b.b.a
+cn.sharesdk.framework.b.b.d
+cn.sharesdk.framework.c
+cn.sharesdk.framework.d
+cn.sharesdk.framework.e:
+    protected static final java.lang.String TEXT
+    protected static final java.lang.String IMAGE_PATH
+    protected static final java.lang.String FILE_PATH
+    protected static final java.lang.String TITLE
+    protected static final java.lang.String NOTEBOOK
+    protected static final java.lang.String STACK
+    protected static final java.lang.String TAGS
+    protected static final java.lang.String IS_PUBLIC
+    protected static final java.lang.String IS_FRIEND
+    protected static final java.lang.String IS_FAMILY
+    protected static final java.lang.String SAFETY_LEVEL
+    protected static final java.lang.String CONTENT_TYPE
+    protected static final java.lang.String HIDDEN
+    protected static final java.lang.String VENUE_NAME
+    protected static final java.lang.String VENUE_DESCRIPTION
+    protected static final java.lang.String LATITUDE
+    protected static final java.lang.String LONGITUDE
+    protected static final java.lang.String IMAGE_URL
+    protected static final java.lang.String COMMENT
+    protected static final java.lang.String TITLE_URL
+    protected static final java.lang.String URL
+    protected static final java.lang.String ADDRESS
+    protected static final java.lang.String SITE
+    protected static final java.lang.String SITE_URL
+    protected static final java.lang.String GROPU_ID
+    protected static final java.lang.String EXT_INFO
+    protected static final java.lang.String SHARE_TYPE
+    protected static final java.lang.String MUSIC_URL
+    protected static final java.lang.String IMAGE_DATA
+    protected static final java.lang.String AUTHOR
+    protected static final java.lang.String SCENCE
+    public e()
+    public e(java.util.HashMap)
+    public e(java.lang.String)
+    public void set(java.lang.String,java.lang.Object)
+    public java.lang.Object get(java.lang.String,java.lang.Class)
+    public java.util.HashMap toMap()
+    public void setText(java.lang.String)
+    public java.lang.String getText()
+    public void setImagePath(java.lang.String)
+    public java.lang.String getImagePath()
+    public void setImageUrl(java.lang.String)
+    public java.lang.String getImageUrl()
+    public void setFilePath(java.lang.String)
+    public java.lang.String getFilePath()
+    public java.lang.String getTitle()
+    public void setTitle(java.lang.String)
+    public java.lang.String getNotebook()
+    public void setNotebook(java.lang.String)
+    public java.lang.String getStack()
+    public void setStack(java.lang.String)
+    public java.lang.String[] getTags()
+    public void setTags(java.lang.String[])
+    public boolean isPublic()
+    public void setPublic(boolean)
+    public boolean isFriend()
+    public void setFriend(boolean)
+    public boolean isFamily()
+    public void setFamily(boolean)
+    public int getSafetyLevel()
+    public void setSafetyLevel(int)
+    public int getContentType()
+    public void setContentType(int)
+    public int getHidden()
+    public void setHidden(int)
+    public void setVenueName(java.lang.String)
+    public java.lang.String getVenueName()
+    public java.lang.String getVenueDescription()
+    public void setVenueDescription(java.lang.String)
+    public float getLatitude()
+    public void setLatitude(float)
+    public float getLongitude()
+    public void setLongitude(float)
+    public java.lang.String getTitleUrl()
+    public void setTitleUrl(java.lang.String)
+    public java.lang.String getComment()
+    public void setComment(java.lang.String)
+    public java.lang.String getUrl()
+    public void setUrl(java.lang.String)
+    public java.lang.String getAddress()
+    public void setAddress(java.lang.String)
+    public java.lang.String getMusicUrl()
+    public void setMusicUrl(java.lang.String)
+    public java.lang.String getSite()
+    public void setSite(java.lang.String)
+    public java.lang.String getSiteUrl()
+    public void setSiteUrl(java.lang.String)
+    public java.lang.String getGroupId()
+    public void setGroupId(java.lang.String)
+    public java.lang.String getAuthor()
+    public void setAuthor(java.lang.String)
+    public android.graphics.Bitmap getImageData()
+    public void setImageData(android.graphics.Bitmap)
+    public int getShareType()
+    public void setShareType(int)
+    public int getScence()
+    public void setScence(int)
+    public java.lang.String getExtInfo()
+    public void setExtInfo(java.lang.String)
+cn.sharesdk.framework.f
+cn.sharesdk.framework.g:
+    private android.content.Context b
+    private cn.sharesdk.framework.PlatformDb c
+    private cn.sharesdk.framework.b d
+    private boolean g
+    private boolean h
+    public g(cn.sharesdk.framework.Platform,android.content.Context)
+    public int a()
+    public void a(cn.sharesdk.framework.PlatformActionListener)
+    public cn.sharesdk.framework.PlatformActionListener c()
+    public boolean d()
+    public void a(boolean)
+    public boolean e()
+    public void a(java.lang.String[])
+    private boolean j()
+    public java.lang.String a(int,java.lang.String,java.lang.String)
+    public void a(int,java.lang.Object)
+    protected void b(int,java.lang.Object)
+    protected void c(int,java.lang.Object)
+    public void a(cn.sharesdk.framework.Platform$ShareParams)
+    public void b(java.lang.String)
+    public void a(java.lang.String,int,int)
+    public void c(java.lang.String)
+    public void a(int,int,java.lang.String)
+    public void a(java.lang.String,java.lang.String,short,java.util.HashMap,java.util.HashMap)
+    public cn.sharesdk.framework.PlatformDb g()
+    public void h()
+    public java.lang.String a(java.lang.String,boolean)
+    private java.lang.String k()
+    protected cn.sharesdk.framework.PlatformActionListener i()
+    public java.lang.String d(java.lang.String)
+    public java.lang.String a(android.graphics.Bitmap)
+    static synthetic boolean a(cn.sharesdk.framework.g)
+    static synthetic cn.sharesdk.framework.Platform b(cn.sharesdk.framework.g)
+cn.sharesdk.framework.h
+cn.sharesdk.framework.i
+cn.sharesdk.framework.j
+cn.sharesdk.framework.k:
+    public void b(android.content.Context)
+    public void a(int,cn.sharesdk.framework.Platform)
+    public void a(java.lang.String,int)
+    public java.lang.String a(int,java.lang.String,java.util.HashMap)
+    public boolean a(java.util.HashMap,java.util.HashMap)
+    public java.lang.String a(android.content.Context,java.lang.String,java.lang.String,boolean,int,java.lang.String)
+    public java.lang.String a(android.content.Context,java.lang.String)
+    public java.lang.String a(android.content.Context,android.graphics.Bitmap)
+cn.sharesdk.framework.m:
+    private java.lang.String f
+    private boolean h
+    private java.util.HashMap k
+    private java.util.HashMap l
+    private boolean m
+    public m(android.content.Context)
+    public void a(java.lang.String,boolean)
+    private void d(java.lang.String)
+    private void h()
+    public void a()
+    public void a(java.lang.Class)
+    public void b(java.lang.Class)
+    public void c(java.lang.Class)
+    public void d(java.lang.Class)
+    public cn.sharesdk.framework.Service e(java.lang.Class)
+    public void a(int)
+    public void b(int)
+    public void a(boolean)
+    public boolean c()
+    public void a(int,cn.sharesdk.framework.Platform)
+    public void a(java.lang.String,int)
+    public void a(java.lang.String,java.util.HashMap)
+    public java.lang.String c(int)
+    public boolean d()
+    public java.lang.String a(int,java.lang.String)
+    public boolean e()
+    public boolean a(java.util.HashMap)
+    public boolean b(java.util.HashMap)
+    public java.lang.String a(java.lang.String,boolean,int,java.lang.String)
+    public java.lang.String c(java.lang.String)
+    public java.lang.String a(android.graphics.Bitmap)
+cn.sharesdk.framework.n
+cn.sharesdk.framework.utils.BitmapHelper
+cn.sharesdk.framework.utils.Escaper
+cn.sharesdk.framework.utils.R
+cn.sharesdk.framework.utils.UIHandler
+cn.sharesdk.framework.utils.a:
+    public static byte[] a(byte[],java.lang.String)
+    public static byte[] a(byte[],byte[])
+    public static java.lang.String b(java.lang.String)
+    public static byte[] c(java.lang.String)
+    public static java.lang.String d(java.lang.String)
+cn.sharesdk.framework.utils.b:
+    public java.lang.String f()
+    public java.lang.String h()
+    public java.lang.String q()
+    public java.lang.String t()
+cn.sharesdk.framework.utils.c
+cn.sharesdk.framework.utils.e:
+    public static void a(android.content.Context)
+cn.sharesdk.framework.utils.f
+cn.sharesdk.framework.utils.f$1
+cn.sharesdk.framework.utils.f$a
+cn.sharesdk.framework.utils.f$b
+cn.sharesdk.framework.utils.g
+cn.sharesdk.framework.utils.h
+cn.sharesdk.framework.utils.i
+cn.sharesdk.framework.utils.j
+cn.sharesdk.framework.utils.k
+cn.sharesdk.framework.utils.l
+cn.sharesdk.framework.utils.m
+cn.sharesdk.framework.utils.m$a
+cn.sharesdk.google.GooglePlus
+cn.sharesdk.google.GooglePlus$ShareParams
+cn.sharesdk.google.GooglePlusClientNotExistException
+cn.sharesdk.google.a
+cn.sharesdk.google.b
+cn.sharesdk.google.c
+cn.sharesdk.google.c$a
+cn.sharesdk.google.d
+cn.sharesdk.instagram.Instagram
+cn.sharesdk.instagram.Instagram$ShareParams
+cn.sharesdk.instagram.InstagramClientNotExistException
+cn.sharesdk.instagram.a
+cn.sharesdk.instagram.b
+cn.sharesdk.instagram.c
+cn.sharesdk.instagram.d
+cn.sharesdk.instagram.e
+cn.sharesdk.instagram.f
+cn.sharesdk.instagram.g
+cn.sharesdk.kaixin.KaiXin
+cn.sharesdk.kaixin.KaiXin$ShareParams
+cn.sharesdk.kaixin.a
+cn.sharesdk.kaixin.b
+cn.sharesdk.kaixin.c
+cn.sharesdk.linkedin.LinkedIn
+cn.sharesdk.linkedin.LinkedIn$ShareParams
+cn.sharesdk.linkedin.a
+cn.sharesdk.linkedin.b
+cn.sharesdk.linkedin.c
+cn.sharesdk.linkedin.d
+cn.sharesdk.mingdao.Mingdao
+cn.sharesdk.mingdao.a
+cn.sharesdk.mingdao.b
+cn.sharesdk.mingdao.c
+cn.sharesdk.mingdao.d
+cn.sharesdk.mingdao.e
+cn.sharesdk.mingdao.f
+cn.sharesdk.mingdao.g
+cn.sharesdk.mingdao.h
+cn.sharesdk.mingdao.i
+cn.sharesdk.mingdao.j
+cn.sharesdk.mingdao.k
+cn.sharesdk.netease.microblog.NetEaseMicroBlog
+cn.sharesdk.netease.microblog.NetEaseMicroBlog$ShareParams
+cn.sharesdk.netease.microblog.a
+cn.sharesdk.netease.microblog.b
+cn.sharesdk.netease.microblog.c
+cn.sharesdk.onekeyshare.CustomerLogo
+cn.sharesdk.onekeyshare.EditPage
+cn.sharesdk.onekeyshare.EditPage$1
+cn.sharesdk.onekeyshare.EditPage$1$1
+cn.sharesdk.onekeyshare.EditPage$2
+cn.sharesdk.onekeyshare.EditPage$3
+cn.sharesdk.onekeyshare.EditPage$4
+cn.sharesdk.onekeyshare.EditPage$4$1
+cn.sharesdk.onekeyshare.EditPage$5
+cn.sharesdk.onekeyshare.EditPage$6
+cn.sharesdk.onekeyshare.EditPage$7
+cn.sharesdk.onekeyshare.EditPage$8
+cn.sharesdk.onekeyshare.FollowList
+cn.sharesdk.onekeyshare.FollowList$FollowAdapter
+cn.sharesdk.onekeyshare.FollowList$FollowListItem
+cn.sharesdk.onekeyshare.FollowList$Following
+cn.sharesdk.onekeyshare.FollowList$PRTHeader
+cn.sharesdk.onekeyshare.FollowList$RotateImageView
+cn.sharesdk.onekeyshare.OnekeyShare
+cn.sharesdk.onekeyshare.OnekeyShare$1
+cn.sharesdk.onekeyshare.OnekeyShare$2
+cn.sharesdk.onekeyshare.PicViewer
+cn.sharesdk.onekeyshare.PlatformGridView
+cn.sharesdk.onekeyshare.PlatformGridView$1
+cn.sharesdk.onekeyshare.PlatformGridView$GridView
+cn.sharesdk.onekeyshare.PlatformGridView$PlatformAdapter
+cn.sharesdk.onekeyshare.Shake2Share
+cn.sharesdk.onekeyshare.Shake2Share$OnShakeListener
+cn.sharesdk.onekeyshare.ShareContentCustomizeCallback
+cn.sharesdk.onekeyshare.ShareCore
+cn.sharesdk.pinterest.ClientIDNotExistException
+cn.sharesdk.pinterest.ImageNotFoundException
+cn.sharesdk.pinterest.Pinterest
+cn.sharesdk.pinterest.Pinterest$ShareParams
+cn.sharesdk.pinterest.PinterestClientNotExistException
+cn.sharesdk.pinterest.SourceUrlNotFoundException
+cn.sharesdk.pinterest.SystemVersionTooLowException
+cn.sharesdk.pinterest.a
+cn.sharesdk.pinterest.b
+cn.sharesdk.renren.Renren
+cn.sharesdk.renren.Renren$ShareParams
+cn.sharesdk.renren.a
+cn.sharesdk.renren.b
+cn.sharesdk.renren.c
+cn.sharesdk.renren.d
+cn.sharesdk.renren.e
+cn.sharesdk.renren.f
+cn.sharesdk.renren.g
+cn.sharesdk.renren.h
+cn.sharesdk.sina.weibo.SinaWeibo
+cn.sharesdk.sina.weibo.SinaWeibo$ShareParams
+cn.sharesdk.sina.weibo.a
+cn.sharesdk.sina.weibo.b
+cn.sharesdk.sina.weibo.c
+cn.sharesdk.sina.weibo.d
+cn.sharesdk.sina.weibo.e
+cn.sharesdk.sina.weibo.f
+cn.sharesdk.sohu.microblog.SohuMicroBlog
+cn.sharesdk.sohu.microblog.SohuMicroBlog$ShareParams
+cn.sharesdk.sohu.microblog.a
+cn.sharesdk.sohu.microblog.b
+cn.sharesdk.sohu.microblog.c
+cn.sharesdk.sohu.suishenkan.SohuSuishenkan
+cn.sharesdk.sohu.suishenkan.SohuSuishenkan$ShareParams
+cn.sharesdk.sohu.suishenkan.a
+cn.sharesdk.sohu.suishenkan.b
+cn.sharesdk.sohu.suishenkan.c
+cn.sharesdk.system.email.ActionListener
+cn.sharesdk.system.email.Email
+cn.sharesdk.system.email.Email$ShareParams
+cn.sharesdk.system.email.a
+cn.sharesdk.system.email.b
+cn.sharesdk.system.text.ActionListener
+cn.sharesdk.system.text.ShortMessage
+cn.sharesdk.system.text.ShortMessage$ShareParams
+cn.sharesdk.system.text.a
+cn.sharesdk.system.text.b
+cn.sharesdk.tencent.qq.QQ
+cn.sharesdk.tencent.qq.QQ$ShareParams
+cn.sharesdk.tencent.qq.QQClientNotExistException
+cn.sharesdk.tencent.qq.TencentSSOClientNotInstalledException
+cn.sharesdk.tencent.qq.a
+cn.sharesdk.tencent.qq.b
+cn.sharesdk.tencent.qq.c
+cn.sharesdk.tencent.qq.d
+cn.sharesdk.tencent.qzone.QZone
+cn.sharesdk.tencent.qzone.QZone$ShareParams
+cn.sharesdk.tencent.qzone.QZoneWebShareAdapter
+cn.sharesdk.tencent.qzone.TencentSSOClientNotInstalledException
+cn.sharesdk.tencent.qzone.a
+cn.sharesdk.tencent.qzone.b
+cn.sharesdk.tencent.qzone.c
+cn.sharesdk.tencent.qzone.d
+cn.sharesdk.tencent.qzone.e
+cn.sharesdk.tencent.qzone.f
+cn.sharesdk.tencent.qzone.g
+cn.sharesdk.tencent.qzone.h
+cn.sharesdk.tencent.qzone.i
+cn.sharesdk.tencent.qzone.j
+cn.sharesdk.tencent.qzone.k
+cn.sharesdk.tencent.qzone.l
+cn.sharesdk.tencent.weibo.TencentWeibo
+cn.sharesdk.tencent.weibo.TencentWeibo$ShareParams
+cn.sharesdk.tencent.weibo.a
+cn.sharesdk.tencent.weibo.b
+cn.sharesdk.tencent.weibo.c
+cn.sharesdk.tencent.weibo.d
+cn.sharesdk.tencent.weibo.e
+cn.sharesdk.tencent.weibo.f
+cn.sharesdk.tencent.weibo.g
+cn.sharesdk.tencent.weibo.g$a
+cn.sharesdk.tencent.weibo.h
+cn.sharesdk.tencent.weibo.i
+cn.sharesdk.tumblr.Tumblr
+cn.sharesdk.tumblr.Tumblr$ShareParams
+cn.sharesdk.tumblr.a
+cn.sharesdk.tumblr.b
+cn.sharesdk.tumblr.c
+cn.sharesdk.tumblr.d
+cn.sharesdk.tumblr.e
+cn.sharesdk.twitter.Twitter
+cn.sharesdk.twitter.Twitter$ShareParams
+cn.sharesdk.twitter.a
+cn.sharesdk.twitter.b
+cn.sharesdk.twitter.c
+cn.sharesdk.twitter.d
+cn.sharesdk.twitter.e
+cn.sharesdk.vkontakte.VKontakte
+cn.sharesdk.vkontakte.VKontakte$ShareParams
+cn.sharesdk.vkontakte.a
+cn.sharesdk.vkontakte.b
+cn.sharesdk.vkontakte.c
+cn.sharesdk.vkontakte.d
+cn.sharesdk.vkontakte.e
+cn.sharesdk.wechat.favorite.WechatFavorite
+cn.sharesdk.wechat.favorite.WechatFavorite$ShareParams
+cn.sharesdk.wechat.favorite.a
+cn.sharesdk.wechat.friends.Wechat
+cn.sharesdk.wechat.friends.Wechat$ShareParams
+cn.sharesdk.wechat.friends.a
+cn.sharesdk.wechat.moments.WechatMoments
+cn.sharesdk.wechat.moments.WechatMoments$ShareParams
+cn.sharesdk.wechat.moments.a
+cn.sharesdk.wechat.utils.WXAppExtendObject
+cn.sharesdk.wechat.utils.WXEmojiObject
+cn.sharesdk.wechat.utils.WXFileObject
+cn.sharesdk.wechat.utils.WXImageObject
+cn.sharesdk.wechat.utils.WXMediaMessage:
+    public static final java.lang.String ACTION_WXAPPMESSAGE
+    public final int getType()
+    public final void setThumbImage(android.graphics.Bitmap)
+cn.sharesdk.wechat.utils.WXMediaMessage$IMediaObject:
+    public static final int TYPE_UNKNOWN
+    public static final int TYPE_TEXT
+    public static final int TYPE_IMAGE
+    public static final int TYPE_MUSIC
+    public static final int TYPE_VIDEO
+    public static final int TYPE_URL
+    public static final int TYPE_FILE
+    public static final int TYPE_APPDATA
+    public static final int TYPE_EMOJI
+    public abstract int type()
+    public abstract boolean checkArgs()
+cn.sharesdk.wechat.utils.WXMusicObject
+cn.sharesdk.wechat.utils.WXTextObject
+cn.sharesdk.wechat.utils.WXVideoObject
+cn.sharesdk.wechat.utils.WXWebpageObject
+cn.sharesdk.wechat.utils.WechatClientNotExistException
+cn.sharesdk.wechat.utils.WechatFavoriteNotSupportedException
+cn.sharesdk.wechat.utils.WechatHelper:
+    public void a(cn.sharesdk.wechat.utils.h)
+    public void a(cn.sharesdk.wechat.utils.h,cn.sharesdk.framework.Platform$ShareParams)
+    public void b(cn.sharesdk.wechat.utils.h)
+    private void a(java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void a(java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void a(java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
+    private void a(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void a(java.lang.String,java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
+    private void a(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void a(java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
+    private void b(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void b(java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
+    private void b(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void b(java.lang.String,java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
+    private void c(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void c(java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
+    private void b(java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void b(java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
+    private byte[] a(java.lang.String)
+    private byte[] b(java.lang.String)
+    private byte[] a(byte[])
+    private java.lang.String c(java.lang.String)
+    public boolean a(android.content.Context,java.lang.String)
+    public boolean b()
+    public boolean c()
+    private void a(cn.sharesdk.wechat.utils.WXMediaMessage,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+cn.sharesdk.wechat.utils.WechatHelper$ShareParams
+cn.sharesdk.wechat.utils.WechatResp$ErrCode
+cn.sharesdk.wechat.utils.WechatTimelineNotSupportedException
+cn.sharesdk.wechat.utils.a
+cn.sharesdk.wechat.utils.d
+cn.sharesdk.wechat.utils.g:
+    private android.content.Context a
+    private java.lang.String b
+    public boolean a(android.content.Context,java.lang.String)
+    public void a(cn.sharesdk.wechat.utils.i)
+    public boolean a()
+    private boolean c()
+    private java.lang.String a(java.lang.String)
+    public boolean b()
+cn.sharesdk.wechat.utils.h:
+    public h(cn.sharesdk.framework.Platform)
+    public void a(cn.sharesdk.framework.authorize.AuthorizeListener)
+    public void a(cn.sharesdk.framework.Platform$ShareParams,cn.sharesdk.framework.PlatformActionListener)
+    public cn.sharesdk.framework.Platform$ShareParams a()
+    public cn.sharesdk.framework.Platform b()
+    public cn.sharesdk.framework.PlatformActionListener c()
+cn.sharesdk.wechat.utils.i
+cn.sharesdk.yixin.friends.Yixin
+cn.sharesdk.yixin.friends.Yixin$ShareParams
+cn.sharesdk.yixin.moments.YixinMoments
+cn.sharesdk.yixin.moments.YixinMoments$ShareParams
+cn.sharesdk.yixin.utils.YXImageMessageData
+cn.sharesdk.yixin.utils.YXMessage:
+    public static final int THUMB_SIZE
+    public YXMessage(cn.sharesdk.yixin.utils.YXMessage$YXMessageData)
+    final boolean a()
+cn.sharesdk.yixin.utils.YXMessage$MessageType
+cn.sharesdk.yixin.utils.YXMessage$YXMessageData:
+    public abstract boolean verifyData()
+    public abstract void write(android.os.Bundle)
+    public abstract cn.sharesdk.yixin.utils.YXMessage$MessageType dataType()
+cn.sharesdk.yixin.utils.YXMessage$a:
+    public static android.os.Bundle a(cn.sharesdk.yixin.utils.YXMessage)
+cn.sharesdk.yixin.utils.YXMusicMessageData
+cn.sharesdk.yixin.utils.YXTextMessageData
+cn.sharesdk.yixin.utils.YXVideoMessageData
+cn.sharesdk.yixin.utils.YXWebPageMessageData
+cn.sharesdk.yixin.utils.YixinClientNotExistException
+cn.sharesdk.yixin.utils.YixinImpl:
+    public boolean a(android.content.Context,java.lang.String)
+    public boolean b()
+    public void a(cn.sharesdk.yixin.utils.d,cn.sharesdk.framework.Platform$ShareParams)
+    public void a(cn.sharesdk.yixin.utils.d)
+    private void a(java.lang.String,java.lang.String,int,cn.sharesdk.yixin.utils.d)
+    private void a(java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.yixin.utils.d)
+    private void a(java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.yixin.utils.d)
+    private void a(java.lang.String,java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.yixin.utils.d)
+    private void a(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.yixin.utils.d)
+    private void a(java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.yixin.utils.d)
+    private void a(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.yixin.utils.d)
+    private void b(java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.yixin.utils.d)
+    private void b(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.yixin.utils.d)
+    private void a(cn.sharesdk.yixin.utils.YXMessage,java.lang.String,int,cn.sharesdk.yixin.utils.d)
+    private byte[] a(java.lang.String)
+    private byte[] a(byte[])
+    private byte[] b(java.lang.String)
+    private java.lang.String c(java.lang.String)
+    public boolean c()
+cn.sharesdk.yixin.utils.YixinImpl$ShareParams
+cn.sharesdk.yixin.utils.YixinResp$ErrCode
+cn.sharesdk.yixin.utils.YixinTimelineNotSupportedException
+cn.sharesdk.yixin.utils.a:
+    public int a()
+    public void b(android.os.Bundle)
+    public boolean b()
+cn.sharesdk.yixin.utils.c:
+    private android.content.Context a
+    private java.lang.String b
+    public boolean a(android.content.Context,java.lang.String)
+    private boolean c()
+    public boolean a()
+    public void a(cn.sharesdk.yixin.utils.a)
+    public boolean b()
+cn.sharesdk.yixin.utils.d:
+    public d(cn.sharesdk.framework.Platform)
+    public void a(cn.sharesdk.framework.Platform$ShareParams,cn.sharesdk.framework.PlatformActionListener)
+    public cn.sharesdk.framework.Platform a()
+    public cn.sharesdk.framework.Platform$ShareParams b()
+    public cn.sharesdk.framework.PlatformActionListener c()
+cn.sharesdk.yixin.utils.e:
+    public abstract int a()
+    public void b(android.os.Bundle)
+cn.sharesdk.youdao.YouDao
+cn.sharesdk.youdao.YouDao$ShareParams
+cn.sharesdk.youdao.a
+cn.sharesdk.youdao.b
+cn.sharesdk.youdao.c
+cn.sharesdk.youdao.d
+com.sina.sso.RemoteSSO
+com.sina.sso.RemoteSSO$Stub
+com.sina.sso.RemoteSSO$Stub$Proxy
+com.soloman.noonedieplane.BuildConfig
+com.soloman.noonedieplane.R
+com.soloman.noonedieplane.R$attr
+com.soloman.noonedieplane.R$color
+com.soloman.noonedieplane.R$drawable
+com.soloman.noonedieplane.R$string
+com.soloman.noonedieplane.R$style
+m.framework.network.ByteArrayPart
+m.framework.network.FilePart
+m.framework.network.HTTPPart
+m.framework.network.KVPair
+m.framework.network.MultiPart
+m.framework.network.MultiPartInputStream
+m.framework.network.NetworkHelper
+m.framework.network.ResponseCallback
+m.framework.network.SSLSocketFactoryEx
+m.framework.network.SSLSocketFactoryEx$1
+m.framework.network.StringPart
+m.framework.ui.widget.asyncview.AsyncImageView
+m.framework.ui.widget.asyncview.AsyncView
+m.framework.ui.widget.asyncview.BitmapCallback
+m.framework.ui.widget.asyncview.BitmapProcessor
+m.framework.ui.widget.asyncview.BitmapProcessor$ImageReq
+m.framework.ui.widget.asyncview.BitmapProcessor$ManagerThread
+m.framework.ui.widget.asyncview.BitmapProcessor$ManagerThread$1
+m.framework.ui.widget.asyncview.BitmapProcessor$PatchInputStream
+m.framework.ui.widget.asyncview.BitmapProcessor$WorkerThread
+m.framework.ui.widget.asyncview.BitmapProcessor$WorkerThread$1
+m.framework.ui.widget.asyncview.OnImageGotListener
+m.framework.ui.widget.asyncview.SimpleOnImageGotListener
+m.framework.ui.widget.pulltorefresh.GroupListView
+m.framework.ui.widget.pulltorefresh.GroupListView$1
+m.framework.ui.widget.pulltorefresh.GroupListView$GroupListAdapter
+m.framework.ui.widget.pulltorefresh.GroupListView$ItemHolder
+m.framework.ui.widget.pulltorefresh.ListInnerAdapter
+m.framework.ui.widget.pulltorefresh.OnListStopScrollListener
+m.framework.ui.widget.pulltorefresh.OnScrollListener
+m.framework.ui.widget.pulltorefresh.PullToRefreshAdatper
+m.framework.ui.widget.pulltorefresh.PullToRefreshBaseListAdapter
+m.framework.ui.widget.pulltorefresh.PullToRefreshGridAdapter
+m.framework.ui.widget.pulltorefresh.PullToRefreshGridAdapter$1
+m.framework.ui.widget.pulltorefresh.PullToRefreshGroupListAdapter
+m.framework.ui.widget.pulltorefresh.PullToRefreshGroupListAdapter$1
+m.framework.ui.widget.pulltorefresh.PullToRefreshGroupListAdapter$2
+m.framework.ui.widget.pulltorefresh.PullToRefreshListAdapter
+m.framework.ui.widget.pulltorefresh.PullToRefreshListAdapter$1
+m.framework.ui.widget.pulltorefresh.PullToRefreshView
+m.framework.ui.widget.pulltorefresh.PullToRefreshView$1
+m.framework.ui.widget.pulltorefresh.Scrollable
+m.framework.ui.widget.pulltorefresh.ScrollableGridView
+m.framework.ui.widget.pulltorefresh.ScrollableGridView$1
+m.framework.ui.widget.pulltorefresh.ScrollableGroupListView
+m.framework.ui.widget.pulltorefresh.ScrollableGroupListView$1
+m.framework.ui.widget.pulltorefresh.ScrollableListView
+m.framework.ui.widget.pulltorefresh.ScrollableListView$1
+m.framework.ui.widget.slidingmenu.BodyContainer
+m.framework.ui.widget.slidingmenu.MenuAdapter
+m.framework.ui.widget.slidingmenu.MenuConfig
+m.framework.ui.widget.slidingmenu.SlidingMenu
+m.framework.ui.widget.slidingmenu.SlidingMenu$1
+m.framework.ui.widget.slidingmenu.SlidingMenu$1$1
+m.framework.ui.widget.slidingmenu.SlidingMenu$2
+m.framework.ui.widget.slidingmenu.SlidingMenu$3
+m.framework.ui.widget.slidingmenu.SlidingMenu$3$1
+m.framework.ui.widget.slidingmenu.SlidingMenu$4
+m.framework.ui.widget.slidingmenu.SlidingMenu$5
+m.framework.ui.widget.slidingmenu.SlidingMenu$6
+m.framework.ui.widget.slidingmenu.SlidingMenu$6$1
+m.framework.ui.widget.slidingmenu.SlidingMenuGroup
+m.framework.ui.widget.slidingmenu.SlidingMenuItem
+m.framework.ui.widget.viewpager.ViewPagerAdapter
+m.framework.ui.widget.viewpager.ViewPagerClassic
+m.framework.ui.widget.viewpager.ViewPagerClassic$1
+m.framework.utils.Data
+m.framework.utils.DeviceHelper
+m.framework.utils.HEX
+m.framework.utils.Hashon:
+    21:30:public java.util.HashMap fromJson(java.lang.String)
+    35:54:private java.util.HashMap fromJson(org.json.JSONObject)
+    59:70:private java.util.ArrayList fromJson(org.json.JSONArray)
+    197:201:public java.lang.String format(java.lang.String)
+    206:231:private java.lang.String format(java.lang.String,java.util.HashMap)
+    236:260:private java.lang.String format(java.lang.String,java.util.ArrayList)
+m.framework.utils.UIHandler:
+    13:13:public UIHandler()
+    43:45:private static android.os.Message getShellMessage(int,android.os.Handler$Callback)
+    53:53:public static boolean sendMessageDelayed(android.os.Message,long,android.os.Handler$Callback)
+    57:57:public static boolean sendMessageAtTime(android.os.Message,long,android.os.Handler$Callback)
+    61:61:public static boolean sendMessageAtFrontOfQueue(android.os.Message,android.os.Handler$Callback)
+    65:65:public static boolean sendEmptyMessage(int,android.os.Handler$Callback)
+    69:69:public static boolean sendEmptyMessageAtTime(int,long,android.os.Handler$Callback)
+    73:73:public static boolean sendEmptyMessageDelayed(int,long,android.os.Handler$Callback)
+m.framework.utils.Utils
+org.cocos2dx.lib.Cocos2dxAccelerometer:
+    78:84:public void setInterval(float)
+org.cocos2dx.lib.Cocos2dxActivity:
+    113:117:public void showDialog(java.lang.String,java.lang.String)
+    121:125:public void showEditTextDialog(java.lang.String,java.lang.String,int,int,int,int)
+org.cocos2dx.lib.Cocos2dxBitmap:
+    private static final int HORIZONTALALIGN_LEFT
+    private static final int HORIZONTALALIGN_RIGHT
+    private static final int HORIZONTALALIGN_CENTER
+    private static final int VERTICALALIGN_TOP
+    private static final int VERTICALALIGN_BOTTOM
+    private static final int VERTICALALIGN_CENTER
+    44:44:public Cocos2dxBitmap()
+    private static native void nativeInitBitmapDC(int,int,byte[])
+    97:102:public static void createTextBitmap(java.lang.String,java.lang.String,int,int,int,int)
+    111:197:public static boolean createTextBitmapShadowStroke(java.lang.String,java.lang.String,int,float,float,float,int,int,int,boolean,float,float,float,float,boolean,float,float,float,float)
+    202:237:private static android.graphics.Paint newPaint(java.lang.String,int,int)
+    242:263:private static org.cocos2dx.lib.Cocos2dxBitmap$TextProperty computeTextProperty(java.lang.String,int,int,android.graphics.Paint)
+    268:282:private static int computeX(java.lang.String,int,int)
+    288:307:private static int computeY(android.graphics.Paint$FontMetricsInt,int,int,int)
+    316:365:private static java.lang.String[] splitString(java.lang.String,int,int,android.graphics.Paint)
+    370:412:private static java.util.LinkedList divideStringWithMaxWidth(java.lang.String,int,android.graphics.Paint)
+    417:443:private static java.lang.String refactorString(java.lang.String)
+    447:454:private static void initNativeObject(android.graphics.Bitmap)
+    457:466:private static byte[] getPixels(android.graphics.Bitmap)
+    470:490:private static int getFontSizeAccordingHeight(int)
+    495:503:private static java.lang.String getStringWithEllipsis(java.lang.String,float,float)
+org.cocos2dx.lib.Cocos2dxBitmap$TextProperty
+org.cocos2dx.lib.Cocos2dxETCLoader:
+    private static final java.lang.String ASSETS_PATH
+    36:36:public Cocos2dxETCLoader()
+    41:99:public static boolean loadTexture(java.lang.String)
+    private static native void nativeSetTextureInfo(int,int,byte[],int)
+org.cocos2dx.lib.Cocos2dxEditText:
+    52:53:public Cocos2dxEditText(android.content.Context,android.util.AttributeSet)
+    56:57:public Cocos2dxEditText(android.content.Context,android.util.AttributeSet,int)
+org.cocos2dx.lib.Cocos2dxGLSurfaceView:
+    private static final int HANDLER_OPEN_IME_KEYBOARD
+    private static final int HANDLER_CLOSE_IME_KEYBOARD
+    70:73:public Cocos2dxGLSurfaceView(android.content.Context,android.util.AttributeSet)
+    317:321:public static void openIMEKeyboard()
+    324:327:public static void closeIMEKeyboard()
+    348:369:private static void dumpMotionEvent(android.view.MotionEvent)
+org.cocos2dx.lib.Cocos2dxHandler:
+    public static final int HANDLER_SHOW_DIALOG
+    public static final int HANDLER_SHOW_EDITBOX_DIALOG
+org.cocos2dx.lib.Cocos2dxHandler$DialogMessage:
+    112:115:public Cocos2dxHandler$DialogMessage(java.lang.String,java.lang.String)
+org.cocos2dx.lib.Cocos2dxHandler$EditBoxMessage:
+    126:133:public Cocos2dxHandler$EditBoxMessage(java.lang.String,java.lang.String,int,int,int,int)
+org.cocos2dx.lib.Cocos2dxHelper:
+    private static final java.lang.String PREFS_NAME
+    private static final int RUNNABLES_PER_FRAME
+    private static final java.lang.String META_DATA_LIB_NAME
+    private static final java.lang.String DEFAULT_LIB_NAME
+    43:43:public Cocos2dxHelper()
+    77:78:public static void runOnGLThread(java.lang.Runnable)
+    123:123:public static android.app.Activity getActivity()
+    145:145:public static java.lang.String getCocos2dxPackageName()
+    149:149:public static java.lang.String getCocos2dxWritablePath()
+    153:153:public static java.lang.String getCurrentLanguage()
+    161:161:public static android.content.res.AssetManager getAssetManager()
+    165:167:public static void enableAccelerometer()
+    171:172:public static void setAccelerometerInterval(float)
+    175:177:public static void disableAccelerometer()
+    180:181:public static void preloadBackgroundMusic(java.lang.String)
+    184:185:public static void playBackgroundMusic(java.lang.String,boolean)
+    188:189:public static void resumeBackgroundMusic()
+    192:193:public static void pauseBackgroundMusic()
+    196:197:public static void stopBackgroundMusic()
+    200:201:public static void rewindBackgroundMusic()
+    204:204:public static boolean isBackgroundMusicPlaying()
+    208:208:public static float getBackgroundMusicVolume()
+    212:213:public static void setBackgroundMusicVolume(float)
+    216:217:public static void preloadEffect(java.lang.String)
+    220:220:public static int playEffect(java.lang.String,boolean,float,float,float)
+    224:225:public static void resumeEffect(int)
+    228:229:public static void pauseEffect(int)
+    232:233:public static void stopEffect(int)
+    236:236:public static float getEffectsVolume()
+    240:241:public static void setEffectsVolume(float)
+    244:245:public static void unloadEffect(java.lang.String)
+    248:249:public static void pauseAllEffects()
+    252:253:public static void resumeAllEffects()
+    256:257:public static void stopAllEffects()
+    260:262:public static void end()
+    277:278:public static void terminateProcess()
+    281:282:private static void showDialog(java.lang.String,java.lang.String)
+    285:286:private static void showEditTextDialog(java.lang.String,java.lang.String,int,int,int,int)
+    305:319:public static int getDPI()
+    327:328:public static boolean getBoolForKey(java.lang.String,boolean)
+    332:333:public static int getIntegerForKey(java.lang.String,int)
+    337:338:public static float getFloatForKey(java.lang.String,float)
+    343:344:public static double getDoubleForKey(java.lang.String,double)
+    348:349:public static java.lang.String getStringForKey(java.lang.String,java.lang.String)
+    353:357:public static void setBoolForKey(java.lang.String,boolean)
+    360:364:public static void setIntegerForKey(java.lang.String,int)
+    367:371:public static void setFloatForKey(java.lang.String,float)
+    375:379:public static void setDoubleForKey(java.lang.String,double)
+    382:386:public static void setStringForKey(java.lang.String,java.lang.String)
+org.cocos2dx.lib.Cocos2dxHelper$Cocos2dxHelperListener:
+    public abstract void showDialog(java.lang.String,java.lang.String)
+    public abstract void showEditTextDialog(java.lang.String,java.lang.String,int,int,int,int)
+org.cocos2dx.lib.Cocos2dxLocalStorage
+org.cocos2dx.lib.Cocos2dxLocalStorage$DBOpenHelper
+org.cocos2dx.lib.Cocos2dxLuaJavaBridge
+org.cocos2dx.lib.Cocos2dxMusic:
+    76:89:public void preloadBackgroundMusic(java.lang.String)
+    92:129:public void playBackgroundMusic(java.lang.String,boolean)
+    132:139:public void stopBackgroundMusic()
+    142:146:public void pauseBackgroundMusic()
+    149:153:public void resumeBackgroundMusic()
+    156:169:public void rewindBackgroundMusic()
+    172:180:public boolean isBackgroundMusicPlaying()
+    184:189:public void end()
+    192:195:public float getBackgroundVolume()
+    200:212:public void setBackgroundVolume(float)
+    230:250:private android.media.MediaPlayer createMediaplayer(java.lang.String)
+org.cocos2dx.lib.Cocos2dxRenderer:
+    private static final long NANOSECONDSPERSECOND
+    private static final long NANOSECONDSPERMICROSECOND
+    58:59:public static void setAnimationInterval(double)
+org.cocos2dx.lib.Cocos2dxSound:
+    private static final java.lang.String TAG
+    private static final int MAX_SIMULTANEOUS_STREAMS_DEFAULT
+    private static final int MAX_SIMULTANEOUS_STREAMS_I9100
+    private static final float SOUND_RATE
+    private static final int SOUND_PRIORITY
+    private static final int SOUND_QUALITY
+    private static final int INVALID_SOUND_ID
+    private static final int INVALID_STREAM_ID
+    115:125:public int preloadEffect(java.lang.String)
+    130:144:public void unloadEffect(java.lang.String)
+    147:180:public int playEffect(java.lang.String,boolean,float,float,float)
+    184:193:public void stopEffect(int)
+    196:197:public void pauseEffect(int)
+    200:201:public void resumeEffect(int)
+    204:205:public void pauseAllEffects()
+    210:219:public void resumeAllEffects()
+    224:236:public void stopAllEffects()
+    239:239:public float getEffectsVolume()
+    244:263:public void setEffectsVolume(float)
+    266:275:public void end()
+    278:296:public int createSoundIDFromAsset(java.lang.String)
+org.cocos2dx.lib.Cocos2dxSound$SoundInfoForLoadedCompleted:
+    final synthetic org.cocos2dx.lib.Cocos2dxSound this$0
+    335:342:public Cocos2dxSound$SoundInfoForLoadedCompleted(org.cocos2dx.lib.Cocos2dxSound,java.lang.String,int,boolean,float,float,float)
+org.cocos2dx.lib.Cocos2dxTypefaces
+org.cocos2dx.plugin.AdsWrapper
+org.cocos2dx.plugin.AdsWrapper$1
+org.cocos2dx.plugin.AdsWrapper$2
+org.cocos2dx.plugin.IAPWrapper
+org.cocos2dx.plugin.IAPWrapper$1
+org.cocos2dx.plugin.InterfaceAds
+org.cocos2dx.plugin.InterfaceAnalytics
+org.cocos2dx.plugin.InterfaceIAP
+org.cocos2dx.plugin.InterfaceSocial
+org.cocos2dx.plugin.PluginWrapper
+org.cocos2dx.plugin.SocialWrapper
+org.cocos2dx.plugin.SocialWrapper$1

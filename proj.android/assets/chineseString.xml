@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0"> 
+	<dict>  
+		<key>gamename</key> 
+		<string>一个都不能死</string>       
+		<key>subname</key> 
+		<string>飞机版</string>       
+		<key>startGame</key> 
+		<string>开始游戏</string>  
+		<key>putong</key> 
+		<string>普通模式</string>  
+		<key>fanhui</key> 
+		<string>返回</string>  
+		<key>zailai</key> 
+		<string>再来一次</string>  
+		<key>jianchi</key>
+		<string>你坚持了</string>  
+		<key>miao</key>
+		<string>秒！</string>  
+		<key>fenxiangmsg</key>
+		<string>分享</string>  
+    <key>wanfa</key>
+		<string>拖动不同的飞机移动</string>   
+		<key>wanfa2</key>
+		<string>确保飞机不会撞到飞行块</string>  
+		<key>share</key>
+		<string>一个都不能死 飞机版，你能比我强吗？</string>  
+	</dict>  
+</plist>  
