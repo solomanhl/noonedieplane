@@ -97,7 +97,7 @@ void GameOver::onEnter()
 
 	//ÏÔÊ¾Ä£Ê½
 	auto labelMode = Label::create();
-	strchinese = (String*)dic->objectForKey("putong");
+	strchinese = (String*)dic->objectForKey(moshi.getCString());
 	labelMode->setString(strchinese->getCString());
 	labelMode->setPosition(Point(visibleSize.width / 2, visibleSize.height * 3 /4));
 	labelMode->setSystemFontSize(48);

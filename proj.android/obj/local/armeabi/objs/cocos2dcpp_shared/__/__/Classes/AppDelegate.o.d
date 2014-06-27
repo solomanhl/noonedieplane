@@ -244,7 +244,7 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/AppDelegate.o: \
  D:\Project\CocosProject\noonedieplane\proj.android\../cocos2d/cocos/audio/android/../include/Export.h \
  jni/../../Classes/Areas.h jni/../../Classes/Peoples.h \
  jni/../../Classes/Enemys.h jni/../../Classes/GameOver.h \
- jni/../../Classes/SelectMode.h
+ jni/../../Classes/SelectMode.h jni/../../Classes/IIIFingerMode.h
 
 jni/../../Classes/AppDelegate.h:
 
@@ -741,3 +741,5 @@ jni/../../Classes/Enemys.h:
 jni/../../Classes/GameOver.h:
 
 jni/../../Classes/SelectMode.h:
+
+jni/../../Classes/IIIFingerMode.h:

@@ -1,4 +1,7 @@
-#pragma once
+//#pragma once
+
+#ifndef __Areas__
+#define __Areas__
 
 #include <cocos2d.h>
 USING_NS_CC;
@@ -28,3 +31,5 @@ public:
 protected:
 	Areas *area;	
 };
+
+#endif // __Areas__

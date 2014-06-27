@@ -243,7 +243,8 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/SelectMode.o: \
  jni/../../Classes/Enemys.h jni/../../Classes/GameOver.h \
  jni/../../Classes/../Classes/C2DXShareSDK/C2DXShareSDK.h \
  E:/tools/IDE/Eclipse/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/iostream \
- jni/../../Classes/../Classes/C2DXShareSDK/C2DXShareSDKTypeDef.h
+ jni/../../Classes/../Classes/C2DXShareSDK/C2DXShareSDKTypeDef.h \
+ jni/../../Classes/IIIFingerMode.h
 
 jni/../../Classes/SelectMode.h:
 
@@ -738,3 +739,5 @@ jni/../../Classes/../Classes/C2DXShareSDK/C2DXShareSDK.h:
 E:/tools/IDE/Eclipse/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/iostream:
 
 jni/../../Classes/../Classes/C2DXShareSDK/C2DXShareSDKTypeDef.h:
+
+jni/../../Classes/IIIFingerMode.h:

@@ -1,4 +1,9 @@
-#pragma once
+//#pragma once
+
+
+#ifndef __Peoples__
+#define __Peoples__
+
 
 #include <cocos2d.h>
 USING_NS_CC;
@@ -12,6 +17,9 @@ private:
 public:
 	Peoples();
 	~Peoples();
+
+	int ADHeight = 200;  //广告高度
+	int peopleNum;
 
 	static Vector<Peoples *> *getPeoples();
 	static Vector<Peoples *> *removeAll();
@@ -32,3 +40,5 @@ public:
 protected:
 	Peoples *people;
 };
+
+#endif // __Peoples__

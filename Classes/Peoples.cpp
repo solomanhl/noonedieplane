@@ -136,14 +136,15 @@ void Peoples::onTouchMoved(Touch* touch, Event*  event)
 		{
 			target->setPosition(visibleSize.width - s.width / 2, targetPosition.y);
 		}
+
 		//y‘ΩΩÁ
-		if (targetPosition.y < (target->getTag() * visibleSize.height / 2) + s.width / 2)
+		if (targetPosition.y < (target->getTag() * (visibleSize.height - ADHeight) / peopleNum) + s.height / 2 + ADHeight)
 		{
-			target->setPosition(targetPosition.x, (target->getTag() * visibleSize.height / 2) + s.width / 2);
+			target->setPosition(targetPosition.x, (target->getTag() * (visibleSize.height - ADHeight) / peopleNum) + s.height / 2 + ADHeight);
 		}
-		else if (targetPosition.y >((target->getTag() + 1) * visibleSize.height / 2) - s.width / 2)
+		else if (targetPosition.y >((target->getTag() + 1) * (visibleSize.height - ADHeight) / peopleNum) - s.height / 2 + ADHeight)
 		{
-			target->setPosition(targetPosition.x, ((target->getTag() + 1) * visibleSize.height / 2) - s.width / 2);
+			target->setPosition(targetPosition.x, ((target->getTag() + 1) * (visibleSize.height - ADHeight) / peopleNum) - s.height / 2 + ADHeight);
 		}
 	}
 	else

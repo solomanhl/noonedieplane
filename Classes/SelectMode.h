@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 
 #include "NormalMode.h"
+#include "IIIFingerMode.h"
 #include "Peoples.h"
 #include "Areas.h"
 
@@ -13,7 +14,7 @@ class SelectMode : public cocos2d::Layer
 {
 private:
 	Size visibleSize;
-	Label *nameLabel, *subnameLabel, *startLabel;
+	Label *nameLabel, *subnameLabel, *startLabel, *sanzhiLable;
 	Peoples *people;
 	Vector<Peoples *> *ps;
 
@@ -36,7 +37,7 @@ public:
 	bool onTouchBegan(Touch* touch, Event*  event);
 
 	void addArea(Color3B color);
-	void changeToGame();
+	void changeToGame(int t);
 
 
 	void addPeople();//ÃÌº””¢–€

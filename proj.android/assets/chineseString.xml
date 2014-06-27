@@ -9,6 +9,8 @@
 		<string>开始游戏</string>  
 		<key>putong</key> 
 		<string>普通模式</string>  
+		<key>sanzhi</key> 
+		<string>三指模式</string>  
 		<key>fanhui</key> 
 		<string>返回</string>  
 		<key>zailai</key> 

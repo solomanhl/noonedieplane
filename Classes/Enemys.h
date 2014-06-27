@@ -1,4 +1,7 @@
-#pragma 
+//#pragma 
+
+#ifndef __Enemys__
+#define __Enemys__
 
 #include <cocos2d.h>
 USING_NS_CC;
@@ -30,3 +33,5 @@ public:
 protected:
 	Enemys *enemy;
 };
+
+#endif // __Enemys__

@@ -23,6 +23,8 @@ private:
 	long startY;
 	bool gameRunning;
 
+	int ADHeight;  //广告高度
+
 	Vector<Peoples *> *ps;
 	Vector<Enemys *> *es;
 

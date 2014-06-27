@@ -28,6 +28,7 @@ bool NormalMode::init()
     }
 	this->setKeypadEnabled(true);
 	srand(time(NULL));
+	ADHeight = 200;
 
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("sound/biu01.wav");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("sound/peng01.wav");
@@ -125,13 +126,13 @@ bool NormalMode::init()
 	String* strchinese = (String*)dic->objectForKey("wanfa");
 	wanfaLabel = Label::create(strchinese->getCString(), "Arial", 64);
 	wanfaLabel->setTextColor(Color4B::BLACK);
-	wanfaLabel->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2 + 50));
+	wanfaLabel->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2 + 50 + (ADHeight / 2)));
 	gameLayer->addChild(wanfaLabel);
 
 	strchinese = (String*)dic->objectForKey("wanfa2");
 	wanfaLabel2 = Label::create(strchinese->getCString(), "Arial", 64);
 	wanfaLabel2->setTextColor(Color4B::BLACK);
-	wanfaLabel2->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2 - 50));
+	wanfaLabel2->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2 - 50 + (ADHeight / 2)));
 	gameLayer->addChild(wanfaLabel2);
 
 
@@ -327,9 +328,9 @@ void NormalMode::stopTimer1s(){
 void NormalMode::addArea(Color3B color, int tag){
 	
 
-	auto b = Areas::createWithArgs(color, Size(visibleSize.width - 10, (visibleSize.height / 2) - 10), "", 32, Color4B::BLACK, tag);
+	auto b = Areas::createWithArgs(color, Size(visibleSize.width - 10, ((visibleSize.height - ADHeight) / 2) - 10), "", 32, Color4B::BLACK, tag);
 	gameLayer->addChild(b);
-	b->setPosition(5, (tag*visibleSize.height / 2) + 5);
+	b->setPosition(5, (tag* (visibleSize.height - ADHeight) / 2) + 5 + ADHeight);
 
 	
 }
@@ -337,7 +338,10 @@ void NormalMode::addArea(Color3B color, int tag){
 void NormalMode::addPeople(int tag){
 	auto b = Peoples::createWithImg("plane100.png", tag, 90);
 	peopleLayer->addChild(b);
-	b->setPosition(b->getContentSize().width / 2, tag*visibleSize.height / 2 + visibleSize.height / 4);
+	b->setPosition(b->getContentSize().width / 2, tag*(visibleSize.height - ADHeight) / 2 + (visibleSize.height - ADHeight) / 4 + ADHeight);
+
+	b->ADHeight = ADHeight;
+	b->peopleNum = 2;
 }
 
 /*
@@ -359,14 +363,14 @@ void NormalMode::addEnemy()
 {
 	auto b0 = Enemys::createWithArgs(Color3B::BLACK, Size(100, 10), "", 20, Color4B::BLACK);
 	peopleLayer->addChild(b0);
-	startY = rand() % (int)(visibleSize.height / 2 );
-	b0->setPosition(visibleSize.width + b0->getContentSize().width / 2, startY);
+	startY = rand() % (int)((visibleSize.height - ADHeight) / 2 );
+	b0->setPosition(visibleSize.width + b0->getContentSize().width / 2, startY + ADHeight);
 	b0->moveEnemy(3, Point(0 - b0->getContentSize().width / 2, b0->getPosition().y) );
 
 	auto b1 = Enemys::createWithArgs(Color3B::BLACK, Size(100, 10), "", 20, Color4B::BLACK);
 	peopleLayer->addChild(b1);
-	startY = rand() % (int)(visibleSize.height / 2 - b1->getContentSize().height / 2);
-	b1->setPosition(visibleSize.width + b1->getContentSize().width / 2, startY + visibleSize.height / 2 + b1->getContentSize().height / 2);
+	startY = rand() % (int)((visibleSize.height - ADHeight) / 2 - b1->getContentSize().height / 2);
+	b1->setPosition(visibleSize.width + b1->getContentSize().width / 2, startY + (visibleSize.height - ADHeight) / 2 + ADHeight + b1->getContentSize().height / 2);
 	b1->moveEnemy(3, Point(0 - b1->getContentSize().width / 2, b1->getPosition().y));
 
 	//·¢³öÉùÒô
@@ -408,7 +412,11 @@ void NormalMode::changeToGameOver(String s)
 	TransitionScene * reScene = NULL;
 	Scene * scene = Scene::create();
 	GameOver *layer = GameOver::create();
+
 	layer->aliveTime = s;
+
+	layer->moshi = "putong";
+
 	scene->addChild(layer);
 	float t = 1.2f;
 

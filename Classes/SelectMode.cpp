@@ -85,21 +85,29 @@ bool SelectMode::init()
 	this->addChild(subnameLabel, 1);
 
 
-	strchinese = (String*)dic->objectForKey("startGame");
+	strchinese = (String*)dic->objectForKey("putong");
 	startLabel = Label::create(strchinese->getCString(), "Arial", 64);
 	startLabel->setColor(Color3B::BLACK);
 	// position the label on the center of the screen
-	startLabel->setPosition(Point(visibleSize.width / 2,visibleSize.height / 2));
+	startLabel->setPosition(Point(visibleSize.width / 2,(visibleSize.height / 2) + 80));
+	this->addChild(startLabel, 1);
+
+	strchinese = (String*)dic->objectForKey("sanzhi");
+	sanzhiLable = Label::create(strchinese->getCString(), "Arial", 64);
+	sanzhiLable->setColor(Color3B::BLACK);
+	// position the label on the center of the screen
+	sanzhiLable->setPosition(Point(visibleSize.width / 2, (visibleSize.height / 2) - 80));
 
 	// add the time label as a child to this layer
-	this->addChild(startLabel, 1);
+	this->addChild(sanzhiLable, 1);
 
 
 	people = Peoples::createWithImg("plane100.png", 0, 90);
 	this->addChild(people);
-	people->setPosition(startLabel->getPositionX() - 200, startLabel->getPositionY() - 150);
+	people->setPosition(startLabel->getPositionX() - 200, startLabel->getPositionY() + 50);
 
-	MoveBy *move = MoveBy::create(1.2f, Point(0, 300));
+	int delta = startLabel->getPositionY() - sanzhiLable->getPositionY() + 100;
+	MoveBy *move = MoveBy::create(1.2f, Point(0, -delta));
 	people->runAction(RepeatForever::create(static_cast<Sequence *>(Sequence::create(move, move->reverse(), NULL))));
 
 
@@ -187,10 +195,20 @@ bool  SelectMode::onTouchBegan(Touch* touch, Event*  event)
 	if (rect.containsPoint(locationInNode))//判断触摸点是否在精灵的矩形框上
 	{
 		log("SelectMode::onTouchBegan");
-		changeToGame();
+		changeToGame(0);
+		return true;
 	}
 
-	return true;
+	s = sanzhiLable->getContentSize();//获取“三指模式”的文本尺寸大小
+	rect = Rect(sanzhiLable->getPositionX() - s.width / 2, sanzhiLable->getPositionY() - s.height / 2, s.width, s.height);//获取精灵的矩形框（起始点为精灵的中间）
+	if (rect.containsPoint(locationInNode))//判断触摸点是否在精灵的矩形框上
+	{
+		log("SelectMode::onTouchBegan");
+		changeToGame(1);
+		return true;
+	}
+
+	
 }
 
 
@@ -216,7 +234,7 @@ void SelectMode::addArea(Color3B color)
 	b->setPosition(0,0);
 }
 
-void SelectMode::changeToGame()
+void SelectMode::changeToGame(int t)
 {
 	ps = Peoples::removeAll();
 	removeAllChildrenWithCleanup(true);
@@ -226,24 +244,53 @@ void SelectMode::changeToGame()
 	GameOver *layer = GameOver::create();
 	scene->addChild(layer);*/
 
-	auto *scene = NormalMode::createScene();
-	float t = 1.2f;
 
-	//  CCTransitionJumpZoom
-	//    作用： 创建一个跳动的过渡动画
-	//    参数1：过渡动作的时间
-	//    参数2：切换到目标场景的对象
-	//Scene = CCTransitionJumpZoom ::create(t , s);
-	//CCDirector::sharedDirector()->replaceScene(reScene);
+	if (t == 0)
+	{
 
-	//    CCTransitionProgressInOut
-	//    作用： 创建一个由里向外扩展的过渡动画，
-	//    参数1：过渡动作的时间
-	//    参数2：切换到目标场景的对象
-	//reScene = CCTransitionProgressInOut::create(t, scene);
+		auto *scene = NormalMode::createScene();
+		float t = 1.2f;
+
+		//  CCTransitionJumpZoom
+		//    作用： 创建一个跳动的过渡动画
+		//    参数1：过渡动作的时间
+		//    参数2：切换到目标场景的对象
+		//Scene = CCTransitionJumpZoom ::create(t , s);
+		//CCDirector::sharedDirector()->replaceScene(reScene);
+
+		//    CCTransitionProgressInOut
+		//    作用： 创建一个由里向外扩展的过渡动画，
+		//    参数1：过渡动作的时间
+		//    参数2：切换到目标场景的对象
+		//reScene = CCTransitionProgressInOut::create(t, scene);
 
 
-	//本场景从上到下消失同时另一场景出现  
-	reScene = TransitionProgressVertical::create(t, scene);
-	CCDirector::sharedDirector()->replaceScene(reScene);
+		//本场景从上到下消失同时另一场景出现  
+		reScene = TransitionProgressVertical::create(t, scene);
+		CCDirector::sharedDirector()->replaceScene(reScene);
+	}
+	else if (t == 1)
+	{
+
+		auto *scene = IIIFingerMode::createScene();
+		float t = 1.2f;
+
+		//  CCTransitionJumpZoom
+		//    作用： 创建一个跳动的过渡动画
+		//    参数1：过渡动作的时间
+		//    参数2：切换到目标场景的对象
+		//Scene = CCTransitionJumpZoom ::create(t , s);
+		//CCDirector::sharedDirector()->replaceScene(reScene);
+
+		//    CCTransitionProgressInOut
+		//    作用： 创建一个由里向外扩展的过渡动画，
+		//    参数1：过渡动作的时间
+		//    参数2：切换到目标场景的对象
+		//reScene = CCTransitionProgressInOut::create(t, scene);
+
+
+		//本场景从上到下消失同时另一场景出现  
+		reScene = TransitionProgressVertical::create(t, scene);
+		CCDirector::sharedDirector()->replaceScene(reScene);
+	}
 }

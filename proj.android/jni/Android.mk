@@ -14,6 +14,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/SelectMode.cpp \
                    ../../Classes/NormalMode.cpp \
+                    ../../Classes/IIIFingerMode.cpp \
                    ../../Classes/Areas.cpp \
                    ../../Classes/Enemys.cpp \
                    ../../Classes/Peoples.cpp \
